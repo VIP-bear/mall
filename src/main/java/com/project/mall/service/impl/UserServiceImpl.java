@@ -22,6 +22,7 @@ public class UserServiceImpl implements IUserService {
     @Autowired
     private UserRepository userRepository;
 
+    // 用于加密和解密
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
