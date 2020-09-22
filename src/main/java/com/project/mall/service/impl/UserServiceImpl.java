@@ -9,6 +9,7 @@ import com.project.mall.enums.UserTypeEnum;
 import com.project.mall.service.IUserService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 /**
@@ -21,8 +22,12 @@ public class UserServiceImpl implements IUserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
     /**
      * 用户登录
+     * 使用Spring Security对密码进行解密
      * @param userLoginReq
      * @return
      */
@@ -30,7 +35,8 @@ public class UserServiceImpl implements IUserService {
     public ReqResult login(UserLoginReq userLoginReq) {
         // 根据用户名查找用户
         UserEntity userEntity = userRepository.findUserEntityByUsername(userLoginReq.getUsername());
-        if (null == userEntity || !userLoginReq.getPassword().equals(userEntity.getPassword())) {
+        if (null == userEntity || !bCryptPasswordEncoder.matches(userLoginReq.getPassword(), userEntity.getPassword())) {
+            // 没有查找到用户或者密码不正确
             return new ReqResult(UserTypeEnum.USERNAME_OR_PASSWORD_ERROR.getCode(), "用户名或者密码错误", null);
         }
         return new ReqResult(UserTypeEnum.LOGIN_SUCCESS.getCode(), "登录成功", null);
@@ -38,6 +44,7 @@ public class UserServiceImpl implements IUserService {
 
     /**
      * 用户注册
+     * 使用Spring Security对密码进行加密
      * @param userRegisterReq
      * @return
      */
@@ -49,6 +56,8 @@ public class UserServiceImpl implements IUserService {
         }
         UserEntity userEntity = new UserEntity();
         BeanUtils.copyProperties(userRegisterReq, userEntity);
+        // 对密码进行加密
+        userEntity.setPassword(bCryptPasswordEncoder.encode(userEntity.getPassword()));
         if (userRepository.findUserEntityByUsername(userRegisterReq.getUsername()) != null){
             // 用户已存在
             return new ReqResult(UserTypeEnum.USER_EXISTED.getCode(), "用户已存在", null);
