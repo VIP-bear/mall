@@ -44,5 +44,4 @@ public interface BuyerRepository extends JpaRepository<BuyerEntity, Long> {
     @Modifying
     @Query(value = "update mall_buyer set buyer_pwd = ?2 where buyer_email = ?1", nativeQuery = true)
     int changePasswordByEmail(String email, String newPassword);
-
 }
