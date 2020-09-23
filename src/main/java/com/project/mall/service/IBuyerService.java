@@ -2,8 +2,8 @@ package com.project.mall.service;
 
 import com.project.mall.controller.req.BuyerLoginReq;
 import com.project.mall.controller.req.BuyerRegisterReq;
-import com.project.mall.controller.req.BuyerChangePasswordReq;
-import com.project.mall.controller.req.BuyerCodeMatchingReq;
+import com.project.mall.controller.req.UserChangePasswordReq;
+import com.project.mall.controller.req.UserCodeMatchingReq;
 import com.project.mall.controller.res.ReqResult;
 
 import javax.mail.MessagingException;
@@ -35,7 +35,7 @@ public interface IBuyerService {
     ReqResult getCode(String email) throws MessagingException;
 
 
-    ReqResult codeMatching(BuyerCodeMatchingReq buyerCodeMatchingReq);
+    ReqResult codeMatching(UserCodeMatchingReq userCodeMatchingReq);
 
-    ReqResult changePwd(BuyerChangePasswordReq buyerChangePasswordReq);
+    ReqResult changePwd(UserChangePasswordReq userChangePasswordReq);
 }

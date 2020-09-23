@@ -2,6 +2,9 @@ package com.project.mall.controller.req;
 
 import lombok.Data;
 
+/**
+ * 用户注册
+ */
 @Data
 public class BuyerRegisterReq {
 

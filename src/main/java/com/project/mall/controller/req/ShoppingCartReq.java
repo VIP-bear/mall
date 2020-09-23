@@ -3,6 +3,9 @@ package com.project.mall.controller.req;
 
 import lombok.Data;
 
+/**
+ * 添加购物车
+ */
 @Data
 public class ShoppingCartReq {
     /**

@@ -2,8 +2,8 @@ package com.project.mall.controller;
 
 import com.project.mall.controller.req.BuyerLoginReq;
 import com.project.mall.controller.req.BuyerRegisterReq;
-import com.project.mall.controller.req.BuyerChangePasswordReq;
-import com.project.mall.controller.req.BuyerCodeMatchingReq;
+import com.project.mall.controller.req.UserChangePasswordReq;
+import com.project.mall.controller.req.UserCodeMatchingReq;
 import com.project.mall.controller.res.ReqResult;
 import com.project.mall.service.IBuyerService;
 import lombok.extern.slf4j.Slf4j;
@@ -55,24 +55,24 @@ public class BuyerController {
 
     /**
      * 验证码匹配
-     * @param buyerCodeMatchingReq
+     * @param userCodeMatchingReq
      * @return
      */
     @PostMapping("/CodeMatching")
     @ResponseBody
-    public ReqResult codeMatching(BuyerCodeMatchingReq buyerCodeMatchingReq) {
-        return buyerService.codeMatching(buyerCodeMatchingReq);
+    public ReqResult codeMatching(UserCodeMatchingReq userCodeMatchingReq) {
+        return buyerService.codeMatching(userCodeMatchingReq);
     }
 
     /**
      * 修改密码
-     * @param buyerChangePasswordReq
+     * @param userChangePasswordReq
      * @return
      */
     @PostMapping("/changePassword")
     @ResponseBody
-    public ReqResult changePassword(BuyerChangePasswordReq buyerChangePasswordReq) {
-        return buyerService.changePwd(buyerChangePasswordReq);
+    public ReqResult changePassword(UserChangePasswordReq userChangePasswordReq) {
+        return buyerService.changePwd(userChangePasswordReq);
     }
 
 

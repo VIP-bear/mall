@@ -2,6 +2,9 @@ package com.project.mall.controller.req;
 
 import lombok.Data;
 
+/**
+ * 用户登录
+ */
 @Data
 public class BuyerLoginReq {
 

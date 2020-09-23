@@ -2,8 +2,11 @@ package com.project.mall.controller.req;
 
 import lombok.Data;
 
+/**
+ * 匹配验证码
+ */
 @Data
-public class BuyerCodeMatchingReq {
+public class UserCodeMatchingReq {
 
     /**
      * 用户邮箱

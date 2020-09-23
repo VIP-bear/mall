@@ -2,8 +2,11 @@ package com.project.mall.controller.req;
 
 import lombok.Data;
 
+/**
+ * 用户修改密码
+ */
 @Data
-public class BuyerChangePasswordReq {
+public class UserChangePasswordReq {
     /**
      * 用户邮箱
      */

@@ -2,8 +2,8 @@ package com.project.mall.service.impl;
 
 import com.project.mall.controller.req.BuyerLoginReq;
 import com.project.mall.controller.req.BuyerRegisterReq;
-import com.project.mall.controller.req.BuyerChangePasswordReq;
-import com.project.mall.controller.req.BuyerCodeMatchingReq;
+import com.project.mall.controller.req.UserChangePasswordReq;
+import com.project.mall.controller.req.UserCodeMatchingReq;
 import com.project.mall.controller.res.ReqResult;
 import com.project.mall.dao.BuyerRepository;
 import com.project.mall.dao.entity.BuyerEntity;
@@ -132,12 +132,12 @@ public class BuyerServiceImpl implements IBuyerService {
     }
 
     @Override
-    public ReqResult changePwd(BuyerChangePasswordReq buyerChangePasswordReq) {
+    public ReqResult changePwd(UserChangePasswordReq userChangePasswordReq) {
         return null;
     }
 
     @Override
-    public ReqResult codeMatching(BuyerCodeMatchingReq buyerCodeMatchingReq) {
+    public ReqResult codeMatching(UserCodeMatchingReq userCodeMatchingReq) {
         return null;
     }
 }
