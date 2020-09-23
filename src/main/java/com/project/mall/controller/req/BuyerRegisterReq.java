@@ -19,4 +19,16 @@ public class BuyerRegisterReq {
      * 确认密码
      */
     private String confirmPassword;
+
+    /**
+     * 用户邮箱
+     */
+    private String mail;
+
+    /**
+    *用户手机
+    */
+    private long phoneNumber;
+
+
 }
