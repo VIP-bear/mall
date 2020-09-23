@@ -1,5 +1,7 @@
 package com.project.mall.controller;
 
+import com.project.mall.controller.req.UserChangePasswordReq;
+import com.project.mall.controller.req.UserCodeMatchingReq;
 import com.project.mall.controller.req.UserLoginReq;
 import com.project.mall.controller.req.UserRegisterReq;
 import com.project.mall.controller.res.ReqResult;
@@ -33,6 +35,18 @@ public class UserController {
     public ReqResult register(UserRegisterReq userRegisterReq) {
         log.info("userMessage: {}" + userRegisterReq);
         return userService.register(userRegisterReq);
+    }
+
+    @PostMapping("/CodeMatching")
+    @ResponseBody
+    public ReqResult codeMatching(UserCodeMatchingReq userCodeMatchingReq) {
+        return userService.codeMatching(userCodeMatchingReq);
+    }
+
+    @PostMapping("/changePassword")
+    @ResponseBody
+    public ReqResult changePassword(UserChangePasswordReq userChangePasswordReq) {
+        return userService.changePwd(userChangePasswordReq);
     }
 
 }

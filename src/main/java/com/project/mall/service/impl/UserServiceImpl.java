@@ -1,5 +1,7 @@
 package com.project.mall.service.impl;
 
+import com.project.mall.controller.req.UserChangePasswordReq;
+import com.project.mall.controller.req.UserCodeMatchingReq;
 import com.project.mall.controller.req.UserLoginReq;
 import com.project.mall.controller.req.UserRegisterReq;
 import com.project.mall.controller.res.ReqResult;
@@ -69,5 +71,15 @@ public class UserServiceImpl implements IUserService {
         }
         // 注册成功
         return new ReqResult(UserTypeEnum.REGISTER_SUCCESS.getCode(), "注册成功", null);
+    }
+
+    @Override
+    public ReqResult changePwd(UserChangePasswordReq userChangePasswordReq) {
+        return null;
+    }
+
+    @Override
+    public ReqResult codeMatching(UserCodeMatchingReq userCodeMatchingReq) {
+        return null;
     }
 }
