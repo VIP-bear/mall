@@ -8,7 +8,7 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-public enum UserTypeEnum {
+public enum BuyerTypeEnum {
 
     LOGIN_SUCCESS(120),
     LOGIN_FAILED(121),
@@ -18,7 +18,8 @@ public enum UserTypeEnum {
     REGISTER_FAILED(125),
     USER_EXISTED(126),
     INCONSISTENT_PASSWORD_TWICE(127),
-    USERNAME_OR_PASSWORD_ERROR(128)
+    USERNAME_OR_PASSWORD_ERROR(128),
+    EMAIL_NOT_EXIST(129)
     ;
 
     private Integer code;

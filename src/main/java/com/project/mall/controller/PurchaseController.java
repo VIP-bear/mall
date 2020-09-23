@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Slf4j
 public class PurchaseController {
     @Autowired
-    IPurchaseService purchase;
+    IPurchaseService purchaseService;
 
     @PostMapping("/purchase")
     @ResponseBody
     public ReqResult purchase(PurchsaeReq purchsaeReq) {
         log.info("purchaseMessage: {}" + purchsaeReq);
-        return purchase.buy(purchsaeReq);
+        return purchaseService.buy(purchsaeReq);
     }
 }

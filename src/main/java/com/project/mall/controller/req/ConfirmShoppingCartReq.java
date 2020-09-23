@@ -21,7 +21,7 @@ public class ConfirmShoppingCartReq {
     /**
      * 用户ID
      */
-    private long userID;
+    private long buyerID;
 
     /**
      * 购买数量

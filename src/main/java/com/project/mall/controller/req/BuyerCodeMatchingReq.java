@@ -3,15 +3,14 @@ package com.project.mall.controller.req;
 import lombok.Data;
 
 @Data
-public class UserChangePasswordReq {
+public class BuyerCodeMatchingReq {
+
     /**
      * 用户邮箱
      */
     private String mail;
-
     /**
-     * 用户新密码
+     * 验证码
      */
-    private String newPassword;
-
+    private int code;
 }
