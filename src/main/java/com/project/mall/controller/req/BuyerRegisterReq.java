@@ -3,12 +3,12 @@ package com.project.mall.controller.req;
 import lombok.Data;
 
 @Data
-public class UserRegisterReq {
+public class BuyerRegisterReq {
 
     /**
      * 用户名
      */
-    private String username;
+    private String buyerName;
 
     /**
      * 用户密码

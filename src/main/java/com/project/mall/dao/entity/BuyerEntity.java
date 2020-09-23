@@ -11,37 +11,43 @@ import javax.persistence.*;
 @Entity
 @Data
 @Table(name = "mall_buyer")
-public class UserEntity {
+public class BuyerEntity {
 
     /**
      * 用户id,自增长
      */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long buyer_id;
 
     /**
      * 用户名
      */
     @Column
-    private String username;
+    private String buyer_name;
 
     /**
      * 用户密码
      */
     @Column
-    private String password;
+    private String buyer_pwd;
+
+    /**
+     * 用户邮箱
+     */
+    @Column
+    private String buyer_email;
 
     /**
      * 默认地址
      */
     @Column
-    private String default_address;
+    private String address_default;
 
     /**
      * 电话
      */
     @Column
-    private Long phone;
+    private Long buyer_phone;
 
 }
