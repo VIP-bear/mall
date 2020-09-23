@@ -9,10 +9,7 @@ import com.project.mall.service.IBuyerService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
 
@@ -27,14 +24,14 @@ public class BuyerController {
      * 用户登录
      * @return  登录结果
      */
-    @PostMapping("/login")
+    @GetMapping("/buyer/login")
     @ResponseBody
     public ReqResult login(BuyerLoginReq buyerLoginReq) {
         log.info("userMessage: {}" + buyerLoginReq);
         return buyerService.login(buyerLoginReq);
     }
 
-    @PostMapping("/register")
+    @PostMapping("/buyer/register")
     @ResponseBody
     public ReqResult register(BuyerRegisterReq buyerRegisterReq) {
         log.info("userMessage: {}" + buyerRegisterReq);
@@ -46,7 +43,7 @@ public class BuyerController {
      * @param email
      * @return
      */
-    @GetMapping("/user/getCode")
+    @PostMapping("/buyer/getCode")
     @ResponseBody
     public ReqResult getCode(@RequestParam(name = "email")String email) throws MessagingException {
         log.info("email: {}", email);
@@ -58,7 +55,7 @@ public class BuyerController {
      * @param userCodeMatchingReq
      * @return
      */
-    @PostMapping("/CodeMatching")
+    @GetMapping("/codeMatching")
     @ResponseBody
     public ReqResult codeMatching(UserCodeMatchingReq userCodeMatchingReq) {
         return buyerService.codeMatching(userCodeMatchingReq);
@@ -69,7 +66,7 @@ public class BuyerController {
      * @param userChangePasswordReq
      * @return
      */
-    @PostMapping("/changePassword")
+    @PutMapping("/changePassword")
     @ResponseBody
     public ReqResult changePassword(UserChangePasswordReq userChangePasswordReq) {
         return buyerService.changePwd(userChangePasswordReq);

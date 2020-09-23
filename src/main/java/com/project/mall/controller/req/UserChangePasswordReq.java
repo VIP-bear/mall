@@ -10,7 +10,7 @@ public class UserChangePasswordReq {
     /**
      * 用户邮箱
      */
-    private String mail;
+    private String email;
 
     /**
      * 用户新密码

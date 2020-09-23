@@ -6,9 +6,11 @@ import com.project.mall.controller.req.UserChangePasswordReq;
 import com.project.mall.controller.req.UserCodeMatchingReq;
 import com.project.mall.controller.res.ReqResult;
 import com.project.mall.dao.BuyerRepository;
+import com.project.mall.dao.VerifyCodeRepository;
 import com.project.mall.dao.entity.BuyerEntity;
 import com.project.mall.dao.entity.VerifyCodeEntity;
 import com.project.mall.enums.BuyerTypeEnum;
+import com.project.mall.enums.VerifyTypeEnum;
 import com.project.mall.service.IBuyerService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -33,6 +36,9 @@ public class BuyerServiceImpl implements IBuyerService {
 
     @Autowired
     private BuyerRepository buyerRepository;
+
+    @Autowired
+    private VerifyCodeRepository verifyCodeRepository;
 
     // 用于加密和解密
     @Autowired
@@ -57,15 +63,16 @@ public class BuyerServiceImpl implements IBuyerService {
         BuyerEntity buyerEntity = null;
         if (buyerLoginReq.getBuyerName().endsWith(".com")) {
             // 根据邮箱查找用户
-            buyerEntity = buyerRepository.findUserEntityByUserEmail(buyerLoginReq.getBuyerName());
+            buyerEntity = buyerRepository.findBuyerEntityByBuyerEmail(buyerLoginReq.getBuyerName());
         } else {
             // 根据用户名查找用户
-            buyerEntity = buyerRepository.findUserEntityByUsername(buyerLoginReq.getBuyerName());
+            buyerEntity = buyerRepository.findBuyerEntityByBuyerName(buyerLoginReq.getBuyerName());
         }
         if (null == buyerEntity || !bCryptPasswordEncoder.matches(buyerLoginReq.getPassword(), buyerEntity.getBuyer_pwd())) {
             // 没有查找到用户或者密码不正确
             return new ReqResult(BuyerTypeEnum.USERNAME_OR_PASSWORD_ERROR.getCode(), "用户名或者密码错误", null);
         }
+        buyerEntity.setBuyer_pwd(buyerLoginReq.getPassword());
         return new ReqResult(BuyerTypeEnum.LOGIN_SUCCESS.getCode(), "登录成功", buyerEntity);
     }
 
@@ -75,16 +82,19 @@ public class BuyerServiceImpl implements IBuyerService {
      * @param buyerRegisterReq
      * @return
      */
+    @Transactional
     @Override
     public ReqResult register(BuyerRegisterReq buyerRegisterReq) {
-        BuyerEntity buyerEntity = new BuyerEntity();
-        BeanUtils.copyProperties(buyerRegisterReq, buyerEntity);
-        // 对密码进行加密
-        buyerEntity.setBuyer_pwd(bCryptPasswordEncoder.encode(buyerEntity.getBuyer_pwd()));
-        if (buyerRepository.findUserEntityByUsername(buyerRegisterReq.getBuyerName()) != null){
+        if (buyerRepository.findBuyerEntityByBuyerName(buyerRegisterReq.getBuyerName()) != null){
             // 用户已存在
             return new ReqResult(BuyerTypeEnum.USER_EXISTED.getCode(), "用户已存在", null);
         }
+
+        BuyerEntity buyerEntity = new BuyerEntity();
+        buyerEntity.setBuyer_name(buyerRegisterReq.getBuyerName());
+        // 对密码进行加密
+        buyerEntity.setBuyer_pwd(bCryptPasswordEncoder.encode(buyerRegisterReq.getPassword()));
+
         if (buyerRepository.save(buyerEntity) == null){
             // 注册失败
             return new ReqResult(BuyerTypeEnum.REGISTER_FAILED.getCode(), "注册失败", null);
@@ -93,10 +103,23 @@ public class BuyerServiceImpl implements IBuyerService {
         return new ReqResult(BuyerTypeEnum.REGISTER_SUCCESS.getCode(), "注册成功", null);
     }
 
+    /**
+     * 生成验证码并发送至邮箱，然后将验证码保存至数据库
+     * @param email
+     * @return
+     */
+    @Transactional
     @Override
     public ReqResult getCode(String email) {
 
-        // 验证邮箱是否存在(还未实现)
+        // 验证邮箱是否有效(还未实现)
+
+        // 验证邮箱是否已经注册
+        BuyerEntity buyerEntity = buyerRepository.findBuyerEntityByBuyerEmail(email);
+        if (null == buyerEntity) {
+            // 该邮箱没有被绑定过，邮箱无效
+            return new ReqResult(BuyerTypeEnum.EMAIL_INVALID.getCode(), "邮箱无效");
+        }
 
         String verifyCode = String.valueOf(new Random().nextInt(899999) + 100000);  // 生成验证码
 
@@ -127,17 +150,53 @@ public class BuyerServiceImpl implements IBuyerService {
         verifyCodeEntity.setCode(Integer.valueOf(verifyCode));
         verifyCodeEntity.setEmail(email);
         verifyCodeEntity.setSend_time(new Timestamp(System.currentTimeMillis()));
-
+        verifyCodeRepository.save(verifyCodeEntity);
         return null;
     }
 
+    /**
+     * 修改密码
+     * @param userChangePasswordReq
+     * @return
+     */
+    @Transactional
     @Override
     public ReqResult changePwd(UserChangePasswordReq userChangePasswordReq) {
-        return null;
+        // 密码加密
+        userChangePasswordReq.setNewPassword(bCryptPasswordEncoder.encode(userChangePasswordReq.getNewPassword()));
+        // 修改密码，返回受影响的行数
+        int influenceRow = buyerRepository.changePasswordByEmail(userChangePasswordReq.getEmail(), userChangePasswordReq.getNewPassword());
+        if (influenceRow != 1) {
+            return new ReqResult(BuyerTypeEnum.CHANGE_PWD_FAILED.getCode(), "密码修改失败");
+        }
+        return new ReqResult(BuyerTypeEnum.CHANGE_PWD_SUCCESS.getCode(), "密码修改成功");
     }
 
+    /**
+     * 检验验证码
+     * 验证码有效时长5分钟
+     * @param userCodeMatchingReq
+     * @return
+     */
     @Override
     public ReqResult codeMatching(UserCodeMatchingReq userCodeMatchingReq) {
-        return null;
+        VerifyCodeEntity verifyCodeEntity = verifyCodeRepository
+                .findVerifyCodeEntityByEmailAndCode(userCodeMatchingReq.getEmail(), userCodeMatchingReq.getCode());
+        if (null == verifyCodeEntity) {
+            // 验证码错误
+            return new ReqResult(VerifyTypeEnum.VERIFY_CODE_ERROR.getCode(), "验证码错误");
+        }
+        long timeDiff = System.currentTimeMillis() - verifyCodeEntity.getSend_time().getTime(); // 时间差
+        ReqResult reqResult;
+        if (timeDiff > 5 * 60 * 1000) {
+            // 验证码失效
+            reqResult = new ReqResult(VerifyTypeEnum.VERIFY_CODE_INVALID.getCode(), "验证码已失效");
+        } else {
+            reqResult = new ReqResult(VerifyTypeEnum.VERIFY_CODE_SUCCESS.getCode(), "验证成功");
+        }
+
+        // 删除验证码记录
+        verifyCodeRepository.deleteById(verifyCodeEntity.getId());
+        return reqResult;
     }
 }

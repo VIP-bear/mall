@@ -2,6 +2,7 @@ package com.project.mall.dao;
 
 import com.project.mall.dao.entity.BuyerEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
@@ -16,8 +17,6 @@ public interface BuyerRepository extends JpaRepository<BuyerEntity, Long> {
      * 使用本地sql查询
      * ?1:代表第一个参数
      * nativeQuery=true:开启本地查询
-     * @param username
-     * @return
      */
 
     /**
@@ -26,7 +25,7 @@ public interface BuyerRepository extends JpaRepository<BuyerEntity, Long> {
      * @return
      */
     @Query(value = "select * from mall_buyer where buyer_name = ?1", nativeQuery = true)
-    BuyerEntity findUserEntityByUsername(String buyerName);
+    BuyerEntity findBuyerEntityByBuyerName(String buyerName);
 
     /**
      * 根据邮箱查询用户
@@ -34,5 +33,15 @@ public interface BuyerRepository extends JpaRepository<BuyerEntity, Long> {
      * @return
      */
     @Query(value = "select * from mall_buyer where buyer_email = ?1", nativeQuery = true)
-    BuyerEntity findUserEntityByUserEmail(String buyerEmail);
+    BuyerEntity findBuyerEntityByBuyerEmail(String buyerEmail);
+
+    /**
+     * 根据邮箱更新用户密码
+     * @param email
+     * @param newPassword
+     * @return
+     */
+    @Modifying
+    @Query(value = "update mall_buyer set buyer_pwd = ?2 where buyer_email = ?1", nativeQuery = true)
+    int changePasswordByEmail(String email, String newPassword);
 }
