@@ -1,9 +1,10 @@
 package com.project.mall.controller;
 
-import com.project.mall.controller.req.ConfirmShoppingCartReq;
-import com.project.mall.controller.req.ShoppingCartReq;
+import com.project.mall.controller.req.buyer.PurchsaeReq;
+import com.project.mall.controller.req.buyer.ShoppingCartReq;
 import com.project.mall.controller.res.ReqResult;
-import com.project.mall.service.IConfirmShoppingCartService;
+
+import com.project.mall.service.IOrderService;
 import com.project.mall.service.IShoppingCartService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,11 @@ public class ShoppingCartController {
     @Autowired
     private IShoppingCartService shoppingCartService;
 
+    /**
+     * 添加至购物车
+     * @param shoppingCartReq
+     * @return
+     */
     @PostMapping("/shoppingCart")
     @ResponseBody
     public ReqResult shoppingCart(ShoppingCartReq shoppingCartReq) {
@@ -25,13 +31,18 @@ public class ShoppingCartController {
     }
 
     @Autowired
-    IConfirmShoppingCartService confirmShoppingCartService;
+    IOrderService orderService;
 
+    /**
+     * 结算购物车，跳至下订单后续操作
+     * @param purchsaeReq
+     * @return
+     */
     @PostMapping("/confirmShoppingCart")
     @ResponseBody
-    public ReqResult confirmShoppingCart(ConfirmShoppingCartReq confirmShoppingCartReq) {
+    public ReqResult confirmShoppingCart(PurchsaeReq purchsaeReq) {
         //
-        return confirmShoppingCartService.settlement(confirmShoppingCartReq);
+        return orderService.placeOrder(purchsaeReq);
     }
 
 

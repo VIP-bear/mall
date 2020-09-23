@@ -1,17 +1,17 @@
-package com.project.mall.controller.req;
+package com.project.mall.controller.req.merchant;
 
 import lombok.Data;
 
 /**
- * 用户登录
+ * 卖家登录
  */
 @Data
-public class BuyerLoginReq {
+public class MerchantLoginReq {
 
     /**
      * 用户名
      */
-    private String buyerName;
+    private String MerchantName;
 
     /**
      * 用户密码

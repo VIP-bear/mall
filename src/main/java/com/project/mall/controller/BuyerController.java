@@ -1,7 +1,7 @@
 package com.project.mall.controller;
 
-import com.project.mall.controller.req.BuyerLoginReq;
-import com.project.mall.controller.req.BuyerRegisterReq;
+import com.project.mall.controller.req.buyer.BuyerLoginReq;
+import com.project.mall.controller.req.buyer.BuyerRegisterReq;
 import com.project.mall.controller.req.UserChangePasswordReq;
 import com.project.mall.controller.req.UserCodeMatchingReq;
 import com.project.mall.controller.res.ReqResult;
@@ -24,7 +24,7 @@ public class BuyerController {
     private IBuyerService buyerService;
 
     /**
-     * 用户登录
+     * 买家登录
      * @return  登录结果
      */
     @PostMapping("/login")
@@ -34,6 +34,11 @@ public class BuyerController {
         return buyerService.login(buyerLoginReq);
     }
 
+    /**
+     * 买家注册
+     * @param buyerRegisterReq
+     * @return
+     */
     @PostMapping("/register")
     @ResponseBody
     public ReqResult register(BuyerRegisterReq buyerRegisterReq) {

@@ -1,7 +1,7 @@
 package com.project.mall.service;
 
-import com.project.mall.controller.req.BuyerLoginReq;
-import com.project.mall.controller.req.BuyerRegisterReq;
+import com.project.mall.controller.req.buyer.BuyerLoginReq;
+import com.project.mall.controller.req.buyer.BuyerRegisterReq;
 import com.project.mall.controller.req.UserChangePasswordReq;
 import com.project.mall.controller.req.UserCodeMatchingReq;
 import com.project.mall.controller.res.ReqResult;
@@ -34,8 +34,17 @@ public interface IBuyerService {
      */
     ReqResult getCode(String email) throws MessagingException;
 
-
+    /**
+     * 检查验证码是否正确
+     * @param userCodeMatchingReq
+     * @return
+     */
     ReqResult codeMatching(UserCodeMatchingReq userCodeMatchingReq);
 
+    /**
+     * 修改密码
+     * @param userChangePasswordReq
+     * @return
+     */
     ReqResult changePwd(UserChangePasswordReq userChangePasswordReq);
 }

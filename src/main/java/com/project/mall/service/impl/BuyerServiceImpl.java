@@ -1,7 +1,7 @@
 package com.project.mall.service.impl;
 
-import com.project.mall.controller.req.BuyerLoginReq;
-import com.project.mall.controller.req.BuyerRegisterReq;
+import com.project.mall.controller.req.buyer.BuyerLoginReq;
+import com.project.mall.controller.req.buyer.BuyerRegisterReq;
 import com.project.mall.controller.req.UserChangePasswordReq;
 import com.project.mall.controller.req.UserCodeMatchingReq;
 import com.project.mall.controller.res.ReqResult;
@@ -131,11 +131,21 @@ public class BuyerServiceImpl implements IBuyerService {
         return null;
     }
 
+    /**
+     * 用户修改密码
+     * @param userChangePasswordReq
+     * @return
+     */
     @Override
     public ReqResult changePwd(UserChangePasswordReq userChangePasswordReq) {
         return null;
     }
 
+    /**
+     * 检验验证码是否正确
+     * @param userCodeMatchingReq
+     * @return
+     */
     @Override
     public ReqResult codeMatching(UserCodeMatchingReq userCodeMatchingReq) {
         return null;
