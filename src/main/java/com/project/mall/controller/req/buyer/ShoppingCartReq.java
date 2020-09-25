@@ -1,18 +1,13 @@
-package com.project.mall.controller.req;
+package com.project.mall.controller.req.buyer;
+
 
 import lombok.Data;
 
 /**
- * 确认购物车
+ * 添加购物车
  */
 @Data
-public class ConfirmShoppingCartReq {
-
-    /**
-     *配送地址
-     */
-    private String address;
-
+public class ShoppingCartReq {
     /**
      * 商品ID
      */

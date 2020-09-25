@@ -1,4 +1,4 @@
-package com.project.mall.controller.req;
+package com.project.mall.controller.req.buyer;
 
 import lombok.Data;
 
