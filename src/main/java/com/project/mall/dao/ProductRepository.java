@@ -53,65 +53,6 @@ public interface ProductRepository extends CrudRepository<ProductEntity, Long> {
 //            "order by product_score", nativeQuery = true)
 //    Page<ProductEntity> findAllByProductCategoryOrderByScore(String product_category);
 
-    /**
-     * 根据商品id更新商品类别
-     * @param product_category
-     * @param product_id
-     * @return
-     */
-    @Modifying
-    @Query(value = "update mall_product set product_category = ?1 where product_id = ?2", nativeQuery = true)
-    int updateProductCategoryByProductId(String product_category, Long product_id);
-
-    /**
-     * 根据商品id更新商品名称
-     * @param product_name
-     * @param product_id
-     * @return
-     */
-    @Modifying
-    @Query(value = "update mall_product set product_name = ?1 where product_id = ?2", nativeQuery = true)
-    int updateProductNameByProductId(String product_name, Long product_id);
-
-    /**
-     * 根据商品id更新商品描述
-     * @param product_description
-     * @param product_id
-     * @return
-     */
-    @Modifying
-    @Query(value = "update mall_product set product_description = ?1 where product_id = ?2", nativeQuery = true)
-    int updateProductDescriptionByProductId(String product_description, Long product_id);
-
-    /**
-     * 根据商品id更新商品封面
-     * @param product_cover
-     * @param product_id
-     * @return
-     */
-    @Modifying
-    @Query(value = "update mall_product set product_cover = ?1 where product_id = ?2", nativeQuery = true)
-    int updateProductCoverByProductId(String product_cover, Long product_id);
-
-    /**
-     * 根据商品id更新商品单价
-     * @param product_price
-     * @param product_id
-     * @return
-     */
-    @Modifying
-    @Query(value = "update mall_product set product_price = ?1 where product_id = ?2", nativeQuery = true)
-    int updateProductPriceByProductId(Double product_price, Long product_id);
-
-    /**
-     * 根据商品id更新商品单位
-     * @param product_unit
-     * @param product_id
-     * @return
-     */
-    @Modifying
-    @Query(value = "update mall_product set product_unit = ?1 where product_id = ?2", nativeQuery = true)
-    int updateProductUnitByProductId(String product_unit, Long product_id);
 
     /**
      * 根据商品id更新商品库存
