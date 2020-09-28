@@ -4,6 +4,7 @@ import com.project.mall.controller.req.buyer.BuyerLoginReq;
 import com.project.mall.controller.req.buyer.BuyerRegisterReq;
 import com.project.mall.controller.req.UserChangePasswordReq;
 import com.project.mall.controller.req.UserCodeMatchingReq;
+import com.project.mall.controller.req.buyer.ChangeEmail;
 import com.project.mall.controller.res.ReqResult;
 import com.project.mall.dao.BuyerRepository;
 import com.project.mall.dao.VerifyCodeRepository;
@@ -172,6 +173,7 @@ public class BuyerServiceImpl implements IBuyerService {
         return new ReqResult(BuyerTypeEnum.CHANGE_PWD_SUCCESS.getCode(), "密码修改成功");
     }
 
+
     /**
      * 检验验证码
      * 验证码有效时长5分钟
@@ -200,4 +202,15 @@ public class BuyerServiceImpl implements IBuyerService {
         verifyCodeRepository.deleteById(verifyCodeEntity.getId());
         return reqResult;
     }
+
+    /**
+     * 绑定/修改邮箱
+     * @param changeEmail
+     * @return
+     */
+    @Override
+    public ReqResult changeEmail(ChangeEmail changeEmail) {
+        return null;
+    }
+
 }

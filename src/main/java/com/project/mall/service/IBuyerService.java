@@ -4,6 +4,7 @@ import com.project.mall.controller.req.buyer.BuyerLoginReq;
 import com.project.mall.controller.req.buyer.BuyerRegisterReq;
 import com.project.mall.controller.req.UserChangePasswordReq;
 import com.project.mall.controller.req.UserCodeMatchingReq;
+import com.project.mall.controller.req.buyer.ChangeEmail;
 import com.project.mall.controller.res.ReqResult;
 
 import javax.mail.MessagingException;
@@ -47,4 +48,11 @@ public interface IBuyerService {
      * @return
      */
     ReqResult changePwd(UserChangePasswordReq userChangePasswordReq);
+
+    /**
+     * 绑定/修改邮箱
+     * @param changeEmail
+     * @return
+     */
+    ReqResult changeEmail(ChangeEmail changeEmail);
 }
