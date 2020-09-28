@@ -22,7 +22,7 @@ public class QualificationEntity {
      * 身份证明号（与真实姓名和用户面部共同确定卖家身份）
      */
     @Column
-    private String qualification_idNum;
+    private String qualification_idnum;
 
     /**
      * 真实姓名
