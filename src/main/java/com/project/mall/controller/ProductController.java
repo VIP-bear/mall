@@ -1,10 +1,7 @@
 package com.project.mall.controller;
 
 import com.project.mall.controller.req.AdministratorChangeStateReq;
-import com.project.mall.controller.req.merchant.MerchantQueryProductByNameReq;
-import com.project.mall.controller.req.merchant.MerchantQueryProductByStateReq;
-import com.project.mall.controller.req.merchant.MerchantQueryProductByTypeReq;
-import com.project.mall.controller.req.merchant.MerchantUploadProductReq;
+import com.project.mall.controller.req.merchant.*;
 import com.project.mall.controller.res.ReqResult;
 import com.project.mall.service.IProductService;
 import lombok.extern.slf4j.Slf4j;
@@ -125,12 +122,30 @@ public class ProductController {
      * @param merchantQueryProductByStateReq
      * @return
      */
-    @GetMapping("/MerchantQueryProductByState")
+    @GetMapping("/merchant/queryProductByState")
     @ResponseBody
     public ReqResult merchantQueryProductByState(MerchantQueryProductByStateReq merchantQueryProductByStateReq) {
 
         return iProductService.queryProductByMerchantIdAndProductState(merchantQueryProductByStateReq.getMerchantID(),
                 merchantQueryProductByStateReq.getProductState());
+    }
+
+    /**
+     * 商家修改商品信息
+     * @param merchantChangeProductReq
+     * @return
+     */
+    @PutMapping("/merchant/changeProductInfo")
+    @ResponseBody
+    public ReqResult merchantChangeProductInfo(MerchantChangeProductReq merchantChangeProductReq) {
+
+        return iProductService.updateProduct(merchantChangeProductReq);
+    }
+
+    @PutMapping("/merchant/changeProduct")
+    @ResponseBody
+    public ReqResult merchantChangeProductStock(@RequestParam(name = "stock")Double stock,@RequestParam(name = "merchantID")Long merchantID){
+        return iProductService.updateProductStockByProductId(stock,merchantID);
     }
 
     /**
