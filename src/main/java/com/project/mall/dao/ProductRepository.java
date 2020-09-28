@@ -7,9 +7,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface ProductRepository extends CrudRepository<ProductEntity, Long> {
 
     /**
@@ -42,7 +44,7 @@ public interface ProductRepository extends CrudRepository<ProductEntity, Long> {
      * @return
      */
     @Query(value = "select * from mall_product where merchant_id = ?1 and product_state = ?2", nativeQuery = true)
-    List<ProductEntity> findAllByMerchantIdandProductState(Long merchant_id, String product_state);
+    List<ProductEntity> findAllByMerchantIdAndProductState(Long merchant_id, String product_state);
 
 //    /**
 //     *
