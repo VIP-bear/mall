@@ -37,7 +37,7 @@ public class ProductController {
      */
     @GetMapping("/buyerQueryProductByName")
     @ResponseBody
-    public ReqResult buyerQueryProductByName(@RequestParam(name = "productName")String productName){
+    public ReqResult buyerQueryProductByName(@RequestParam(name = "productName")String productName,@RequestParam(name = "page")int page){
 
         return null;
     }
@@ -47,7 +47,7 @@ public class ProductController {
      */
     @GetMapping("/buyerQueryProductByType")
     @ResponseBody
-    public ReqResult buyerQueryProductByType(@RequestParam(name = "productType")String productType){
+    public ReqResult buyerQueryProductByType(@RequestParam(name = "productType")String productType,@RequestParam(name = "page")int page){
 
         return null;
     }
@@ -142,7 +142,13 @@ public class ProductController {
         return iProductService.updateProduct(merchantChangeProductReq);
     }
 
-    @PutMapping("/merchant/changeProduct")
+    /**
+     * 商家改变商品库存
+     * @param stock
+     * @param merchantID
+     * @return
+     */
+    @PutMapping("/merchant/changeProductStock")
     @ResponseBody
     public ReqResult merchantChangeProductStock(@RequestParam(name = "stock")Double stock,@RequestParam(name = "merchantID")Long merchantID){
         return iProductService.updateProductStockByProductId(stock,merchantID);
@@ -163,6 +169,11 @@ public class ProductController {
         return iProductService.queryProductByProductState(state);
     }
 
+    /**
+     * 管理员审批通过商品上架
+     * @param administratorChangeStateReq
+     * @return
+     */
     @PutMapping("/administrator/changeState")
     @ResponseBody
     public ReqResult administratorChangeState(AdministratorChangeStateReq administratorChangeStateReq) {

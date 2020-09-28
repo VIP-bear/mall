@@ -21,11 +21,6 @@ public class MerchantVerifyReq {
     private String identityNumber;
 
     /**
-     * 照片
-     */
-    private MultipartFile photo;
-
-    /**
      * 营业执照注册号
      */
     private String merchantRegisterID;
