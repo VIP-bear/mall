@@ -5,6 +5,9 @@ import lombok.Data;
 import javax.persistence.*;
 import java.sql.Timestamp;
 
+/**
+ * 验证码表（用于用户找回密码，向用户绑定邮箱发送验证邮件）
+ */
 @Data
 @Entity
 @Table(name = "mall_verify_code")

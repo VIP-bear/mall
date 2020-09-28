@@ -5,6 +5,9 @@ import lombok.Data;
 import javax.persistence.*;
 import java.text.DecimalFormat;
 
+/**
+ * 订单表
+ */
 @Entity
 @Data
 @Table(name = "mall_order")

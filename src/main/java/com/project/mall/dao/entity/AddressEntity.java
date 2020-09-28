@@ -4,6 +4,11 @@ import lombok.Data;
 
 import javax.persistence.*;
 
+/**
+ * 地址表
+ * 存储所有用户的所有地址
+ * 包含默认地址的标记
+ */
 @Entity
 @Data
 @Table(name = "mall_address")

@@ -6,6 +6,9 @@ import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 
+/**
+ * 商品表
+ */
 @Entity
 @Data
 @Table(name = "mall_product")

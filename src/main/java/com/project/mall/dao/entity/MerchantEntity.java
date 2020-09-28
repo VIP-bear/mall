@@ -4,6 +4,11 @@ import lombok.Data;
 
 import javax.persistence.*;
 
+/**
+ * 卖家表
+ * 买家通过资质审查成为卖家（所以卖家表中会出现买家id）
+ * 营业执照注册表在资质审查表中作为审查信息
+ */
 @Entity
 @Data
 @Table(name = "mall_merchant")
