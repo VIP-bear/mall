@@ -36,4 +36,10 @@ public class QualificationEntity {
     @Column
     private String qualification_face;
 
+    /**
+     * 营业执照注册号
+     */
+    @Column
+    private String merchant_license;
+
 }
