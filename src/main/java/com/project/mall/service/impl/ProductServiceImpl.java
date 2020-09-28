@@ -55,7 +55,7 @@ public class ProductServiceImpl implements IProductService {
 
     @Transactional
     @Override
-    public ReqResult updateProductStockByProductId(Integer productStock, Long productId) {
+    public ReqResult updateProductStockByProductId(Double productStock, Long productId) {
         int row = productRepository.updateProductStockByProductId(productStock, productId);
         if (row != 1) {
             return new ReqResult(ProductTypeEnum.UPDATE_FAILED.getCode(), "更新失败");

@@ -9,8 +9,17 @@ import lombok.Data;
 @Data
 public class ReqResult {
 
+    /**
+     * 状态码
+     */
     private Integer code;
+    /**
+     * 描述信息
+     */
     private String msg;
+    /**
+     * 返回数据
+     */
     private Object data;
 
     public ReqResult(){

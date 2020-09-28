@@ -35,7 +35,7 @@ public interface IProductService {
      * @param productId
      * @return
      */
-    ReqResult updateProductStockByProductId(Integer productStock, Long productId);
+    ReqResult updateProductStockByProductId(Double productStock, Long productId);
 
     /**
      * 根据商品id更新商品状态

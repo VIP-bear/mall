@@ -4,6 +4,9 @@ import com.project.mall.controller.req.merchant.MerchantLoginReq;
 import com.project.mall.controller.req.merchant.MerchantVerifyReq;
 import com.project.mall.controller.res.ReqResult;
 
+/**
+ * 商家服务接口
+ */
 public interface IMerchantService {
 
     /**

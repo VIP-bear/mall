@@ -62,7 +62,7 @@ public interface ProductRepository extends CrudRepository<ProductEntity, Long> {
      */
     @Modifying
     @Query(value = "update mall_product set product_stock = ?1 where product_id = ?2", nativeQuery = true)
-    int updateProductStockByProductId(Integer product_stock, Long product_id);
+    int updateProductStockByProductId(Double product_stock, Long product_id);
 
     /**
      * 根据商品id更新商品状态
