@@ -1,6 +1,6 @@
 package com.project.mall.service.impl;
 
-import com.project.mall.controller.req.merchant.MerchantUploadProduct;
+import com.project.mall.controller.req.merchant.MerchantUploadProductReq;
 import com.project.mall.controller.res.ReqResult;
 import com.project.mall.dao.ProductRepository;
 import com.project.mall.dao.entity.ProductEntity;
@@ -28,7 +28,7 @@ public class ProductServiceImpl implements IProductService {
 
     @Transactional
     @Override
-    public ReqResult addProduct(MerchantUploadProduct uploadProduct) {
+    public ReqResult addProduct(MerchantUploadProductReq uploadProduct) {
         ProductEntity productEntity = new ProductEntity();
         BeanUtils.copyProperties(uploadProduct, productEntity);
         if (null == productRepository.save(productEntity)) {
@@ -46,7 +46,7 @@ public class ProductServiceImpl implements IProductService {
 
     @Transactional
     @Override
-    public ReqResult updateProduct(MerchantUploadProduct updateProduct) {
+    public ReqResult updateProduct(MerchantUploadProductReq updateProduct) {
         ProductEntity productEntity = new ProductEntity();
         BeanUtils.copyProperties(updateProduct, productEntity);
         productRepository.save(productEntity);  // 更新

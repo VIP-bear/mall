@@ -10,5 +10,5 @@ public class CheckOrderReq {
     /**
      * 买家id
      */
-    private int buyerID;
+    private Long buyerID;
 }
