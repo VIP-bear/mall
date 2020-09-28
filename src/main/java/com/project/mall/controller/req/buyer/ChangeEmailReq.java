@@ -6,7 +6,7 @@ import lombok.Data;
  * 用户修改/绑定邮箱
  */
 @Data
-public class ChangeEmail {
+public class ChangeEmailReq {
     /**
      * 买家/卖家ID
      */

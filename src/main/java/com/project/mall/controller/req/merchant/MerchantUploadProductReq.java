@@ -6,7 +6,7 @@ import lombok.Data;
  * 商家上传商品数据
  */
 @Data
-public class MerchantUploadProduct {
+public class MerchantUploadProductReq {
     /**
      * 商品名称
      */
@@ -34,5 +34,5 @@ public class MerchantUploadProduct {
     /**
      * 商品库存
      */
-    private String aaaa;
+    private String productStock;
 }

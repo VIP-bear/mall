@@ -6,11 +6,11 @@ import lombok.Data;
  * 买家依关键字查询商品信息
  */
 @Data
-public class MerchantQueryProductByState {
+public class MerchantQueryProductByTypeReq {
     /**
-     * 商品状态
+     * 商品类别
      */
-    private String productState;
+    private String productType;
 
     /**
      * 卖家ID

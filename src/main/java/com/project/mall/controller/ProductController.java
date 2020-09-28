@@ -1,9 +1,9 @@
 package com.project.mall.controller;
 
-import com.project.mall.controller.req.merchant.MerchantQueryProductByName;
-import com.project.mall.controller.req.merchant.MerchantQueryProductByState;
-import com.project.mall.controller.req.merchant.MerchantQueryProductByType;
-import com.project.mall.controller.req.merchant.MerchantUploadProduct;
+import com.project.mall.controller.req.merchant.MerchantQueryProductByNameReq;
+import com.project.mall.controller.req.merchant.MerchantQueryProductByStateReq;
+import com.project.mall.controller.req.merchant.MerchantQueryProductByTypeReq;
+import com.project.mall.controller.req.merchant.MerchantUploadProductReq;
 import com.project.mall.controller.res.ReqResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ public class ProductController {
      */
     @PostMapping("/addProduct")
     @ResponseBody
-    public ReqResult addProduct(MerchantUploadProduct merchantUploadProduct){
+    public ReqResult addProduct(MerchantUploadProductReq merchantUploadProductReq){
             ReqResult reqResult = new ReqResult();
         return reqResult;
     }
@@ -70,36 +70,36 @@ public class ProductController {
 
     /**
      * 卖家按商品名查询
-     * @param merchantQueryProductByName
+     * @param merchantQueryProductByNameReq
      * @return
      */
     @GetMapping("/MerchantQueryProductByName")
     @ResponseBody
-    public ReqResult MerchantQueryProductByName(MerchantQueryProductByName merchantQueryProductByName) {
+    public ReqResult MerchantQueryProductByName(MerchantQueryProductByNameReq merchantQueryProductByNameReq) {
 
         return null;
     }
 
     /**
      * 卖家按商品类别查询
-     * @param merchantQueryProductByType
+     * @param merchantQueryProductByTypeReq
      * @return
      */
     @GetMapping("/MerchantQueryProductByType")
     @ResponseBody
-    public ReqResult MerchantQueryProductByType(MerchantQueryProductByType merchantQueryProductByType) {
+    public ReqResult MerchantQueryProductByType(MerchantQueryProductByTypeReq merchantQueryProductByTypeReq) {
 
         return null;
     }
 
     /**
      * 卖家按商品状态查询
-     * @param merchantQueryProductByState
+     * @param merchantQueryProductByStateReq
      * @return
      */
     @GetMapping("/MerchantQueryProductByState")
     @ResponseBody
-    public ReqResult MerchantQueryProductByState(MerchantQueryProductByState merchantQueryProductByState) {
+    public ReqResult MerchantQueryProductByState(MerchantQueryProductByStateReq merchantQueryProductByStateReq) {
 
         return null;
     }

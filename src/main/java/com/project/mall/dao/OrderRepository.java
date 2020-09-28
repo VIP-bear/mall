@@ -9,6 +9,9 @@ public interface OrderRepository extends JpaRepository<OrderEntity, Long> {
 
     /**
      * 根据订单id修改订单状态
+     * @param  order_state
+     * @param order_id
+     * @return
      */
     @Modifying
     @Query(value = "update mall_order set order_state = ?1 where order_id = ?2", nativeQuery = true)
@@ -16,11 +19,21 @@ public interface OrderRepository extends JpaRepository<OrderEntity, Long> {
 
     /**
      * 根据订单id修改订单配送地址
+     * @param order_address
+     * @param order_id
+     * @return
      */
     @Modifying
     @Query(value = "update mall_order set order_address = ?1 where order_id = ?2", nativeQuery = true)
     int updateOrderAddressById(String order_address, Long order_id);
 
+    /**
+     * 根据订单id修改订单中的商品数量和花费总额
+     * @param order_num
+     * @param order_cost
+     * @param order_id
+     * @return
+     */
     @Modifying
     @Query(value = "upate mall_order set order_num = ?1 and order_cost = ?2 where order_id = ?3", nativeQuery = true)
     int updateOrderNumandCostById(double order_num, double order_cost, Long order_id);

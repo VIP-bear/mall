@@ -4,7 +4,7 @@ import com.project.mall.controller.req.buyer.BuyerLoginReq;
 import com.project.mall.controller.req.buyer.BuyerRegisterReq;
 import com.project.mall.controller.req.UserChangePasswordReq;
 import com.project.mall.controller.req.UserCodeMatchingReq;
-import com.project.mall.controller.req.buyer.ChangeEmail;
+import com.project.mall.controller.req.buyer.ChangeEmailReq;
 import com.project.mall.controller.res.ReqResult;
 import com.project.mall.dao.BuyerRepository;
 import com.project.mall.dao.VerifyCodeRepository;
@@ -13,7 +13,6 @@ import com.project.mall.dao.entity.VerifyCodeEntity;
 import com.project.mall.enums.BuyerTypeEnum;
 import com.project.mall.enums.VerifyTypeEnum;
 import com.project.mall.service.IBuyerService;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.MailSendException;
@@ -205,11 +204,11 @@ public class BuyerServiceImpl implements IBuyerService {
 
     /**
      * 绑定/修改邮箱
-     * @param changeEmail
+     * @param changeEmailReq
      * @return
      */
     @Override
-    public ReqResult changeEmail(ChangeEmail changeEmail) {
+    public ReqResult changeEmail(ChangeEmailReq changeEmailReq) {
         return null;
     }
 
