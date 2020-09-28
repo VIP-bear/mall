@@ -16,10 +16,7 @@ public interface IMerchantService {
      */
     ReqResult login(MerchantLoginReq merchantLoginReq);
 
-    /**
-     * 商家注册
-     * @param merchantRegisterReq
-     * @return
-     */
-    ReqResult register(MerchantRegisterReq merchantRegisterReq);
+    ReqResult perInfoReview();
+
+
 }

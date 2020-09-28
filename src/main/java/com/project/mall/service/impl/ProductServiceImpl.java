@@ -103,7 +103,7 @@ public class ProductServiceImpl implements IProductService {
 
     @Override
     public ReqResult queryProductByMerchantIdAndProductState(Long merchantId, String productState) {
-        List<ProductEntity> productEntityList = productRepository.findAllByMerchantIdandProductState(merchantId, productState);
+        List<ProductEntity> productEntityList = productRepository.findAllByMerchantIdAndProductState(merchantId, productState);
         return new ReqResult(ProductTypeEnum.QUERY_SUCCESS.getCode(), "查询成功", productEntityList);
     }
 }
