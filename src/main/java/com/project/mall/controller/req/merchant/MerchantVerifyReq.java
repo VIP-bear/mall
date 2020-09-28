@@ -1,6 +1,7 @@
 package com.project.mall.controller.req.merchant;
 
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * 卖家身份验证
@@ -15,9 +16,9 @@ public class MerchantVerifyReq {
     private String merchantName;
 
     /**
-     * 照片链接
+     * 照片
      */
-    private String photo;
+    private MultipartFile photo;
 
     /**
      * 营业执照注册号

@@ -1,6 +1,7 @@
 package com.project.mall.controller.req.merchant;
 
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * 商家上传商品数据
@@ -20,7 +21,7 @@ public class MerchantUploadProductReq {
     /**
      * 商品图片
      */
-    private String productPicture;
+    private MultipartFile productPicture;
 
     /**
      * 商品单价

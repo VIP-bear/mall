@@ -16,5 +16,5 @@ public class MerchantQueryProductByTypeReq {
      * 卖家ID
      */
 
-    private int MerchantID;
+    private Long MerchantID;
 }

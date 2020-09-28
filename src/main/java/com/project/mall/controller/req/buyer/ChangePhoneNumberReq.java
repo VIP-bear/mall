@@ -3,17 +3,17 @@ package com.project.mall.controller.req.buyer;
 import lombok.Data;
 
 /**
- * 用户修改/绑定邮箱
+ * 修改/绑定手机号
  */
 @Data
-public class ChangeEmailReq {
+public class ChangePhoneNumberReq {
     /**
      * 买家/卖家ID
      */
     private Long ID;
 
     /**
-     * 绑定/修改的邮箱地址
+     * 电话号
      */
-    private String email;
+    private Long phoneNumber;
 }
