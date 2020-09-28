@@ -16,12 +16,17 @@ public class MerchantVerifyReq {
     private String merchantName;
 
     /**
-     * 照片
+     * 身份证号
      */
-    private MultipartFile photo;
+    private String identityNumber;
 
     /**
      * 营业执照注册号
      */
     private String merchantRegisterID;
+
+    /**
+     * 店铺名称
+     */
+    private String storeName;
 }

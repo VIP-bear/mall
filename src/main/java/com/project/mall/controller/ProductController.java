@@ -1,10 +1,7 @@
 package com.project.mall.controller;
 
 import com.project.mall.controller.req.AdministratorChangeStateReq;
-import com.project.mall.controller.req.merchant.MerchantQueryProductByNameReq;
-import com.project.mall.controller.req.merchant.MerchantQueryProductByStateReq;
-import com.project.mall.controller.req.merchant.MerchantQueryProductByTypeReq;
-import com.project.mall.controller.req.merchant.MerchantUploadProductReq;
+import com.project.mall.controller.req.merchant.*;
 import com.project.mall.controller.res.ReqResult;
 import com.project.mall.service.IProductService;
 import lombok.extern.slf4j.Slf4j;
@@ -40,7 +37,7 @@ public class ProductController {
      */
     @GetMapping("/buyerQueryProductByName")
     @ResponseBody
-    public ReqResult buyerQueryProductByName(@RequestParam(name = "productName")String productName){
+    public ReqResult buyerQueryProductByName(@RequestParam(name = "productName")String productName,@RequestParam(name = "page")int page){
 
         return null;
     }
@@ -50,7 +47,7 @@ public class ProductController {
      */
     @GetMapping("/buyerQueryProductByType")
     @ResponseBody
-    public ReqResult buyerQueryProductByType(@RequestParam(name = "productType")String productType){
+    public ReqResult buyerQueryProductByType(@RequestParam(name = "productType")String productType,@RequestParam(name = "page")int page){
 
         return null;
     }
@@ -125,12 +122,36 @@ public class ProductController {
      * @param merchantQueryProductByStateReq
      * @return
      */
-    @GetMapping("/MerchantQueryProductByState")
+    @GetMapping("/merchant/queryProductByState")
     @ResponseBody
     public ReqResult merchantQueryProductByState(MerchantQueryProductByStateReq merchantQueryProductByStateReq) {
 
         return iProductService.queryProductByMerchantIdAndProductState(merchantQueryProductByStateReq.getMerchantID(),
                 merchantQueryProductByStateReq.getProductState());
+    }
+
+    /**
+     * 商家修改商品信息
+     * @param merchantChangeProductReq
+     * @return
+     */
+    @PutMapping("/merchant/changeProductInfo")
+    @ResponseBody
+    public ReqResult merchantChangeProductInfo(MerchantChangeProductReq merchantChangeProductReq) {
+
+        return iProductService.updateProduct(merchantChangeProductReq);
+    }
+
+    /**
+     * 商家改变商品库存
+     * @param stock
+     * @param merchantID
+     * @return
+     */
+    @PutMapping("/merchant/changeProductStock")
+    @ResponseBody
+    public ReqResult merchantChangeProductStock(@RequestParam(name = "stock")Double stock,@RequestParam(name = "merchantID")Long merchantID){
+        return iProductService.updateProductStockByProductId(stock,merchantID);
     }
 
     /**
@@ -148,6 +169,11 @@ public class ProductController {
         return iProductService.queryProductByProductState(state);
     }
 
+    /**
+     * 管理员审批通过商品上架
+     * @param administratorChangeStateReq
+     * @return
+     */
     @PutMapping("/administrator/changeState")
     @ResponseBody
     public ReqResult administratorChangeState(AdministratorChangeStateReq administratorChangeStateReq) {

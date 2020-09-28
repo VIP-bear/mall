@@ -26,7 +26,7 @@ public class MerchantUploadProductReq {
     /**
      * 商品单价
      */
-    private int UnitPrice;
+    private Double UnitPrice;
 
     /**
      * 商品销售单位
@@ -36,4 +36,9 @@ public class MerchantUploadProductReq {
      * 商品库存
      */
     private String productStock;
+    /**
+     * 商品描述
+     */
+    private String productDescribe;
+
 }
