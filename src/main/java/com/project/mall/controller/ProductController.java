@@ -181,4 +181,8 @@ public class ProductController {
                 administratorChangeStateReq.getMerchantID());
     }
 
+    @PutMapping("/administrator/verifyStore")
+    @ResponseBody
+    public ReqResult administratorVerifyStore(@RequestParam(name = ""))
+
 }
