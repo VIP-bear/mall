@@ -25,11 +25,6 @@ public class MerchantEntity {
     private Long buyer_id;
 
     /**
-     * 用户名（同买家用户名）
-     */
-    private String buyer_name;
-
-    /**
      * 店铺名称（有名命要求）
      */
     private String merchant_shopname;

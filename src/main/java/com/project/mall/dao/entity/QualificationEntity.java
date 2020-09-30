@@ -30,11 +30,6 @@ public class QualificationEntity {
     @Column
     private String qualification_realname;
 
-    /**
-     * 面部图片（用于面部识别确定卖家身份）
-     */
-    @Column
-    private String qualification_face;
 
     /**
      * 营业执照注册号
