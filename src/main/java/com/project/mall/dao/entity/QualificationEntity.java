@@ -22,7 +22,7 @@ public class QualificationEntity {
      * 身份证明号（与真实姓名和用户面部共同确定卖家身份）
      */
     @Column
-    private String qualification_idNum;
+    private String qualification_idnum;
 
     /**
      * 真实姓名
@@ -30,10 +30,11 @@ public class QualificationEntity {
     @Column
     private String qualification_realname;
 
+
     /**
-     * 面部图片（用于面部识别确定卖家身份）
+     * 营业执照注册号
      */
     @Column
-    private String qualification_face;
+    private String merchant_license;
 
 }
