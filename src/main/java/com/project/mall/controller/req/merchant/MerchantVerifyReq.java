@@ -23,10 +23,15 @@ public class MerchantVerifyReq {
     /**
      * 营业执照注册号
      */
-    private String merchantRegisterID;
+    private String merchantLicense;
 
     /**
      * 店铺名称
      */
     private String storeName;
+
+    /**
+     * 买家ID
+     */
+    private Long buyerID;
 }
