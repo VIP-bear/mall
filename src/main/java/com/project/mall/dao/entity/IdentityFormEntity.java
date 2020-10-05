@@ -31,4 +31,10 @@ public class IdentityFormEntity {
     @Column
     private String identify_number;
 
+    /**
+     * 营业执照注册号
+     */
+    @Column
+    private String merchant_license;
+
 }
