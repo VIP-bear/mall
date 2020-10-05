@@ -181,8 +181,14 @@ public class ProductController {
                 administratorChangeStateReq.getMerchantID());
     }
 
-    @PutMapping("/administrator/verifyStore")
-    @ResponseBody
-    public ReqResult administratorVerifyStore(@RequestParam(name = ""))
+    /**
+     * 管理员审核店铺
+     */
+//    @PutMapping("/administrator/verifyStore")
+//    @ResponseBody
+//    public ReqResult administratorVerifyStore(@RequestParam(name = "")){
+//
+//
+//    }
 
 }

@@ -1,5 +1,6 @@
 package com.project.mall.service;
 
+import com.project.mall.controller.req.merchant.MerchantChangeProductReq;
 import com.project.mall.controller.req.merchant.MerchantUploadProductReq;
 import com.project.mall.controller.res.ReqResult;
 
@@ -27,7 +28,7 @@ public interface IProductService {
      * @param updateProduct
      * @return
      */
-    ReqResult updateProduct(MerchantUploadProductReq updateProduct);
+    ReqResult updateProduct(MerchantChangeProductReq updateProduct);
 
     /**
      * 根据商品id更新商品库存

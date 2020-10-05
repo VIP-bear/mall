@@ -1,5 +1,6 @@
 package com.project.mall.service.impl;
 
+import com.project.mall.controller.req.merchant.MerchantChangeProductReq;
 import com.project.mall.controller.req.merchant.MerchantUploadProductReq;
 import com.project.mall.controller.res.ReqResult;
 import com.project.mall.dao.ProductRepository;
@@ -46,7 +47,7 @@ public class ProductServiceImpl implements IProductService {
 
     @Transactional
     @Override
-    public ReqResult updateProduct(MerchantUploadProductReq updateProduct) {
+    public ReqResult updateProduct(MerchantChangeProductReq updateProduct) {
         ProductEntity productEntity = new ProductEntity();
         BeanUtils.copyProperties(updateProduct, productEntity);
         productRepository.save(productEntity);  // 更新
