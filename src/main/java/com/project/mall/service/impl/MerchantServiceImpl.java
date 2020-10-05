@@ -47,12 +47,12 @@ public class MerchantServiceImpl implements IMerchantService {
         if (entity == null || !merchantVerifyReq.getMerchantName().equals(entity.getUsername())) {
             return new ReqResult(900, "未查询到此人");
         }
-        if (!merchantVerifyReq.getMerchantRegisterID().equals(entity.getMerchant_license())) {
+        if (!merchantVerifyReq.getMerchantLicense().equals(entity.getMerchant_license())) {
             return new ReqResult(901, "营业执照注册号无效");
         }
         // 将商家信息保存到数据库
         MerchantEntity merchantEntity = new MerchantEntity();
-        merchantEntity.setMerchant_license(merchantVerifyReq.getMerchantRegisterID());
+        merchantEntity.setMerchant_license(merchantVerifyReq.getMerchantLicense());
         merchantEntity.setMerchant_shopname(merchantVerifyReq.getStoreName());
         merchantEntity.setBuyer_id(merchantVerifyReq.getBuyerID());
         merchantEntity.setMerchant_state("可营业");
