@@ -5,8 +5,10 @@ import com.project.mall.controller.res.ReqResult;
 import com.project.mall.service.IShoppingCartService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
-public class ShoppingCartImpl implements IShoppingCartService {
+public class ShoppingCartServiceImpl implements IShoppingCartService {
 
     /**
      * 添加至购物车
@@ -15,6 +17,16 @@ public class ShoppingCartImpl implements IShoppingCartService {
      */
     @Override
     public ReqResult addShoppingCart(ShoppingCartReq shoppingCartReq) {
+        return null;
+    }
+
+    /**
+     * 删除购物车商品
+     * @param cartIdList
+     * @return
+     */
+    @Override
+    public ReqResult deleteShoppingCart(List<Long> cartIdList) {
         return null;
     }
 }

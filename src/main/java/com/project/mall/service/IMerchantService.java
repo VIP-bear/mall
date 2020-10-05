@@ -1,9 +1,12 @@
 package com.project.mall.service;
 
 import com.project.mall.controller.req.merchant.MerchantLoginReq;
-import com.project.mall.controller.req.merchant.MerchantRegisterReq;
+import com.project.mall.controller.req.merchant.MerchantVerifyReq;
 import com.project.mall.controller.res.ReqResult;
 
+/**
+ * 商家服务接口
+ */
 public interface IMerchantService {
 
     /**
@@ -14,9 +17,11 @@ public interface IMerchantService {
     ReqResult login(MerchantLoginReq merchantLoginReq);
 
     /**
-     * 商家注册
-     * @param merchantRegisterReq
+     * 商家个人信息审核
+     * @param merchantVerifyReq
      * @return
      */
-    ReqResult register(MerchantRegisterReq merchantRegisterReq);
+    ReqResult perInfoReview(MerchantVerifyReq merchantVerifyReq);
+
+
 }

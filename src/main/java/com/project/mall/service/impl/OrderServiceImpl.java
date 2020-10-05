@@ -7,7 +7,7 @@ import com.project.mall.service.IOrderService;
 import org.springframework.stereotype.Service;
 
 @Service
-public class OrderImpl implements IOrderService {
+public class OrderServiceImpl implements IOrderService {
 
     /**
      * 买家创建订单

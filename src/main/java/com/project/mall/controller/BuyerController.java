@@ -4,6 +4,7 @@ import com.project.mall.controller.req.buyer.BuyerLoginReq;
 import com.project.mall.controller.req.buyer.BuyerRegisterReq;
 import com.project.mall.controller.req.UserChangePasswordReq;
 import com.project.mall.controller.req.UserCodeMatchingReq;
+import com.project.mall.controller.req.buyer.ChangeEmailReq;
 import com.project.mall.controller.res.ReqResult;
 import com.project.mall.service.IBuyerService;
 import lombok.extern.slf4j.Slf4j;
@@ -77,5 +78,10 @@ public class BuyerController {
         return buyerService.changePwd(userChangePasswordReq);
     }
 
+    @PostMapping("/bindEmail")
+    @ResponseBody
+    public ReqResult bindEmail(ChangeEmailReq changeEmailReq) {
+        return buyerService.changeEmail(changeEmailReq);
+    }
 
 }

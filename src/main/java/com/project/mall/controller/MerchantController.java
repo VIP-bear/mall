@@ -1,7 +1,7 @@
 package com.project.mall.controller;
 
 import com.project.mall.controller.req.merchant.MerchantLoginReq;
-import com.project.mall.controller.req.merchant.MerchantRegisterReq;
+import com.project.mall.controller.req.merchant.MerchantVerifyReq;
 import com.project.mall.controller.res.ReqResult;
 import com.project.mall.service.IMerchantService;
 import lombok.extern.slf4j.Slf4j;
@@ -30,13 +30,13 @@ public class MerchantController {
 
     /**
      * 商家注册
-     * @param merchantRegisterReq
+     * @param merchantVerifyReq
      * @return
      */
     @PostMapping("/merchant/register")
     @ResponseBody
-    public ReqResult merchantRegister(MerchantRegisterReq merchantRegisterReq) {
+    public ReqResult merchantRegister(MerchantVerifyReq merchantVerifyReq) {
 
-        return merchantService.register(merchantRegisterReq);
+        return merchantService.register(merchantVerifyReq);
     }
 }
