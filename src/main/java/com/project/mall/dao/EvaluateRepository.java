@@ -28,5 +28,5 @@ public interface EvaluateRepository extends JpaRepository<EvaluateEntity, Long> 
      * @return
      */
     @Query(value = "select * from mall_evaluate where product_id = ?1 and buyer_id = ?2", nativeQuery = true)
-    EvaluateEntity findAllByProductIdAndBuyerId(String product_id, String buyer_id);
+    EvaluateEntity findAllByProductIdAndBuyerId(Long product_id, Long buyer_id);
 }
