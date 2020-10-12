@@ -40,17 +40,17 @@ public class AddEvaluateReq {
      * 评价图片1（评价可上传最多三张图片）
      */
 
-    private String evaluate_pic1;
+    private MultipartFile evaluate_pic1;
     /**
      * 评价图片2
      */
 
-    private String evaluate_pic2;
+    private MultipartFile evaluate_pic2;
     /**
      * 评价图片3
      */
 
-    private String evaluate_pic3;
+    private MultipartFile evaluate_pic3;
 
 
 

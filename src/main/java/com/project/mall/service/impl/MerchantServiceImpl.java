@@ -43,18 +43,18 @@ public class MerchantServiceImpl implements IMerchantService {
     @Transactional
     @Override
     public ReqResult perInfoReview(MerchantVerifyReq merchantVerifyReq) {
-        IdentityFormEntity entity = identityFormRepository.findByIdentifyNumber(merchantVerifyReq.getIdentityNumber());
-        if (entity == null || !merchantVerifyReq.getMerchantName().equals(entity.getUsername())) {
+        IdentityFormEntity entity = identityFormRepository.findByIdentifyNumber(merchantVerifyReq.getQualification_idnum());
+        if (entity == null || !merchantVerifyReq.getQualification_realname().equals(entity.getUsername())) {
             return new ReqResult(900, "未查询到此人");
         }
-        if (!merchantVerifyReq.getMerchantLicense().equals(entity.getMerchant_license())) {
+        if (!merchantVerifyReq.getMerchant_license().equals(entity.getMerchant_license())) {
             return new ReqResult(901, "营业执照注册号无效");
         }
         // 将商家信息保存到数据库
         MerchantEntity merchantEntity = new MerchantEntity();
-        merchantEntity.setMerchant_license(merchantVerifyReq.getMerchantLicense());
-        merchantEntity.setMerchant_shopname(merchantVerifyReq.getStoreName());
-        merchantEntity.setBuyer_id(merchantVerifyReq.getBuyerID());
+        merchantEntity.setMerchant_license(merchantVerifyReq.getMerchant_license());
+        merchantEntity.setMerchant_shopname(merchantVerifyReq.getMerchant_shopname());
+        merchantEntity.setBuyer_id(merchantVerifyReq.getBuyer_id());
         merchantEntity.setMerchant_state("可营业");
         merchantRepository.save(merchantEntity);
         return new ReqResult(902, "审核通过");

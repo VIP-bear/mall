@@ -22,7 +22,7 @@ public class MerchantUploadProductReq {
      * 商品描述
      */
 
-    private String product_description;
+    private MultipartFile product_description;
 
     /**
      * 商品封面

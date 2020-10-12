@@ -33,6 +33,5 @@ public class MerchantVerifyReq {
     /**
      * 买家ID
      */
-    private Long buyer_id
-            ;
+    private Long buyer_id;
 }

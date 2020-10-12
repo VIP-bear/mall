@@ -61,18 +61,18 @@ public class BuyerServiceImpl implements IBuyerService {
     @Override
     public ReqResult login(BuyerLoginReq buyerLoginReq) {
         BuyerEntity buyerEntity = null;
-        if (buyerLoginReq.getBuyerName().endsWith(".com")) {
+        if (buyerLoginReq.getBuyer_name().endsWith(".com")) {
             // 根据邮箱查找用户
-            buyerEntity = buyerRepository.findBuyerEntityByBuyerEmail(buyerLoginReq.getBuyerName());
+            buyerEntity = buyerRepository.findBuyerEntityByBuyerEmail(buyerLoginReq.getBuyer_name());
         } else {
             // 根据用户名查找用户
-            buyerEntity = buyerRepository.findBuyerEntityByBuyerName(buyerLoginReq.getBuyerName());
+            buyerEntity = buyerRepository.findBuyerEntityByBuyerName(buyerLoginReq.getBuyer_name());
         }
-        if (null == buyerEntity || !bCryptPasswordEncoder.matches(buyerLoginReq.getPassword(), buyerEntity.getBuyer_pwd())) {
+        if (null == buyerEntity || !bCryptPasswordEncoder.matches(buyerLoginReq.getBuyer_pwd(), buyerEntity.getBuyer_pwd())) {
             // 没有查找到用户或者密码不正确
             return new ReqResult(BuyerTypeEnum.USERNAME_OR_PASSWORD_ERROR.getCode(), "用户名或者密码错误", null);
         }
-        buyerEntity.setBuyer_pwd(buyerLoginReq.getPassword());
+        buyerEntity.setBuyer_pwd(buyerLoginReq.getBuyer_pwd());
         return new ReqResult(BuyerTypeEnum.LOGIN_SUCCESS.getCode(), "登录成功", buyerEntity);
     }
 
@@ -85,15 +85,15 @@ public class BuyerServiceImpl implements IBuyerService {
     @Transactional
     @Override
     public ReqResult register(BuyerRegisterReq buyerRegisterReq) {
-        if (buyerRepository.findBuyerEntityByBuyerName(buyerRegisterReq.getBuyerName()) != null){
+        if (buyerRepository.findBuyerEntityByBuyerName(buyerRegisterReq.getBuyer_name()) != null){
             // 用户已存在
             return new ReqResult(BuyerTypeEnum.USER_EXISTED.getCode(), "用户已存在", null);
         }
 
         BuyerEntity buyerEntity = new BuyerEntity();
-        buyerEntity.setBuyer_name(buyerRegisterReq.getBuyerName());
+        buyerEntity.setBuyer_name(buyerRegisterReq.getBuyer_name());
         // 对密码进行加密
-        buyerEntity.setBuyer_pwd(bCryptPasswordEncoder.encode(buyerRegisterReq.getPassword()));
+        buyerEntity.setBuyer_pwd(bCryptPasswordEncoder.encode(buyerRegisterReq.getBuyer_pwd()));
 
         if (buyerRepository.save(buyerEntity) == null){
             // 注册失败
@@ -163,9 +163,9 @@ public class BuyerServiceImpl implements IBuyerService {
     @Override
     public ReqResult changePwd(UserChangePasswordReq userChangePasswordReq) {
         // 密码加密
-        userChangePasswordReq.setNewPassword(bCryptPasswordEncoder.encode(userChangePasswordReq.getNewPassword()));
+        userChangePasswordReq.setBuyer_password(bCryptPasswordEncoder.encode(userChangePasswordReq.getBuyer_password()));
         // 修改密码，返回受影响的行数
-        int influenceRow = buyerRepository.changePasswordByEmail(userChangePasswordReq.getEmail(), userChangePasswordReq.getNewPassword());
+        int influenceRow = buyerRepository.changePasswordByEmail(userChangePasswordReq.getBuyer_email(), userChangePasswordReq.getBuyer_password());
         if (influenceRow != 1) {
             return new ReqResult(BuyerTypeEnum.CHANGE_PWD_FAILED.getCode(), "密码修改失败");
         }
@@ -183,7 +183,7 @@ public class BuyerServiceImpl implements IBuyerService {
     @Override
     public ReqResult codeMatching(UserCodeMatchingReq userCodeMatchingReq) {
         VerifyCodeEntity verifyCodeEntity = verifyCodeRepository
-                .findVerifyCodeEntityByEmailAndCode(userCodeMatchingReq.getEmail(), userCodeMatchingReq.getCode());
+                .findVerifyCodeEntityByEmailAndCode(userCodeMatchingReq.getBuyer_email(), userCodeMatchingReq.getCode());
         if (null == verifyCodeEntity) {
             // 验证码错误
             return new ReqResult(VerifyTypeEnum.VERIFY_CODE_ERROR.getCode(), "验证码错误");

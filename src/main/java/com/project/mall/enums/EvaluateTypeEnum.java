@@ -13,7 +13,8 @@ public enum EvaluateTypeEnum {
     EVA_FAILED(750),
     EVA_SUCCESS(751),
     EVA_QUERY_SUCCESS(752),
-    EVA_NOT_EXIST(753)
+    EVA_NOT_EXIST(753),
+    EVA_REPLY_SUCCESS(754),
     ;
 
     private Integer code;

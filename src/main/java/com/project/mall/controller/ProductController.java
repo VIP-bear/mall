@@ -128,8 +128,8 @@ public class ProductController {
     @ResponseBody
     public ReqResult merchantQueryProductByState(MerchantQueryProductByStateReq merchantQueryProductByStateReq) {
 
-        return iProductService.queryProductByMerchantIdAndProductState(merchantQueryProductByStateReq.getMerchantID(),
-                merchantQueryProductByStateReq.getProductState());
+        return iProductService.queryProductByMerchantIdAndProductState(merchantQueryProductByStateReq.getBuyer_id(),
+                merchantQueryProductByStateReq.getProduct_state());
     }
 
     /**
@@ -179,8 +179,8 @@ public class ProductController {
     @PutMapping("/administrator/changeState")
     @ResponseBody
     public ReqResult administratorChangeState(AdministratorChangeStateReq administratorChangeStateReq) {
-        return iProductService.updateProductStateByProductId(administratorChangeStateReq.getState(),
-                administratorChangeStateReq.getMerchantID());
+        return iProductService.updateProductStateByProductId(administratorChangeStateReq.getProduct_state(),
+                administratorChangeStateReq.getProduct_id());
     }
 
     /**

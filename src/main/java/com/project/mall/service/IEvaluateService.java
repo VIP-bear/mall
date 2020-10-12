@@ -1,5 +1,6 @@
 package com.project.mall.service;
 
+import com.project.mall.controller.req.buyer.AddEvaluateReq;
 import com.project.mall.controller.res.ReqResult;
 
 /**
@@ -23,5 +24,12 @@ public interface IEvaluateService {
      * @return
      */
     ReqResult queryEvaluateByProductIdAndBuyerId(Long productId, Long buyerId);
+
+    /**
+     * 添加评论
+     * @param addEvaluateReq
+     * @return
+     */
+    ReqResult addEvaluate(AddEvaluateReq addEvaluateReq);
 
 }

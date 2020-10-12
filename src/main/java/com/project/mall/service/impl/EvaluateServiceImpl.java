@@ -1,13 +1,18 @@
 package com.project.mall.service.impl;
 
+import com.project.mall.controller.req.buyer.AddEvaluateReq;
 import com.project.mall.controller.res.ReqResult;
 import com.project.mall.dao.EvaluateRepository;
 import com.project.mall.dao.entity.EvaluateEntity;
 import com.project.mall.enums.EvaluateTypeEnum;
 import com.project.mall.service.IEvaluateService;
+import com.project.mall.util.AliyunProvider;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -18,6 +23,9 @@ public class EvaluateServiceImpl implements IEvaluateService {
 
     @Autowired
     private EvaluateRepository evaluateRepository;
+
+    @Autowired
+    private AliyunProvider aliyunProvider;
 
     @Override
     public ReqResult queryEvaluateByProductId(Long productId, int page, int size) {
@@ -33,6 +41,26 @@ public class EvaluateServiceImpl implements IEvaluateService {
             return new ReqResult(EvaluateTypeEnum.EVA_NOT_EXIST.getCode(), "评论不存在", null);
         }
         return new ReqResult(EvaluateTypeEnum.EVA_QUERY_SUCCESS.getCode(), "评论查询成功", evaluateEntity);
+    }
+
+    @Transactional
+    @Override
+    public ReqResult addEvaluate(AddEvaluateReq addEvaluateReq) {
+        EvaluateEntity evaluateEntity = new EvaluateEntity();
+        BeanUtils.copyProperties(addEvaluateReq, evaluateEntity);
+        Timestamp now = new Timestamp(System.currentTimeMillis());
+        evaluateEntity.setEvaluate_time(now);
+        if (addEvaluateReq.getEvaluate_pic1() != null) {
+            evaluateEntity.setEvaluate_pic1(aliyunProvider.upload(addEvaluateReq.getEvaluate_pic1(), "comment_pic/"));
+        }
+        if (addEvaluateReq.getEvaluate_pic2() != null) {
+            evaluateEntity.setEvaluate_pic2(aliyunProvider.upload(addEvaluateReq.getEvaluate_pic2(), "comment_pic/"));
+        }
+        if (addEvaluateReq.getEvaluate_pic3() != null) {
+            evaluateEntity.setEvaluate_pic3(aliyunProvider.upload(addEvaluateReq.getEvaluate_pic3(), "comment_pic/"));
+        }
+        evaluateRepository.save(evaluateEntity);
+        return new ReqResult(EvaluateTypeEnum.EVA_SUCCESS.getCode(), "评论成功");
     }
 
 }
