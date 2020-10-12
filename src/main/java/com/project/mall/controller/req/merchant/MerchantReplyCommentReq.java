@@ -22,7 +22,7 @@ public class MerchantReplyCommentReq {
     private Long productID;
 
     /**
-     * 评价内容
+     * 回复内容
      */
     private String commentMessage;
 }

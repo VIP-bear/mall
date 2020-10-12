@@ -35,7 +35,7 @@ public class MerchantEntity {
     private String merchant_license;
 
     /**
-     * 卖家状态（审核中(under review)，可营业（open for business)，不可营业(closed)）
+     * 卖家状态（可营业（open for business)，不可营业(closed)）
      */
     private String merchant_state;
 

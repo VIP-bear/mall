@@ -37,6 +37,6 @@ public class MerchantController {
     @ResponseBody
     public ReqResult merchantRegister(MerchantVerifyReq merchantVerifyReq) {
 
-        return merchantService.register(merchantVerifyReq);
+        return merchantService.perInfoReview(merchantVerifyReq);
     }
 }

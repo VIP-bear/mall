@@ -76,18 +76,16 @@ public class ProductServiceImpl implements IProductService {
 
     @Override
     public ReqResult queryProductByProductName(String productName, int page, int size) {
-//        int offset = (page - 1) * size;
-//        List<ProductEntity> productList = productRepository.findAllByProductName(productName, offset, size);
-//        return new ReqResult(ProductTypeEnum.QUERY_SUCCESS.getCode(), "查询成功", productList);
-        return null;
+        int offset = (page - 1) * size;
+        List<ProductEntity> productList = productRepository.findProductByName(productName, offset, size);
+        return new ReqResult(ProductTypeEnum.QUERY_SUCCESS.getCode(), "查询成功", productList);
     }
 
     @Override
     public ReqResult queryProductByTag(String tag, int page, int size) {
-//        int offset = (page - 1) * size;
-//        List<ProductEntity> productList = productRepository.findAllByTag(tag, offset, size);
-//        return new ReqResult(ProductTypeEnum.QUERY_SUCCESS.getCode(), "查询成功", productList);
-        return null;
+        int offset = (page - 1) * size;
+        List<ProductEntity> productList = productRepository.findProductByCategory(tag, offset, size);
+        return new ReqResult(ProductTypeEnum.QUERY_SUCCESS.getCode(), "查询成功", productList);
     }
 
     @Override
