@@ -15,5 +15,5 @@ public class ChangePhoneNumberReq {
     /**
      * 电话号
      */
-    private Long phoneNumber;
+    private Long buyer_phone;
 }

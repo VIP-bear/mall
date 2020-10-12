@@ -10,19 +10,20 @@ public class MerchantReplyCommentReq {
     /**
      * 评论ID
      */
-    private Long commentID;
+    private Long evaluate_id;
     /**
      * 买家ID
      */
-    private Long buyerID;
+    private Long buyer_id;
 
     /**
      * 商品ID
      */
-    private Long productID;
+    private Long product_id;
 
     /**
      * 回复内容
      */
-    private String commentMessage;
+    private String reply_content;
 }
+

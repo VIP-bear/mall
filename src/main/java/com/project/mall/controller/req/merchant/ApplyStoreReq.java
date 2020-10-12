@@ -10,15 +10,15 @@ public class ApplyStoreReq {
     /**
      * 真实姓名
      */
-    private String realName;
+    private String qualification_realname;
 
     /**
      * 身份证号
      */
-    private String identityNumber;
+    private String qualification_idnum;
 
     /**
      * 营业执照注册号
      */
-    private String merchantRegisterID;
+    private String merchant_license;
 }

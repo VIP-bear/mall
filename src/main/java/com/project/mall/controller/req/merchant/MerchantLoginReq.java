@@ -11,11 +11,11 @@ public class MerchantLoginReq {
     /**
      * 用户名
      */
-    private String MerchantName;
+    private String buyer_mame;
 
     /**
      * 用户密码
      */
-    private String password;
+    private String buyer_password;
 
 }

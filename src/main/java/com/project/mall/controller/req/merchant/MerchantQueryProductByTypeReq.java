@@ -10,11 +10,11 @@ public class MerchantQueryProductByTypeReq {
     /**
      * 商品类别
      */
-    private String productType;
+    private String product_category;
 
     /**
      * 卖家ID
      */
 
-    private Long MerchantID;
+    private Long buyer_id;
 }

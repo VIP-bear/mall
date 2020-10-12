@@ -3,50 +3,64 @@ package com.project.mall.controller.req.merchant;
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.persistence.Column;
+
 /**
  * 更新商品信息
  */
 @Data
 public class MerchantChangeProductReq {
+
+
     /**
      * 商品id
      */
-    private Long ID;
-
-    /**
-     * 商品名称
-     */
-    private String merchantName;
-
-    /**
-     * 商品描述
-     */
-    private String merchantDescribe;
-
-    /**
-     * 商品库存
-     */
-    private String merchantStock;
-
-    /**
-     * 商品单价
-     */
-    private Double unitPrice;
-
-    /**
-     * 销售单位
-     */
-    private String SalesUnit;
+    private Long product_id;
 
     /**
      * 商品类别
      */
-    private String type;
+    private String product_category;
 
     /**
-     * 商品图片
+     * 商品名称
      */
-    private MultipartFile productPicture;
+    private String product_name;
+
+    /**
+     * 商品描述
+     */
+
+    private String product_description;
+
+    /**
+     * 商品封面
+     */
+
+    private String product_cover;
+
+    /**
+     * 商品单价
+     */
+
+    private Double product_price;
+
+    /**
+     * 商品单位
+     */
+
+    private String product_unit;
+
+    /**
+     * 商品库存
+     */
+
+    private Double product_stock = 0.00;
 
 
+    /**
+     * 卖家id
+     */
+
+    private Long merchant_id;
 }

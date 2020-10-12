@@ -11,16 +11,15 @@ public class BuyerRegisterReq {
     /**
      * 用户名
      */
-    private String buyerName;
+    private String buyer_name;
 
     /**
      * 用户密码
      */
-    private String password;
+    private String buyer_pwd;
 
     /**
-     * 确认密码
+     * 用户邮箱
      */
-    private String confirmPassword;
-
+    private String buyer_email;
 }

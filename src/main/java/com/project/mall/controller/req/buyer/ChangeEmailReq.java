@@ -15,5 +15,5 @@ public class ChangeEmailReq {
     /**
      * 绑定/修改的邮箱地址
      */
-    private String email;
+    private String buyer_email;
 }

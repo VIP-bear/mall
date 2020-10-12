@@ -11,15 +11,15 @@ public class ShoppingCartReq {
     /**
      * 商品ID
      */
-    private long productID;
+    private long product_id;
 
     /**
      * 用户ID
      */
-    private long buyerID;
+    private long buyer_id;
 
     /**
      * 购买数量
      */
-    private int productNum;
+    private int product_num;
 }
