@@ -63,5 +63,5 @@ public class EvaluateEntity {
      * 评价时间
      */
     @Column
-    private Timestamp evalucate_time;
+    private Timestamp evaluate_time;
 }
