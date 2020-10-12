@@ -91,14 +91,6 @@ public class ProductServiceImpl implements IProductService {
     }
 
     @Override
-    public ReqResult queryEvaluateByProductId(Long productId, int page, int size) {
-//        int offset = (page - 1) * size;
-//        List<EvaluateEntity> evaluateList = evaluateRepository.findAllEvaluateByProductId(productId, offset, size);
-//        return new ReqResult(ProductTypeEnum.QUERY_SUCCESS.getCode(), "查询成功", evaluateList);
-        return null;
-    }
-
-    @Override
     public ReqResult queryProductById(Long productId) {
         ProductEntity productEntity = productRepository.findById(productId).get();
         return new ReqResult(ProductTypeEnum.QUERY_SUCCESS.getCode(), "查询成功", productEntity);

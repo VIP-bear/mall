@@ -65,15 +65,6 @@ public interface IProductService {
     ReqResult queryProductByTag(String tag, int page, int size);
 
     /**
-     * 根据商品id分页查询评论
-     * @param productId
-     * @param page
-     * @param size
-     * @return
-     */
-    ReqResult queryEvaluateByProductId(Long productId, int page, int size);
-
-    /**
      * 根据商品id查询
      * @param productId
      * @return
