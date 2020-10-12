@@ -26,16 +26,6 @@ public class MerchantServiceImpl implements IMerchantService {
     private MerchantRepository merchantRepository;
 
     /**
-     * 卖家登录
-     * @param merchantLoginReq
-     * @return
-     */
-    @Override
-    public ReqResult login(MerchantLoginReq merchantLoginReq) {
-        return null;
-    }
-
-    /**
      * 商家个人信息审核
      * @param merchantVerifyReq
      * @return
