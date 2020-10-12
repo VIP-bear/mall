@@ -47,9 +47,9 @@ public class ProductServiceImpl implements IProductService {
 
     @Transactional
     @Override
-    public ReqResult updateProduct(MerchantChangeProductReq updateProduct) {
+    public ReqResult updateProduct(MerchantChangeProductReq changeProductReq) {
         ProductEntity productEntity = new ProductEntity();
-        BeanUtils.copyProperties(updateProduct, productEntity);
+        BeanUtils.copyProperties(changeProductReq, productEntity);  // 有些问题
         productRepository.save(productEntity);  // 更新
         return null;
     }
@@ -72,6 +72,20 @@ public class ProductServiceImpl implements IProductService {
             return new ReqResult(ProductTypeEnum.UPDATE_FAILED.getCode(), "更新失败");
         }
         return new ReqResult(ProductTypeEnum.UPDATE_SUCCESS.getCode(), "更新成功");
+    }
+
+    @Override
+    public ReqResult queryProductByProductName(String productName, int page, int size) {
+        int offset = (page - 1) * size;
+        List<ProductEntity> productList = productRepository.findProductByName(productName, offset, size);
+        return new ReqResult(ProductTypeEnum.QUERY_SUCCESS.getCode(), "查询成功", productList);
+    }
+
+    @Override
+    public ReqResult queryProductByTag(String tag, int page, int size) {
+        int offset = (page - 1) * size;
+        List<ProductEntity> productList = productRepository.findProductByCategory(tag, offset, size);
+        return new ReqResult(ProductTypeEnum.QUERY_SUCCESS.getCode(), "查询成功", productList);
     }
 
     @Override

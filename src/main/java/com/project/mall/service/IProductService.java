@@ -25,10 +25,10 @@ public interface IProductService {
 
     /**
      * 修改商品
-     * @param updateProduct
+     * @param changeProductReq
      * @return
      */
-    ReqResult updateProduct(MerchantChangeProductReq updateProduct);
+    ReqResult updateProduct(MerchantChangeProductReq changeProductReq);
 
     /**
      * 根据商品id更新商品库存
@@ -46,6 +46,23 @@ public interface IProductService {
      */
     ReqResult updateProductStateByProductId(String productState, Long productId);
 
+    /**
+     * 根据商品名称模糊查询(分页)
+     * @param productName
+     * @param page
+     * @param size
+     * @return
+     */
+    ReqResult queryProductByProductName(String productName, int page, int size);
+
+    /**
+     * 根据商品类别查询(分页)
+     * @param tag
+     * @param page
+     * @param size
+     * @return
+     */
+    ReqResult queryProductByTag(String tag, int page, int size);
 
     /**
      * 根据商品id查询
