@@ -1,9 +1,6 @@
 package com.project.mall.dao.entity;
 
 import lombok.Data;
-import org.dom4j.swing.XMLTableColumnDefinition;
-import org.hibernate.annotations.ColumnDefault;
-
 import javax.persistence.*;
 
 /**
