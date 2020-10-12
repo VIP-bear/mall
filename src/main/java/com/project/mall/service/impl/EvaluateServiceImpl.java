@@ -6,6 +6,7 @@ import com.project.mall.dao.EvaluateRepository;
 import com.project.mall.dao.entity.EvaluateEntity;
 import com.project.mall.enums.EvaluateTypeEnum;
 import com.project.mall.service.IEvaluateService;
+import com.project.mall.util.AliyunProvider;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,9 @@ public class EvaluateServiceImpl implements IEvaluateService {
 
     @Autowired
     private EvaluateRepository evaluateRepository;
+
+    @Autowired
+    private AliyunProvider aliyunProvider;
 
     @Override
     public ReqResult queryEvaluateByProductId(Long productId, int page, int size) {
@@ -46,8 +50,15 @@ public class EvaluateServiceImpl implements IEvaluateService {
         BeanUtils.copyProperties(addEvaluateReq, evaluateEntity);
         Timestamp now = new Timestamp(System.currentTimeMillis());
         evaluateEntity.setEvaluate_time(now);
-
-
+        if (addEvaluateReq.getEvaluate_pic1() != null) {
+            evaluateEntity.setEvaluate_pic1(aliyunProvider.upload(addEvaluateReq.getEvaluate_pic1(), "comment_pic/"));
+        }
+        if (addEvaluateReq.getEvaluate_pic2() != null) {
+            evaluateEntity.setEvaluate_pic2(aliyunProvider.upload(addEvaluateReq.getEvaluate_pic2(), "comment_pic/"));
+        }
+        if (addEvaluateReq.getEvaluate_pic3() != null) {
+            evaluateEntity.setEvaluate_pic3(aliyunProvider.upload(addEvaluateReq.getEvaluate_pic3(), "comment_pic/"));
+        }
         evaluateRepository.save(evaluateEntity);
         return new ReqResult(EvaluateTypeEnum.EVA_SUCCESS.getCode(), "评论成功");
     }

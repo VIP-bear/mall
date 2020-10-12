@@ -1,6 +1,6 @@
 package com.project.mall.service;
 
-import com.project.mall.controller.req.buyer.AddEvaluateReq;
+import com.project.mall.controller.req.merchant.AddReplyReq;
 import com.project.mall.controller.res.ReqResult;
 
 /**
@@ -14,5 +14,12 @@ public interface IReplyEvaluateService {
      * @return
      */
     ReqResult queryReplyEvaluateByEvaluateId(Long evaluateId);
+
+    /**
+     * 添加回复评论
+     * @param addReplyReq
+     * @return
+     */
+    ReqResult addReplyEvaluate(AddReplyReq addReplyReq);
 
 }
