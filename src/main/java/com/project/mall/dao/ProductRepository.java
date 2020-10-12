@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -46,15 +47,6 @@ public interface ProductRepository extends CrudRepository<ProductEntity, Long> {
     @Query(value = "select * from mall_product where merchant_id = ?1 and product_state = ?2", nativeQuery = true)
     List<ProductEntity> findAllByMerchantIdAndProductState(Long merchant_id, String product_state);
 
-//    /**
-//     *
-//     * @param product_category
-//     * @return
-//     */
-//    @Query(value = "select * from mall_product where product_category = ?1 " +
-//            "order by product_score", nativeQuery = true)
-//    Page<ProductEntity> findAllByProductCategoryOrderByScore(String product_category);
-
 
     /**
      * 根据商品id更新商品库存
@@ -75,6 +67,28 @@ public interface ProductRepository extends CrudRepository<ProductEntity, Long> {
     @Modifying
     @Query(value = "update mall_product set product_state = ?1 where product_id = ?2", nativeQuery = true)
     int updateProductStateByProductId(String product_state, Long product_id);
+
+    /**
+     * 根据商品名称模糊查询
+     * @param productName
+     * @param offset
+     * @param size
+     * @return
+     */
+    @Query(value = "select * from mall_product where product_name like concat('%',:productName,'%') " +
+            "limit ?2,?3", nativeQuery = true)
+    List<ProductEntity> findProductByName(@Param(value = "productName") String productName, int offset, int size);
+
+    /**
+     * 根据类别查询商品
+     * @param product_category
+     * @param offset
+     * @param size
+     * @return
+     */
+    @Query(value = "selecct * from mall_product where product_category = ?1 " +
+            "limit ?2,?3",nativeQuery = true)
+    List<ProductEntity> findProductByCategory(String product_category, int offset, int size);
 
 
 }
