@@ -26,3 +26,4 @@ public class MerchantReplyCommentReq {
      */
     private String commentMessage;
 }
+

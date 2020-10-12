@@ -24,7 +24,7 @@ public class ProductController {
      * 分页拉取商品信息
      * @return
      */
-    @GetMapping("/buyerQueryEachProductByPage")
+    @GetMapping("/buyer/queryEachProductByPage")
     @ResponseBody
     public ReqResult queryEachProductByPage(@RequestParam(name = "page")int page){
 
@@ -35,7 +35,7 @@ public class ProductController {
      * 买家按商品名查询
      * @return
      */
-    @GetMapping("/buyerQueryProductByName")
+    @GetMapping("/buyer/queryProductByName")
     @ResponseBody
     public ReqResult buyerQueryProductByName(@RequestParam(name = "productName")String productName,@RequestParam(name = "page")int page){
 
@@ -45,12 +45,14 @@ public class ProductController {
      * 买家按商类别查询
      * @return
      */
-    @GetMapping("/buyerQueryProductByType")
+    @GetMapping("/buyer/queryProductByType")
     @ResponseBody
     public ReqResult buyerQueryProductByType(@RequestParam(name = "productType")String productType,@RequestParam(name = "page")int page){
 
         return null;
     }
+
+
 
 
     /**
@@ -61,7 +63,7 @@ public class ProductController {
     /**
      * 商家增加商品
      */
-    @PostMapping("/addProduct")
+    @PostMapping("/merchant/addProduct")
     @ResponseBody
     public ReqResult addProduct(MerchantUploadProductReq merchantUploadProductReq){
 
@@ -73,7 +75,7 @@ public class ProductController {
      * @param productID
      * @return
      */
-    @DeleteMapping("/deleteProduct")
+    @DeleteMapping("/merchant/deleteProduct")
     @ResponseBody
     public ReqResult deleteProduct(@RequestParam(name = "productID")Long productID){
 
@@ -85,7 +87,7 @@ public class ProductController {
      * @param merchantID
      * @return
      */
-    @GetMapping("/selectAllByMerchantID")
+    @GetMapping("/merchant/selectAllByMerchantID")
     @ResponseBody
     public ReqResult selectAllByMerchantID(@RequestParam(name = "MerchantID")long merchantID) {
 
@@ -98,7 +100,7 @@ public class ProductController {
      * @param merchantQueryProductByNameReq
      * @return
      */
-    @GetMapping("/MerchantQueryProductByName")
+    @GetMapping("/merchant/queryProductByName")
     @ResponseBody
     public ReqResult merchantQueryProductByName(MerchantQueryProductByNameReq merchantQueryProductByNameReq) {
 
@@ -110,7 +112,7 @@ public class ProductController {
      * @param merchantQueryProductByTypeReq
      * @return
      */
-    @GetMapping("/MerchantQueryProductByType")
+    @GetMapping("/merchant/queryProductByType")
     @ResponseBody
     public ReqResult merchantQueryProductByType(MerchantQueryProductByTypeReq merchantQueryProductByTypeReq) {
 
