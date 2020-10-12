@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 public interface QualificationRepository extends JpaRepository<QualificationEntity, Long> {
 
     /**
-     * 根据商家的身份证明号和真实姓名确定商家身份（后续添加人脸识别）
+     * 根据商家的身份证明号和真实姓名以及营业执照注册号确定商家身份
      * @param qualification_idnum
      * @param qualification_realname
      * @param merchant_license

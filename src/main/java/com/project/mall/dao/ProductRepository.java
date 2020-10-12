@@ -69,7 +69,7 @@ public interface ProductRepository extends CrudRepository<ProductEntity, Long> {
     int updateProductStateByProductId(String product_state, Long product_id);
 
     /**
-     * 根据商品名称模糊查询
+     * 根据商品名称模糊查询（分页）
      * @param productName
      * @param offset
      * @param size
