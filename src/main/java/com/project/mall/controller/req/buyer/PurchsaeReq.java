@@ -10,20 +10,23 @@ public class PurchsaeReq {
     /**
      * 商品ID
      */
-    private long productID;
+    private long product_id;
 
     /**
      * 用户ID
      */
-    private long buyerID;
+    private long buyer_phone;
 
     /**
      * 购买数量
      */
-    private int productNum;
-
+    private int order_num;
+    /**
+     * 订单总价
+     */
+    private Double order_cost;
     /**
      * 配送地址
      */
-    private String address;
+    private String order_address;
 }

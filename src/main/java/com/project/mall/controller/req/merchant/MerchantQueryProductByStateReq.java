@@ -10,11 +10,11 @@ public class MerchantQueryProductByStateReq {
     /**
      * 商品状态
      */
-    private String productState;
+    private String product_state;
 
     /**
      * 卖家ID
      */
 
-    private Long MerchantID;
+    private Long buyer_id;
 }

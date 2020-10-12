@@ -11,11 +11,11 @@ public class BuyerLoginReq {
     /**
      * 用户名
      */
-    private String buyerName;
+    private String buyer_name;
 
     /**
      * 用户密码
      */
-    private String password;
+    private String buyer_pwd;
 
 }
