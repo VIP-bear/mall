@@ -1,5 +1,6 @@
 package com.project.mall.service;
 
+import com.project.mall.controller.req.merchant.MerchantChangeProductReq;
 import com.project.mall.controller.req.merchant.MerchantUploadProductReq;
 import com.project.mall.controller.res.ReqResult;
 
@@ -24,10 +25,10 @@ public interface IProductService {
 
     /**
      * 修改商品
-     * @param updateProduct
+     * @param changeProductReq
      * @return
      */
-    ReqResult updateProduct(MerchantUploadProductReq updateProduct);
+    ReqResult updateProduct(MerchantChangeProductReq changeProductReq);
 
     /**
      * 根据商品id更新商品库存
@@ -45,6 +46,32 @@ public interface IProductService {
      */
     ReqResult updateProductStateByProductId(String productState, Long productId);
 
+    /**
+     * 根据商品名称模糊查询(分页)
+     * @param productName
+     * @param page
+     * @param size
+     * @return
+     */
+    ReqResult queryProductByProductName(String productName, int page, int size);
+
+    /**
+     * 根据商品类别查询(分页)
+     * @param tag
+     * @param page
+     * @param size
+     * @return
+     */
+    ReqResult queryProductByTag(String tag, int page, int size);
+
+    /**
+     * 根据商品id分页查询评论
+     * @param productId
+     * @param page
+     * @param size
+     * @return
+     */
+    ReqResult queryEvaluateByProductId(Long productId, int page, int size);
 
     /**
      * 根据商品id查询

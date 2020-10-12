@@ -1,5 +1,6 @@
 package com.project.mall.service.impl;
 
+import com.project.mall.controller.req.merchant.MerchantChangeProductReq;
 import com.project.mall.controller.req.merchant.MerchantUploadProductReq;
 import com.project.mall.controller.res.ReqResult;
 import com.project.mall.dao.ProductRepository;
@@ -46,9 +47,9 @@ public class ProductServiceImpl implements IProductService {
 
     @Transactional
     @Override
-    public ReqResult updateProduct(MerchantUploadProductReq updateProduct) {
+    public ReqResult updateProduct(MerchantChangeProductReq changeProductReq) {
         ProductEntity productEntity = new ProductEntity();
-        BeanUtils.copyProperties(updateProduct, productEntity);
+        BeanUtils.copyProperties(changeProductReq, productEntity);  // 有些问题
         productRepository.save(productEntity);  // 更新
         return null;
     }
@@ -71,6 +72,30 @@ public class ProductServiceImpl implements IProductService {
             return new ReqResult(ProductTypeEnum.UPDATE_FAILED.getCode(), "更新失败");
         }
         return new ReqResult(ProductTypeEnum.UPDATE_SUCCESS.getCode(), "更新成功");
+    }
+
+    @Override
+    public ReqResult queryProductByProductName(String productName, int page, int size) {
+//        int offset = (page - 1) * size;
+//        List<ProductEntity> productList = productRepository.findAllByProductName(productName, offset, size);
+//        return new ReqResult(ProductTypeEnum.QUERY_SUCCESS.getCode(), "查询成功", productList);
+        return null;
+    }
+
+    @Override
+    public ReqResult queryProductByTag(String tag, int page, int size) {
+//        int offset = (page - 1) * size;
+//        List<ProductEntity> productList = productRepository.findAllByTag(tag, offset, size);
+//        return new ReqResult(ProductTypeEnum.QUERY_SUCCESS.getCode(), "查询成功", productList);
+        return null;
+    }
+
+    @Override
+    public ReqResult queryEvaluateByProductId(Long productId, int page, int size) {
+//        int offset = (page - 1) * size;
+//        List<EvaluateEntity> evaluateList = evaluateRepository.findAllEvaluateByProductId(productId, offset, size);
+//        return new ReqResult(ProductTypeEnum.QUERY_SUCCESS.getCode(), "查询成功", evaluateList);
+        return null;
     }
 
     @Override
