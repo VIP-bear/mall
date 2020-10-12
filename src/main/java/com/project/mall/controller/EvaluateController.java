@@ -27,6 +27,12 @@ public class EvaluateController {
         return null;
     }
 
+    /**
+     * 看评论
+     * @param id
+     * @param page
+     * @return
+     */
     @GetMapping("/evaluate/queryEvaluate")
     @ResponseBody
     public ReqResult queryEvaluate(@RequestParam(name ="productID")Long id,@RequestParam(name = "page")int page) {
