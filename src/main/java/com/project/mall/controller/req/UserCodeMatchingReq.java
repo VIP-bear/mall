@@ -11,7 +11,7 @@ public class UserCodeMatchingReq {
     /**
      * 用户邮箱
      */
-    private String email;
+    private String buyer_email;
     /**
      * 验证码
      */

@@ -10,9 +10,9 @@ public class AdministratorChangeStateReq {
     /**
      * 商品ID
      */
-    private Long merchantID;
+    private Long product_id;
     /**
      * 商品状态
      */
-    private String state;
+    private String product_state;
 }
