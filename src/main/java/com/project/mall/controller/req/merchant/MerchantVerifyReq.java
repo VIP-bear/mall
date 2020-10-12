@@ -13,25 +13,26 @@ public class MerchantVerifyReq {
     /**
      * 真实姓名
      */
-    private String merchantName;
+    private String qualification_realname;
 
     /**
      * 身份证号
      */
-    private String identityNumber;
+    private String qualification_idnum;
 
     /**
      * 营业执照注册号
      */
-    private String merchantLicense;
+    private String merchant_license;
 
     /**
      * 店铺名称
      */
-    private String storeName;
+    private String merchant_shopname;
 
     /**
      * 买家ID
      */
-    private Long buyerID;
+    private Long buyer_id
+            ;
 }

@@ -9,36 +9,50 @@ import org.springframework.web.multipart.MultipartFile;
 @Data
 public class MerchantUploadProductReq {
     /**
-     * 商品名称
-     */
-    private String productName;
-
-    /**
      * 商品类别
      */
-    private String productType;
+    private String product_category;
 
     /**
-     * 商品图片
+     * 商品名称
      */
-    private MultipartFile productPicture;
+    private String product_name;
+
+    /**
+     * 商品描述
+     */
+
+    private String product_description;
+
+    /**
+     * 商品封面
+     */
+
+    private String product_cover;
 
     /**
      * 商品单价
      */
-    private Double UnitPrice;
+
+    private Double product_price;
 
     /**
-     * 商品销售单位
+     * 商品单位
      */
-    private String SalesUnit;
+
+    private String product_unit;
+
     /**
      * 商品库存
      */
-    private String productStock;
+
+    private Double product_stock = 0.00;
+
+
     /**
-     * 商品描述
+     * 卖家id
      */
-    private String productDescribe;
+
+    private Long merchant_id;
 
 }

@@ -24,6 +24,6 @@ public class MerchantReplyCommentReq {
     /**
      * 回复内容
      */
-    private String commentMessage;
+    private String reply_content;
 }
 
