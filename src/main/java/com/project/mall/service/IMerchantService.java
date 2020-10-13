@@ -1,6 +1,5 @@
 package com.project.mall.service;
 
-import com.project.mall.controller.req.merchant.MerchantLoginReq;
 import com.project.mall.controller.req.merchant.MerchantVerifyReq;
 import com.project.mall.controller.res.ReqResult;
 

@@ -78,6 +78,11 @@ public class BuyerController {
         return buyerService.changePwd(userChangePasswordReq);
     }
 
+    /**
+     * 用户更改绑定的邮箱
+     * @param changeEmailReq
+     * @return
+     */
     @PostMapping("/bindEmail")
     @ResponseBody
     public ReqResult bindEmail(ChangeEmailReq changeEmailReq) {

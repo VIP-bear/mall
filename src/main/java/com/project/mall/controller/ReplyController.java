@@ -26,9 +26,14 @@ public class ReplyController {
         return null;
     }
 
+    /**
+     * 查看卖家回复
+     * @param reply_id
+     * @return
+     */
     @GetMapping("/reply/queryReply")
     @ResponseBody
-    public ReqResult queryReply(@RequestParam(name = "replyID")Long reply_id) {
+    public ReqResult queryReply(@RequestParam(name = "evaluateID")Long reply_id) {
 
         return  null;
     }
