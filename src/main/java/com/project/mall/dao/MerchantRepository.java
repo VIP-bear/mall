@@ -21,7 +21,7 @@ public interface MerchantRepository extends JpaRepository<MerchantEntity, Long> 
      * @return
      */
     @Modifying
-    @Query(value = "update mall_merchant set merchant_state = ?! where merchant_id = ?2", nativeQuery = true)
+    @Query(value = "update mall_merchant set merchant_state = ?1 where merchant_id = ?2", nativeQuery = true)
     int updateMerchantStateById(String merchant_state, Long merchant_id);
 
     /**
@@ -42,14 +42,5 @@ public interface MerchantRepository extends JpaRepository<MerchantEntity, Long> 
     @Query(value = "update mall_merchant set merchant_shopname = ?1 where merchant_id = ?2", nativeQuery = true)
     int updateMerchantShopNameById(String merchant_shopname, Long merchant_id);
 
-//    /**
-//     * 根据id修改商家的营业执照注册号（同时将商家状态修改为审核中）
-//     * @param merchant_license
-//     * @param merchant_id
-//     * @return
-//     */
-//    @Modifying
-//    @Query(value = "update mall_merchant set merchant_license = ?1 and merchant_state = 'under review' where merchant_id = ?2",nativeQuery = true)
-//    int updateMerchantLicenseById(String merchant_license, Long merchant_id);
 
 }

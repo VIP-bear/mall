@@ -96,11 +96,8 @@ public class ProductServiceImpl implements IProductService {
 
     @Override
     public ReqResult queryProductByPage(int page, int size) {
-        // 按评分排序
-        PageRequest request = PageRequest.of(page, size,
-                Sort.by(Sort.Direction.DESC, "product_score"));
-        Page<ProductEntity> productEntities = productRepository.findAllByPageable(request);
-        List<ProductEntity> productList = productEntities.getContent();
+        int offset = (page - 1) * size;
+        List<ProductEntity> productList = productRepository.findAllByPage(offset, size);
         return new ReqResult(ProductTypeEnum.QUERY_SUCCESS.getCode(), "查询成功", productList);
     }
 
