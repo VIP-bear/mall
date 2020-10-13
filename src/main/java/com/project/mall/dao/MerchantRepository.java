@@ -15,7 +15,7 @@ import java.util.List;
 public interface MerchantRepository extends JpaRepository<MerchantEntity, Long> {
 
     /**
-     * 根据商家的id来更新卖家状态
+     * 根据卖家的id来更新卖家状态
      * @param merchant_state
      * @param merchant_id
      * @return

@@ -13,14 +13,16 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface ProductRepository extends CrudRepository<ProductEntity, Long> {
+public interface ProductRepository extends JpaRepository<ProductEntity, Long> {
 
     /**
      * 分页查询所有商品
-     * @param pageable
+     * @param
      * @return
      */
-    Page<ProductEntity> findAllByPageable(Pageable pageable);
+    @Query(value = "select * from mall_product order by product_socre ASC " +
+            "limit ?1,?2", nativeQuery = true)
+    List<ProductEntity> findAllByPage(int offset, int size);
 
     /**
      * 查询对应商家的所有商品
@@ -69,7 +71,7 @@ public interface ProductRepository extends CrudRepository<ProductEntity, Long> {
     int updateProductStateByProductId(String product_state, Long product_id);
 
     /**
-     * 根据商品名称模糊查询
+     * 根据商品名称模糊查询（分页）
      * @param productName
      * @param offset
      * @param size
