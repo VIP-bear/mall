@@ -9,13 +9,6 @@ import com.project.mall.controller.res.ReqResult;
 public interface IMerchantService {
 
     /**
-     * 商家登录
-     * @param merchantLoginReq
-     * @return
-     */
-    ReqResult login(MerchantLoginReq merchantLoginReq);
-
-    /**
      * 商家个人信息审核
      * @param merchantVerifyReq
      * @return
