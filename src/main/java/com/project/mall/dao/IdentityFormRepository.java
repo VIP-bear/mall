@@ -11,6 +11,11 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface IdentityFormRepository extends JpaRepository<IdentityFormEntity, Long> {
 
-    IdentityFormEntity findByIdentifyNumber(String merchantRegisterID);
-
+    /**
+     * 根据身份证号查询
+     * @param username
+     * @return
+     */
+    @Query(value = "select * from identity_form where username = ?1", nativeQuery = true)
+    IdentityFormEntity findByIdentifyNumber(String username);
 }
