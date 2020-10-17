@@ -21,14 +21,24 @@ public class ProductController {
      */
 
     /**
-     * 分页拉取商品信息
+     * 登录首页实现推荐
+     * @param id
+     * @return
+     */
+    @GetMapping("/buyer/achieveRecommendProduct")
+    @ResponseBody
+    public ReqResult achieveRecommendProduct(@RequestParam(name = "buyer_id")Long id) {
+        return null;
+    }
+    /**
+     * 随机拉取商品信息
      * @return
      */
     @GetMapping("/buyer/queryEachProductByPage")
     @ResponseBody
-    public ReqResult queryEachProductByPage(@RequestParam(name = "page")int page){
+    public ReqResult queryEachProductByPage(){
 
-        return iProductService.queryProductByPage(page,10);
+        return null;
     }
 
     /**
@@ -37,7 +47,8 @@ public class ProductController {
      */
     @GetMapping("/buyer/queryProductByName")
     @ResponseBody
-    public ReqResult buyerQueryProductByName(@RequestParam(name = "productName")String productName,@RequestParam(name = "page")int page){
+    public ReqResult buyerQueryProductByName(@RequestParam(name = "productName")String productName,
+                                             @RequestParam(name = "page")int page){
 
         return iProductService.queryProductByProductName(productName,page,10);
     }
@@ -47,7 +58,8 @@ public class ProductController {
      */
     @GetMapping("/buyer/queryProductByType")
     @ResponseBody
-    public ReqResult buyerQueryProductByType(@RequestParam(name = "productType")String productType,@RequestParam(name = "page")int page){
+    public ReqResult buyerQueryProductByType(@RequestParam(name = "productType")String productType,
+                                             @RequestParam(name = "page")int page){
 
         return iProductService.queryProductByTag(productType,page,10);
     }
@@ -150,13 +162,15 @@ public class ProductController {
      */
     @PutMapping("/merchant/changeProductStock")
     @ResponseBody
-    public ReqResult merchantChangeProductStock(@RequestParam(name = "stock")Double stock,@RequestParam(name = "merchantID")Long merchantID){
+    public ReqResult merchantChangeProductStock(@RequestParam(name = "stock")Double stock,
+                                                @RequestParam(name = "merchantID")Long merchantID) {
         return iProductService.updateProductStockByProductId(stock,merchantID);
     }
 
     /**
      * 管理员操作
      */
+
 
     /**
      * 管理员依据商品状态查询商品信息
