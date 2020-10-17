@@ -28,7 +28,7 @@ public class ProductController {
     @GetMapping("/buyer/achieveRecommendProduct")
     @ResponseBody
     public ReqResult achieveRecommendProduct(@RequestParam(name = "buyer_id")Long id) {
-        return null;
+        return iProductService.queryProductByRecommend(id,10);
     }
     /**
      * 随机拉取商品信息
@@ -38,7 +38,7 @@ public class ProductController {
     @ResponseBody
     public ReqResult queryEachProductByPage(){
 
-        return null;
+        return iProductService.queryProductByRandom(10);
     }
 
     /**
