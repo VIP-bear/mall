@@ -5,6 +5,9 @@ import com.project.mall.controller.res.ReqResult;
 
 import java.util.List;
 
+/**
+ * 购物车服务接口
+ */
 public interface IShoppingCartService {
 
     /**

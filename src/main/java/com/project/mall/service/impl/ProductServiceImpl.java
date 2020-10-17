@@ -3,7 +3,9 @@ package com.project.mall.service.impl;
 import com.project.mall.controller.req.merchant.MerchantChangeProductReq;
 import com.project.mall.controller.req.merchant.MerchantUploadProductReq;
 import com.project.mall.controller.res.ReqResult;
+import com.project.mall.dao.BuyerRepository;
 import com.project.mall.dao.ProductRepository;
+import com.project.mall.dao.entity.BuyerEntity;
 import com.project.mall.dao.entity.ProductEntity;
 import com.project.mall.enums.ProductTypeEnum;
 import com.project.mall.service.IProductService;
@@ -26,6 +28,9 @@ public class ProductServiceImpl implements IProductService {
 
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private BuyerRepository buyerRepository;
 
     @Transactional
     @Override
@@ -95,10 +100,16 @@ public class ProductServiceImpl implements IProductService {
     }
 
     @Override
-    public ReqResult queryProductByPage(int page, int size) {
-        int offset = (page - 1) * size;
-        List<ProductEntity> productList = productRepository.findAllByPage(offset, size);
-        return new ReqResult(ProductTypeEnum.QUERY_SUCCESS.getCode(), "查询成功", productList);
+    public ReqResult queryProductByRecommend(int size) {
+        // 查询所有用户
+        List<BuyerEntity> buyerEntities = buyerRepository.findAll();
+
+        return new ReqResult(ProductTypeEnum.QUERY_SUCCESS.getCode(), "查询成功", productEntity);
+    }
+
+    @Override
+    public ReqResult queryProductByRandom(int page, int size) {
+        return null;
     }
 
     @Override

@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ReplyRepository extends JpaRepository {
+public interface ReplyRepository extends JpaRepository<ReplyEntity, Long> {
 
     /**
      * 根据评价id查询回复

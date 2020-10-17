@@ -25,7 +25,7 @@ public class BuyerController {
      * 买家登录
      * @return  登录结果
      */
-    @GetMapping("/buyer/login")
+    @PostMapping("/buyer/login")
     @ResponseBody
     public ReqResult login(BuyerLoginReq buyerLoginReq) {
         log.info("userMessage: {}" + buyerLoginReq);

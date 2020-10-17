@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
  * 回复评论服务
  */
 @Service
-public class ReplyEvaluateService implements IReplyEvaluateService {
+public class ReplyEvaluateServiceImpl implements IReplyEvaluateService {
 
     @Autowired
     private ReplyRepository replyRepository;
