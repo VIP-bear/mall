@@ -46,10 +46,20 @@ public class EvaluateServiceImpl implements IEvaluateService {
     @Transactional
     @Override
     public ReqResult addEvaluate(AddEvaluateReq addEvaluateReq) {
+
+        // 判断当前用户是否评论过
+        ReqResult reqResult = queryEvaluateByProductIdAndBuyerId(addEvaluateReq.getProduct_id(), addEvaluateReq.getBuyer_id());
+        if (null == reqResult.getData()) {
+            // 当前用户评论过
+            return reqResult;
+        }
+
+        // 当前用户没有评论过当前商品
         EvaluateEntity evaluateEntity = new EvaluateEntity();
         BeanUtils.copyProperties(addEvaluateReq, evaluateEntity);
         Timestamp now = new Timestamp(System.currentTimeMillis());
         evaluateEntity.setEvaluate_time(now);
+        // 上传图片到服务器返回图片url
         if (addEvaluateReq.getEvaluate_pic1() != null) {
             evaluateEntity.setEvaluate_pic1(aliyunProvider.upload(addEvaluateReq.getEvaluate_pic1(), "comment_pic/"));
         }
@@ -59,6 +69,7 @@ public class EvaluateServiceImpl implements IEvaluateService {
         if (addEvaluateReq.getEvaluate_pic3() != null) {
             evaluateEntity.setEvaluate_pic3(aliyunProvider.upload(addEvaluateReq.getEvaluate_pic3(), "comment_pic/"));
         }
+        // 保存评论
         evaluateRepository.save(evaluateEntity);
         return new ReqResult(EvaluateTypeEnum.EVA_SUCCESS.getCode(), "评论成功");
     }

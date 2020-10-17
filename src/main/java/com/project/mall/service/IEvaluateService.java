@@ -18,7 +18,7 @@ public interface IEvaluateService {
     ReqResult queryEvaluateByProductId(Long productId, int page, int size);
 
     /**
-     * 根据商品id和用户id查询商品
+     * 根据商品id和用户id查询评论
      * @param productId
      * @param buyerId
      * @return

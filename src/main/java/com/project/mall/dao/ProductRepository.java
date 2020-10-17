@@ -13,14 +13,16 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface ProductRepository extends CrudRepository<ProductEntity, Long> {
+public interface ProductRepository extends JpaRepository<ProductEntity, Long> {
 
     /**
      * 分页查询所有商品
-     * @param pageable
+     * @param
      * @return
      */
-    Page<ProductEntity> findAllByPageable(Pageable pageable);
+    @Query(value = "select * from mall_product order by product_socre ASC " +
+            "limit ?1,?2", nativeQuery = true)
+    List<ProductEntity> findAllByPage(int offset, int size);
 
     /**
      * 查询对应商家的所有商品
@@ -69,15 +71,15 @@ public interface ProductRepository extends CrudRepository<ProductEntity, Long> {
     int updateProductStateByProductId(String product_state, Long product_id);
 
     /**
-     * 根据商品名称模糊查询
+     * 根据商品名称模糊查询（分页）
      * @param productName
      * @param offset
      * @param size
      * @return
      */
     @Query(value = "select * from mall_product where product_name like concat('%',:productName,'%') " +
-            "limit ?2,?3", nativeQuery = true)
-    List<ProductEntity> findProductByName(@Param(value = "productName") String productName, int offset, int size);
+            "limit :offset, :size", nativeQuery = true)
+    List<ProductEntity> findProductByName(@Param(value = "productName") String productName, @Param(value = "offset") int offset, @Param(value = "size") int size);
 
     /**
      * 根据类别查询商品
@@ -90,5 +92,12 @@ public interface ProductRepository extends CrudRepository<ProductEntity, Long> {
             "limit ?2,?3",nativeQuery = true)
     List<ProductEntity> findProductByCategory(String product_category, int offset, int size);
 
+    /**
+     * 随即在数据库中抓取一定数据
+     * @param size
+     * @return
+     */
+    @Query(value = "select * from mall_product order by rand() limit ?1", nativeQuery = true)
+    List<ProductEntity> findProductByRandom(int size);
 
 }

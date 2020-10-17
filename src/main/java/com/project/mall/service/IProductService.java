@@ -5,7 +5,7 @@ import com.project.mall.controller.req.merchant.MerchantUploadProductReq;
 import com.project.mall.controller.res.ReqResult;
 
 /**
- * 商品服务
+ * 商品服务接口
  */
 public interface IProductService {
 
@@ -72,12 +72,18 @@ public interface IProductService {
     ReqResult queryProductById(Long productId);
 
     /**
-     * 分页查询商品
-     * @param page
+     * 推荐商品
+     * @param size 查询记录数
+     * @return
+     */
+    ReqResult queryProductByRecommend(Long buyerId, int size);
+
+    /**
+     * 随机推荐商品
      * @param size
      * @return
      */
-    ReqResult queryProductByPage(int page, int size);
+    ReqResult queryProductByRandom(int size);
 
     /**
      * 根据商家id查询商品

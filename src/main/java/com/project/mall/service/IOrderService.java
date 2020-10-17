@@ -4,6 +4,9 @@ import com.project.mall.controller.req.buyer.CheckOrderReq;
 import com.project.mall.controller.req.buyer.PurchsaeReq;
 import com.project.mall.controller.res.ReqResult;
 
+/**
+ * 订单服务接口
+ */
 public interface IOrderService {
 
     /**
