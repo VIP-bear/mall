@@ -2,25 +2,25 @@ package com.project.mall.dao.entity;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Data
 @Table(name = "mall_behavior")
-public class BehaviorEntity {
+@IdClass(BehaviorPK.class)
+public class BehaviorEntity implements Serializable {
 
     @Id
-    @Column
+    @Column(name = "buyer_id")
     private Long buyer_id;
 
     @Id
-    @Column
+    @Column(name = "product_id")
     private Long product_id;
 
     @Column
     private  int behavior_score;
+
 
 }
