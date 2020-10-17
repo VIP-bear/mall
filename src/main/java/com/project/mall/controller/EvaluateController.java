@@ -2,7 +2,9 @@ package com.project.mall.controller;
 
 import com.project.mall.controller.req.buyer.AddEvaluateReq;
 import com.project.mall.controller.res.ReqResult;
+import com.project.mall.service.IEvaluateService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +18,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Slf4j
 public class EvaluateController {
 
+    @Autowired
+    IEvaluateService evaluateService;
     /**
      * 用户添加评论
      * @param addEvaluateReq
@@ -24,7 +28,8 @@ public class EvaluateController {
     @PostMapping("/evaluate/addEvaluate")
     @ResponseBody
     public ReqResult addEvaluate(AddEvaluateReq addEvaluateReq) {
-        return null;
+
+        return evaluateService.addEvaluate(addEvaluateReq);
     }
 
     /**
@@ -37,6 +42,6 @@ public class EvaluateController {
     @ResponseBody
     public ReqResult queryEvaluate(@RequestParam(name ="productID")Long id,@RequestParam(name = "page")int page) {
 
-    return null;
+        return evaluateService.queryEvaluateByProductId(id,page,10);
     }
 }

@@ -27,6 +27,7 @@ public class ShoppingCartServiceImpl implements IShoppingCartService {
      */
     @Override
     public ReqResult deleteShoppingCart(List<Long> cartIdList) {
+
         return null;
     }
 }

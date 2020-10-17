@@ -2,7 +2,9 @@ package com.project.mall.controller;
 
 import com.project.mall.controller.req.merchant.AddReplyReq;
 import com.project.mall.controller.res.ReqResult;
+import com.project.mall.service.IReplyEvaluateService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,7 +15,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Slf4j
 public class ReplyController {
 
-
+    @Autowired
+    IReplyEvaluateService replyEvaluateService;
     /**
      * 店铺回复用户评论
      * @param addReplyReq
@@ -23,7 +26,7 @@ public class ReplyController {
     @ResponseBody
     public ReqResult addReply(AddReplyReq addReplyReq) {
 
-        return null;
+        return replyEvaluateService.addReplyEvaluate(addReplyReq);
     }
 
     /**
@@ -35,7 +38,7 @@ public class ReplyController {
     @ResponseBody
     public ReqResult queryReply(@RequestParam(name = "evaluateID")Long reply_id) {
 
-        return  null;
+        return  replyEvaluateService.queryReplyEvaluateByEvaluateId(reply_id);
     }
 
 }

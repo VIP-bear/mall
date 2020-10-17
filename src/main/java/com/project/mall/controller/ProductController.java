@@ -39,7 +39,7 @@ public class ProductController {
     @ResponseBody
     public ReqResult buyerQueryProductByName(@RequestParam(name = "productName")String productName,@RequestParam(name = "page")int page){
 
-        return null;
+        return iProductService.queryProductByProductName(productName,page,10);
     }
     /**
      * 买家按商类别查询
@@ -49,10 +49,8 @@ public class ProductController {
     @ResponseBody
     public ReqResult buyerQueryProductByType(@RequestParam(name = "productType")String productType,@RequestParam(name = "page")int page){
 
-        return null;
+        return iProductService.queryProductByTag(productType,page,10);
     }
-
-
 
 
     /**
@@ -94,30 +92,30 @@ public class ProductController {
         return iProductService.queryProductByMerchantId(merchantID);
     }
 
-
-    /**
-     * 卖家按商品名查询
-     * @param merchantQueryProductByNameReq
-     * @return
-     */
-    @GetMapping("/merchant/queryProductByName")
-    @ResponseBody
-    public ReqResult merchantQueryProductByName(MerchantQueryProductByNameReq merchantQueryProductByNameReq) {
-
-        return null;
-    }
-
-    /**
-     * 卖家按商品类别查询
-     * @param merchantQueryProductByTypeReq
-     * @return
-     */
-    @GetMapping("/merchant/queryProductByType")
-    @ResponseBody
-    public ReqResult merchantQueryProductByType(MerchantQueryProductByTypeReq merchantQueryProductByTypeReq) {
-
-        return null;
-    }
+//
+//    /**
+//     * 卖家按商品名查询
+//     * @param merchantQueryProductByNameReq
+//     * @return
+//     */
+//    @GetMapping("/merchant/queryProductByName")
+//    @ResponseBody
+//    public ReqResult merchantQueryProductByName(MerchantQueryProductByNameReq merchantQueryProductByNameReq) {
+//
+//        return null;
+//    }
+//
+//    /**
+//     * 卖家按商品类别查询
+//     * @param merchantQueryProductByTypeReq
+//     * @return
+//     */
+//    @GetMapping("/merchant/queryProductByType")
+//    @ResponseBody
+//    public ReqResult merchantQueryProductByType(MerchantQueryProductByTypeReq merchantQueryProductByTypeReq) {
+//
+//        return null;
+//    }
 
     /**
      * 卖家按商品状态查询
@@ -183,14 +181,6 @@ public class ProductController {
                 administratorChangeStateReq.getProduct_id());
     }
 
-    /**
-     * 管理员审核店铺
-     */
-//    @PutMapping("/administrator/verifyStore")
-//    @ResponseBody
-//    public ReqResult administratorVerifyStore(@RequestParam(name = "")){
-//
-//
-//    }
+
 
 }

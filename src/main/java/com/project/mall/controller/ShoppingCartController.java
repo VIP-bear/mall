@@ -27,10 +27,10 @@ public class ShoppingCartController {
      * @param shoppingCartReq
      * @return
      */
-    @PostMapping("/shoppingCart")
+    @PostMapping("/addShoppingCart")
     @ResponseBody
-    public ReqResult shoppingCart(ShoppingCartReq shoppingCartReq) {
-        //
+    public ReqResult addShoppingCart(ShoppingCartReq shoppingCartReq) {
+
         return shoppingCartService.addShoppingCart(shoppingCartReq);
     }
 
@@ -56,7 +56,7 @@ public class ShoppingCartController {
     @PostMapping("/confirmShoppingCart")
     @ResponseBody
     public ReqResult confirmShoppingCart(PurchsaeReq purchsaeReq) {
-        //
+        
         return orderService.placeOrder(purchsaeReq);
     }
 
