@@ -76,15 +76,14 @@ public interface IProductService {
      * @param size 查询记录数
      * @return
      */
-    ReqResult queryProductByRecommend(int size);
+    ReqResult queryProductByRecommend(Long buyerId, int size);
 
     /**
-     *
-     * @param page
+     * 随机推荐商品
      * @param size
      * @return
      */
-    ReqResult queryProductByRandom(int page, int size);
+    ReqResult queryProductByRandom(int size);
 
     /**
      * 根据商家id查询商品
