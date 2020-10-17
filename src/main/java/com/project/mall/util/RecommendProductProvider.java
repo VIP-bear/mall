@@ -37,6 +37,7 @@ public class RecommendProductProvider {
 
     // 获取推荐商品集合
     private void getRecommendProductList(Long targetBuyerId, int size) {
+        recommendProductList = new ArrayList<>();
         Set<Long> set = new HashSet<>();
         // 相似用户商品去重
         for (Long buyerId : similarBuyerList) {
@@ -44,6 +45,8 @@ public class RecommendProductProvider {
         }
         // 目标用户和相似用户商品去重
         List<Long> productList = buyerAndProductMap.get(targetBuyerId);
+        if (productList == null) return;
+
         for (Long productId : productList) {
             if (set.contains(productId)) {
                 set.remove(productId);
@@ -66,7 +69,6 @@ public class RecommendProductProvider {
             return o2.getValue().compareTo(o1.getValue());
         });
         // 得到前size个推荐商品
-        recommendProductList = new ArrayList<>();
         int k = 0;
         for (Map.Entry<Long, Double> map : list) {
             if (k >= 10) break;
