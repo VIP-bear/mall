@@ -78,8 +78,8 @@ public interface ProductRepository extends JpaRepository<ProductEntity, Long> {
      * @return
      */
     @Query(value = "select * from mall_product where product_name like concat('%',:productName,'%') " +
-            "limit ?2,?3", nativeQuery = true)
-    List<ProductEntity> findProductByName(@Param(value = "productName") String productName, int offset, int size);
+            "limit :offset, :size", nativeQuery = true)
+    List<ProductEntity> findProductByName(@Param(value = "productName") String productName, @Param(value = "offset") int offset, @Param(value = "size") int size);
 
     /**
      * 根据类别查询商品
@@ -92,5 +92,12 @@ public interface ProductRepository extends JpaRepository<ProductEntity, Long> {
             "limit ?2,?3",nativeQuery = true)
     List<ProductEntity> findProductByCategory(String product_category, int offset, int size);
 
+    /**
+     * 随即在数据库中抓取一定数据
+     * @param size
+     * @return
+     */
+    @Query(value = "select * from mall_product order by rand() limit ?1", nativeQuery = true)
+    List<ProductEntity> findProductByRandom(int size);
 
 }
