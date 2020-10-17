@@ -92,5 +92,12 @@ public interface ProductRepository extends JpaRepository<ProductEntity, Long> {
             "limit ?2,?3",nativeQuery = true)
     List<ProductEntity> findProductByCategory(String product_category, int offset, int size);
 
+    /**
+     * 随即在数据库中抓取一定数据
+     * @param size
+     * @return
+     */
+    @Query(value = "select * from mall_product order by rand() limit ?1", nativeQuery = true)
+    List<ProductEntity> findProductByRandom(int size);
 
 }
