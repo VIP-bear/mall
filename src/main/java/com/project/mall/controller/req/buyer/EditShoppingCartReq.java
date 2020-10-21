@@ -8,9 +8,9 @@ import lombok.Data;
 @Data
 public class EditShoppingCartReq {
     /**
-     * 商品ID
+     * 购物车ID
      */
-    private long product_id;
+    private long cart_id;
 
     /**
      * 购买数量
