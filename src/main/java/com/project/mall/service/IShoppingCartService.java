@@ -29,4 +29,11 @@ public interface IShoppingCartService {
      * @return
      */
     ReqResult changeBuyProductNum();
+
+    /**
+     * 根据买家获取购物车商品列表
+     * @param buyerId
+     * @return
+     */
+    ReqResult getShoppingCartProduct(Long buyerId);
 }
