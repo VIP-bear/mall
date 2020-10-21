@@ -13,6 +13,8 @@ public enum ShoppingCartTypeEnum {
     ADD_FAILED(750),
     ADD_SUCCESS(751),
     DELETE_SUCCESS(752),
+    UPDATE_FAILED(753),
+    UPDATE_SUCCESS(754),
     ;
 
     private Integer code;

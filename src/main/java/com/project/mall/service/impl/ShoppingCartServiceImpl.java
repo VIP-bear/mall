@@ -1,5 +1,6 @@
 package com.project.mall.service.impl;
 
+import com.project.mall.controller.req.buyer.EditShoppingCartReq;
 import com.project.mall.controller.req.buyer.ShoppingCartReq;
 import com.project.mall.controller.res.ReqResult;
 import com.project.mall.dao.CartRepository;
@@ -58,8 +59,12 @@ public class ShoppingCartServiceImpl implements IShoppingCartService {
      * @return
      */
     @Override
-    public ReqResult changeBuyProductNum() {
-        return null;
+    public ReqResult changeBuyProductNum(EditShoppingCartReq editShoppingCartReq) {
+        int row = cartRepository.updateCartNumByCartId(editShoppingCartReq.getProduct_num(), editShoppingCartReq.getCart_id());
+        if (row == 0) {
+            return new ReqResult(ShoppingCartTypeEnum.UPDATE_FAILED.getCode(), "更新失败");
+        }
+        return new ReqResult(ShoppingCartTypeEnum.UPDATE_SUCCESS.getCode(), "更新失败");
     }
 
     /**

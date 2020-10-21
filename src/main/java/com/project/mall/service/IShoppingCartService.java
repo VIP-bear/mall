@@ -1,5 +1,6 @@
 package com.project.mall.service;
 
+import com.project.mall.controller.req.buyer.EditShoppingCartReq;
 import com.project.mall.controller.req.buyer.ShoppingCartReq;
 import com.project.mall.controller.res.ReqResult;
 
@@ -28,7 +29,7 @@ public interface IShoppingCartService {
      * 修改购物车商品数量
      * @return
      */
-    ReqResult changeBuyProductNum();
+    ReqResult changeBuyProductNum(EditShoppingCartReq editShoppingCartReq);
 
     /**
      * 根据买家获取购物车商品列表
