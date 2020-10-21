@@ -40,7 +40,8 @@ public class EvaluateController {
      */
     @GetMapping("/evaluate/queryEvaluate")
     @ResponseBody
-    public ReqResult queryEvaluate(@RequestParam(name ="productID")Long id,@RequestParam(name = "page")int page) {
+    public ReqResult queryEvaluate(@RequestParam(name ="productID")Long id,
+                                   @RequestParam(name = "page")int page) {
 
         return evaluateService.queryEvaluateByProductId(id,page,10);
     }
