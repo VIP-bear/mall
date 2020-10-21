@@ -25,6 +25,6 @@ public class CartEntity {
     /*
     购物车中商品数量
      */
-    @Column(columnDefinition = "decimal(10,2)")
-    private Double cart_num;
+    @Column
+    private Integer cart_num;
 }
