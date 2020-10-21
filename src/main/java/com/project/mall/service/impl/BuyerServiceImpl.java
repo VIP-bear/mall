@@ -92,8 +92,8 @@ public class BuyerServiceImpl implements IBuyerService {
 
         BuyerEntity buyerEntity = new BuyerEntity();
         buyerEntity.setBuyer_name(buyerRegisterReq.getBuyer_name());
-        // 对密码进行加密
-        buyerEntity.setBuyer_pwd(bCryptPasswordEncoder.encode(buyerRegisterReq.getBuyer_pwd()));
+
+        buyerEntity.setBuyer_pwd(bCryptPasswordEncoder.encode(buyerRegisterReq.getBuyer_pwd()));    // 对密码进行加密
 
         if (buyerRepository.save(buyerEntity) == null){
             // 注册失败

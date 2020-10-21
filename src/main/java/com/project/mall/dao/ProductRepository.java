@@ -93,7 +93,7 @@ public interface ProductRepository extends JpaRepository<ProductEntity, Long> {
     List<ProductEntity> findProductByCategory(String product_category, int offset, int size);
 
     /**
-     * 随即在数据库中抓取一定数据
+     * 随机在数据库中抓取一定数据
      * @param size
      * @return
      */
