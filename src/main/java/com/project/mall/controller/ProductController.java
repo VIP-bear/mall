@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 public class ProductController {
     @Autowired
-    IProductService iProductService;
+    IProductService ProductService;
 
 
     /**
@@ -28,7 +28,7 @@ public class ProductController {
     @GetMapping("/buyer/achieveRecommendProduct")
     @ResponseBody
     public ReqResult achieveRecommendProduct(@RequestParam(name = "buyer_id")Long id) {
-        return iProductService.queryProductByRecommend(id,10);
+        return ProductService.queryProductByRecommend(id,10);
     }
     /**
      * 随机拉取商品信息
@@ -38,7 +38,7 @@ public class ProductController {
     @ResponseBody
     public ReqResult queryEachProductByPage(){
 
-        return iProductService.queryProductByRandom(10);
+        return ProductService.queryProductByRandom(10);
     }
 
     /**
@@ -50,7 +50,7 @@ public class ProductController {
     public ReqResult buyerQueryProductByName(@RequestParam(name = "productName")String productName,
                                              @RequestParam(name = "page")int page){
 
-        return iProductService.queryProductByProductName(productName,page,10);
+        return ProductService.queryProductByProductName(productName,page,10);
     }
     /**
      * 买家按商类别查询
@@ -61,7 +61,7 @@ public class ProductController {
     public ReqResult buyerQueryProductByType(@RequestParam(name = "productType")String productType,
                                              @RequestParam(name = "page")int page){
 
-        return iProductService.queryProductByTag(productType,page,10);
+        return ProductService.queryProductByTag(productType,page,10);
     }
 
 
@@ -77,7 +77,7 @@ public class ProductController {
     @ResponseBody
     public ReqResult addProduct(MerchantUploadProductReq merchantUploadProductReq){
 
-        return iProductService.addProduct(merchantUploadProductReq);
+        return ProductService.addProduct(merchantUploadProductReq);
     }
 
     /**
@@ -89,7 +89,7 @@ public class ProductController {
     @ResponseBody
     public ReqResult deleteProduct(@RequestParam(name = "productID")Long productID){
 
-        return iProductService.deleteProduct(productID);
+        return ProductService.deleteProduct(productID);
     }
 
     /**
@@ -101,7 +101,7 @@ public class ProductController {
     @ResponseBody
     public ReqResult selectAllByMerchantID(@RequestParam(name = "MerchantID")long merchantID) {
 
-        return iProductService.queryProductByMerchantId(merchantID);
+        return ProductService.queryProductByMerchantId(merchantID);
     }
 
 //
@@ -138,7 +138,7 @@ public class ProductController {
     @ResponseBody
     public ReqResult merchantQueryProductByState(MerchantQueryProductByStateReq merchantQueryProductByStateReq) {
 
-        return iProductService.queryProductByMerchantIdAndProductState(merchantQueryProductByStateReq.getBuyer_id(),
+        return ProductService.queryProductByMerchantIdAndProductState(merchantQueryProductByStateReq.getBuyer_id(),
                 merchantQueryProductByStateReq.getProduct_state());
     }
 
@@ -151,7 +151,7 @@ public class ProductController {
     @ResponseBody
     public ReqResult merchantChangeProductInfo(MerchantChangeProductReq merchantChangeProductReq) {
 
-        return iProductService.updateProduct(merchantChangeProductReq);
+        return ProductService.updateProduct(merchantChangeProductReq);
     }
 
     /**
@@ -164,7 +164,7 @@ public class ProductController {
     @ResponseBody
     public ReqResult merchantChangeProductStock(@RequestParam(name = "stock")Double stock,
                                                 @RequestParam(name = "merchantID")Long merchantID) {
-        return iProductService.updateProductStockByProductId(stock,merchantID);
+        return ProductService.updateProductStockByProductId(stock,merchantID);
     }
 
     /**
@@ -180,7 +180,7 @@ public class ProductController {
     @GetMapping("/administrator/queryState")
     @ResponseBody
     public ReqResult administratorQueryState(@RequestParam(name = "state")String state) {
-        return iProductService.queryProductByProductState(state);
+        return ProductService.queryProductByProductState(state);
     }
 
     /**
@@ -191,7 +191,7 @@ public class ProductController {
     @PutMapping("/administrator/changeState")
     @ResponseBody
     public ReqResult administratorChangeState(AdministratorChangeStateReq administratorChangeStateReq) {
-        return iProductService.updateProductStateByProductId(administratorChangeStateReq.getProduct_state(),
+        return ProductService.updateProductStateByProductId(administratorChangeStateReq.getProduct_state(),
                 administratorChangeStateReq.getProduct_id());
     }
 
