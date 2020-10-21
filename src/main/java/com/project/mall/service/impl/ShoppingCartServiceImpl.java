@@ -7,6 +7,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * 购物车服务实现
+ */
 @Service
 public class ShoppingCartServiceImpl implements IShoppingCartService {
 
@@ -28,6 +31,15 @@ public class ShoppingCartServiceImpl implements IShoppingCartService {
     @Override
     public ReqResult deleteShoppingCart(List<Long> cartIdList) {
 
+        return null;
+    }
+
+    /**
+     * 修改购物车商品数量
+     * @return
+     */
+    @Override
+    public ReqResult changeBuyProductNum() {
         return null;
     }
 }

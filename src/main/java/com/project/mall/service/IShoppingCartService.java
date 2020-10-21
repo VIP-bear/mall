@@ -23,4 +23,10 @@ public interface IShoppingCartService {
      * @return
      */
     ReqResult deleteShoppingCart(List<Long> cartIdList);
+
+    /**
+     * 修改购物车商品数量
+     * @return
+     */
+    ReqResult changeBuyProductNum();
 }
