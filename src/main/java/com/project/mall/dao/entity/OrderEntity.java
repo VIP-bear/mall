@@ -35,8 +35,8 @@ public class OrderEntity {
     /**
      * 购买数量
      */
-    @Column(columnDefinition = "decimal(10,2)")
-    private Double order_num;
+    @Column
+    private Integer order_num;
 
     /**
      * 商品单位（个、只、条等等）
