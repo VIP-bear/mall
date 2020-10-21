@@ -32,7 +32,7 @@ public interface IShoppingCartService {
     ReqResult changeBuyProductNum(EditShoppingCartReq editShoppingCartReq);
 
     /**
-     * 根据买家获取购物车商品列表
+     * 根据买家id获取购物车商品列表
      * @param buyerId
      * @return
      */

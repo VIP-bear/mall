@@ -68,12 +68,13 @@ public class ShoppingCartServiceImpl implements IShoppingCartService {
     }
 
     /**
-     * 根据买家获取购物车商品列表
+     * 根据买家id获取购物车商品列表
      * @param buyerId
      * @return
      */
     @Override
     public ReqResult getShoppingCartProduct(Long buyerId) {
-        return null;
+        List<CartEntity> shoppingCartList = cartRepository.findAllByBuyerId(buyerId);
+        return new ReqResult(ShoppingCartTypeEnum.QUERY_SUCCESS.getCode(), "查询成功", shoppingCartList);
     }
 }
