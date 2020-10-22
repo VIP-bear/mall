@@ -7,9 +7,7 @@ import com.project.mall.service.IOrderService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @Slf4j
@@ -24,20 +22,25 @@ public class OrderController {
      */
     @PostMapping("/placeOrder")
     @ResponseBody
-    public ReqResult purchase(PurchsaeReq purchsaeReq) {
+    public ReqResult placeOrder(PurchsaeReq purchsaeReq) {
         log.info("purchaseMessage: {}" + purchsaeReq);
         return orderService.placeOrder(purchsaeReq);
+    }
+    @PutMapping("/changeOrderState")
+    @ResponseBody
+    public ReqResult changeOrderState(@RequestParam(name = "order_id")Long ID) {
+        return null;
     }
 
     /**
      * 拉取订单信息
-     * @param checkOrderReq
+     * @param ID
      * @return
      */
-    @GetMapping("/checkOrder")
+    @GetMapping("/checkOrder/checkOrderByBuyerID")
     @ResponseBody
-    public ReqResult checkOrder(CheckOrderReq checkOrderReq) {
+    public ReqResult checkOrderByBuyerID(@RequestParam(name = "buyer_name")Long ID) {
 
-        return orderService.checkOrder(checkOrderReq);
+        return null;
     }
 }

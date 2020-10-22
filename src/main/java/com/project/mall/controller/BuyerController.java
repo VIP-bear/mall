@@ -6,13 +6,18 @@ import com.project.mall.controller.req.UserChangePasswordReq;
 import com.project.mall.controller.req.UserCodeMatchingReq;
 import com.project.mall.controller.req.buyer.ChangeEmailReq;
 import com.project.mall.controller.res.ReqResult;
+import com.project.mall.enums.BuyerTypeEnum;
 import com.project.mall.service.IBuyerService;
+import com.project.mall.util.RequestLimit;
+import com.project.mall.variable.ConstantVar;
+import com.project.mall.variable.GlobalVal;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @Slf4j
@@ -26,10 +31,17 @@ public class BuyerController {
      * @return  登录结果
      */
     @PostMapping("/buyer/login")
+    @RequestLimit(count = ConstantVar.MAX_REQUEST_COUNT,time = ConstantVar.REQUEST_TIMES)
     @ResponseBody
-    public ReqResult login(BuyerLoginReq buyerLoginReq) {
-        log.info("userMessage: {}" + buyerLoginReq);
-        return buyerService.login(buyerLoginReq);
+    public ReqResult login(HttpServletRequest request) {
+        if (GlobalVal.loginEffective) {
+            BuyerLoginReq buyerLoginReq = new BuyerLoginReq();
+            buyerLoginReq.setBuyer_name(request.getParameter("buyer_name"));
+            buyerLoginReq.setBuyer_pwd(request.getParameter("buyer_pwd"));
+            log.info("userMessage: {}" + buyerLoginReq);
+            return buyerService.login(buyerLoginReq);
+        }
+        return new ReqResult(BuyerTypeEnum.REQUEST_FRE.getCode(), "请求过于频繁");
     }
 
     /**

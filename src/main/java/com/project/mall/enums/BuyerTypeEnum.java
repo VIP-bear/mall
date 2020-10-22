@@ -23,6 +23,7 @@ public enum BuyerTypeEnum {
     EMAIL_INVALID(130),
     CHANGE_PWD_SUCCESS(131),
     CHANGE_PWD_FAILED(132),
+    REQUEST_FRE(133),
     ;
 
     private Integer code;
