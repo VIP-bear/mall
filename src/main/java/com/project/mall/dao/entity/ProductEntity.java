@@ -54,8 +54,8 @@ public class ProductEntity {
     /**
      * 商品库存
      */
-    @Column(columnDefinition = "decimal(10,2)")
-    private Double product_stock = 0.00;
+    @Column
+    private Integer product_stock = 0;
 
     /**
      * 商品状态（包括审核中verifying、出售中on offer、下架undercarriage）

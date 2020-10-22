@@ -116,6 +116,7 @@ public class ProductServiceImpl implements IProductService {
         List<BehaviorEntity> temp;
         for (int i = 0; i < buyerEntities.size(); i++) {
             temp = behaviorRepository.findBehaviorByBuyerIdOrdeOrderByScore(buyerEntities.get(i).getBuyer_id(), size);
+            System.out.println(temp.toArray());
             List<Long> productIdList = new ArrayList<>();
             for (BehaviorEntity behaviorEntity : temp) {
                 productIdList.add(behaviorEntity.getProduct_id());

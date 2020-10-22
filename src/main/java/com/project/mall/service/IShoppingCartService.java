@@ -1,5 +1,6 @@
 package com.project.mall.service;
 
+import com.project.mall.controller.req.buyer.EditShoppingCartReq;
 import com.project.mall.controller.req.buyer.ShoppingCartReq;
 import com.project.mall.controller.res.ReqResult;
 
@@ -23,4 +24,17 @@ public interface IShoppingCartService {
      * @return
      */
     ReqResult deleteShoppingCart(List<Long> cartIdList);
+
+    /**
+     * 修改购物车商品数量
+     * @return
+     */
+    ReqResult changeBuyProductNum(EditShoppingCartReq editShoppingCartReq);
+
+    /**
+     * 根据买家id获取购物车商品列表
+     * @param buyerId
+     * @return
+     */
+    ReqResult getShoppingCartProduct(Long buyerId);
 }
