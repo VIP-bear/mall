@@ -47,10 +47,22 @@ public interface OrderRepository extends JpaRepository<OrderEntity, Long> {
      * @param order_state
      * @return
      */
-    @Query(value = "select * from mall_order where order_state = ?1", nativeQuery = true)
-    List<OrderEntity> findAllByOrderState(String order_state);
+    @Query(value = "select * from mall_order where order_state = ?1 and buyer_id = ?2", nativeQuery = true)
+    List<OrderEntity> findAllByOrderState(String order_state, Long buyer_id);
 
+    /**
+     * 删除指定订单id的订单
+     * @param order_id
+     */
     @Modifying
     @Query(value = "delete from mall_order where order_id = ?1", nativeQuery = true)
     void deleteByOrderId(Long order_id);
+
+    /**
+     * 根据买家id查询所有订单
+     * @param buyer_id
+     * @return
+     */
+    @Query(value = "select * from mall_order where buyer_id = ?1", nativeQuery = true)
+    List<OrderEntity> findAllByBuyerId(Long buyer_id);
 }
