@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface OrderRepository extends JpaRepository<OrderEntity, Long> {
 
@@ -39,4 +41,16 @@ public interface OrderRepository extends JpaRepository<OrderEntity, Long> {
     @Modifying
     @Query(value = "upate mall_order set order_num = ?1 and order_cost = ?2 where order_id = ?3", nativeQuery = true)
     int updateOrderNumandCostById(double order_num, double order_cost, Long order_id);
+
+    /**
+     * 根据订单状态查询订单
+     * @param order_state
+     * @return
+     */
+    @Query(value = "select * from mall_order where order_state = ?1", nativeQuery = true)
+    List<OrderEntity> findAllByOrderState(String order_state);
+
+    @Modifying
+    @Query(value = "delete from mall_order where order_id = ?1", nativeQuery = true)
+    void deleteByOrderId(Long order_id);
 }
