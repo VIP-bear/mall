@@ -14,12 +14,33 @@ public interface IOrderService {
      * @param purchsaeReq
      * @return
      */
-    ReqResult placeOrder(PurchsaeReq purchsaeReq);
+    ReqResult addOrder(PurchsaeReq purchsaeReq);
 
     /**
-     * 拉取买家的全部订单信息
+     * 根据订单id删除订单
+     * @param orderId
+     * @return
+     */
+    ReqResult deleteOrder(Long orderId);
+
+    /**
+     * 根据订单id修改订单状态
+     * @param orderId
+     * @param orderState
+     * @return
+     */
+    ReqResult updateOrderState(Long orderId, String orderState);
+
+    /**
+     * 获取买家的全部订单信息
      * @param checkOrderReq
      * @return
      */
-    ReqResult checkOrder(CheckOrderReq checkOrderReq);
+    ReqResult getOrder(CheckOrderReq checkOrderReq);
+
+    /**
+     * 根据订单状态查询订单
+     * @return
+     */
+    ReqResult getOrderByState();
 }
