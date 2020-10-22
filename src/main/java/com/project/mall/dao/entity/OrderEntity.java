@@ -3,6 +3,7 @@ package com.project.mall.dao.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.text.DecimalFormat;
 
 /**
@@ -55,6 +56,12 @@ public class OrderEntity {
      */
     @Column
     private String order_address;
+
+    /**
+     * 订单创建时间
+     */
+    @Column
+    private Timestamp create_time;
 
     /**
      * 订单状态(包括已支付payed、未支付unpayed、已取消canceled、配送中delivering、已完成completed、已退款refunded)
