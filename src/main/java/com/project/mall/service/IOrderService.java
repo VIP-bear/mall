@@ -2,6 +2,7 @@ package com.project.mall.service;
 
 import com.project.mall.controller.req.buyer.CheckOrderReq;
 import com.project.mall.controller.req.buyer.PurchsaeReq;
+import com.project.mall.controller.req.buyer.QueryOrderReq;
 import com.project.mall.controller.res.ReqResult;
 
 /**
@@ -42,5 +43,5 @@ public interface IOrderService {
      * 根据订单状态查询订单
      * @return
      */
-    ReqResult getOrderByState();
+    ReqResult getOrderByState(QueryOrderReq queryOrderReq);
 }
