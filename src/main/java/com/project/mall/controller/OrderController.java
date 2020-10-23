@@ -54,7 +54,7 @@ public class OrderController {
     }
 
     /**
-     * 按商品状态查询商品
+     * 按订单状态查询商品
      * @param queryOrderReq
      * @return
      */
