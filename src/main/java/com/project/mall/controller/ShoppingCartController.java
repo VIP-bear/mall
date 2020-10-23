@@ -72,7 +72,7 @@ public class ShoppingCartController {
     @ResponseBody
     public ReqResult confirmShoppingCart(PurchsaeReq purchsaeReq) {
         
-        return orderService.placeOrder(purchsaeReq);
+        return orderService.addOrder(purchsaeReq);
     }
 
 
