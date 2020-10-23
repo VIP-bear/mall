@@ -1,6 +1,5 @@
 package com.project.mall.service.impl;
 
-import com.project.mall.controller.req.buyer.CheckOrderReq;
 import com.project.mall.controller.req.buyer.PurchsaeReq;
 import com.project.mall.controller.req.buyer.QueryOrderReq;
 import com.project.mall.controller.res.ReqResult;
@@ -82,7 +81,7 @@ public class OrderServiceImpl implements IOrderService {
      */
     @Override
     public ReqResult getOrder(Long buyerId) {
-        List<OrderEntity> allOrder = orderRepository.find;
+        List<OrderEntity> allOrder = orderRepository.findAllByBuyerId(buyerId);
         return new ReqResult(OrderTypeEnum.QUERY_SUCCESS.getCode(), "查询成功", allOrder);
     }
 
@@ -93,8 +92,8 @@ public class OrderServiceImpl implements IOrderService {
      */
     @Override
     public ReqResult getOrderByState(QueryOrderReq queryOrderReq) {
-        orderRepository.findAllByOrderState(queryOrderReq.getOrder_state(), queryOrderReq.getBuyer_name());
-        return null;
+        List<OrderEntity> allOrder = orderRepository.findAllByOrderState(queryOrderReq.getOrder_state(), queryOrderReq.getBuyer_name());
+        return new ReqResult(OrderTypeEnum.QUERY_SUCCESS.getCode(), "查询成功", allOrder);
     }
 }
 

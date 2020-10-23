@@ -34,10 +34,10 @@ public interface IOrderService {
 
     /**
      * 获取买家的全部订单信息
-     * @param checkOrderReq
+     * @param buyerId
      * @return
      */
-    ReqResult getOrder(CheckOrderReq checkOrderReq);
+    ReqResult getOrder(Long buyerId);
 
     /**
      * 根据订单状态查询订单
