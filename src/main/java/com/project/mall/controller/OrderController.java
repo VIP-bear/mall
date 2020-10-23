@@ -49,7 +49,7 @@ public class OrderController {
     @GetMapping("/checkOrder/checkOrderByBuyerID")
     @ResponseBody
     public ReqResult checkOrderByBuyerID(@RequestParam(name = "buyer_name")Long ID) {
-
+        log.info("id: {}", ID);
         return orderService.getOrder(ID);
     }
 
