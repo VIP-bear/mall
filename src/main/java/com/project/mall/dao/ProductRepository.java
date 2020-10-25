@@ -88,7 +88,7 @@ public interface ProductRepository extends JpaRepository<ProductEntity, Long> {
      * @param size
      * @return
      */
-    @Query(value = "selecct * from mall_product where product_category = ?1 " +
+    @Query(value = "select * from mall_product where product_category = ?1 " +
             "limit ?2,?3",nativeQuery = true)
     List<ProductEntity> findProductByCategory(String product_category, int offset, int size);
 

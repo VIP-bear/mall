@@ -64,6 +64,13 @@ public class ProductController {
         return ProductService.queryProductByTag(productType,page,10);
     }
 
+    @GetMapping("/buyer/queryProductByID")
+    @ResponseBody
+    public ReqResult buyerQueryProductByID(@RequestParam(name = "product_id")Long ID) {
+
+        return ProductService.queryProductById(ID);
+    }
+
 
     /**
      * 卖家操作

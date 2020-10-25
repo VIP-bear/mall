@@ -48,13 +48,13 @@ public class OrderController {
      */
     @GetMapping("/checkOrder/checkOrderByBuyerID")
     @ResponseBody
-    public ReqResult checkOrderByBuyerID(@RequestParam(name = "buyer_name")Long ID) {
-        log.info("id: {}", ID);
+    public ReqResult checkOrderByBuyerID(@RequestParam(name = "buyer_id")Long ID) {
+
         return orderService.getOrder(ID);
     }
 
     /**
-     * 按商品状态查询商品
+     * 按订单状态查询商品
      * @param queryOrderReq
      * @return
      */

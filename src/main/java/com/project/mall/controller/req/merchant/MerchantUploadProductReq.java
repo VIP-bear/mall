@@ -28,7 +28,7 @@ public class MerchantUploadProductReq {
      * 商品封面
      */
 
-    private String product_cover;
+    private MultipartFile product_cover;
 
     /**
      * 商品单价

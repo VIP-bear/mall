@@ -11,6 +11,7 @@ import com.project.mall.dao.entity.BuyerEntity;
 import com.project.mall.dao.entity.ProductEntity;
 import com.project.mall.enums.ProductTypeEnum;
 import com.project.mall.service.IProductService;
+import com.project.mall.util.AliyunProvider;
 import com.project.mall.util.RecommendProductProvider;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,12 +39,18 @@ public class ProductServiceImpl implements IProductService {
     @Autowired
     private BehaviorRepository behaviorRepository;
 
+    @Autowired
+    private AliyunProvider aliyunProvider;
+
 
     @Transactional
     @Override
     public ReqResult addProduct(MerchantUploadProductReq uploadProduct) {
         ProductEntity productEntity = new ProductEntity();
         BeanUtils.copyProperties(uploadProduct, productEntity);
+        // 上传封面到服务器
+        String cover_url = aliyunProvider.upload(uploadProduct.getProduct_cover(), "product_cover/");
+        productEntity.setProduct_cover(cover_url);
         if (null == productRepository.save(productEntity)) {
             return new ReqResult(ProductTypeEnum.ADD_FAILED.getCode(), "发布失败");
         }

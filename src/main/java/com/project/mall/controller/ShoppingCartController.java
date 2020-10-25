@@ -56,7 +56,7 @@ public class ShoppingCartController {
 
     @GetMapping("/queryShoppingCart")
     @ResponseBody
-    public ReqResult queryShoppingCart(@RequestParam(name = "buyer_name")Long ID) {
+    public ReqResult queryShoppingCart(@RequestParam(name = "buyer_id")Long ID) {
         return shoppingCartService.getShoppingCartProduct(ID);
     }
 
