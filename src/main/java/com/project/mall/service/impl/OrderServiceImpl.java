@@ -64,6 +64,7 @@ public class OrderServiceImpl implements IOrderService {
      * @param orderState
      * @return
      */
+    @Transactional
     @Override
     public ReqResult updateOrderState(Long orderId, String orderState) {
         int row = orderRepository.updateOrderStateById(orderState, orderId);

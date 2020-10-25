@@ -27,6 +27,13 @@ public class EvaluateServiceImpl implements IEvaluateService {
     @Autowired
     private AliyunProvider aliyunProvider;
 
+    /**
+     * 根据商品id分页查询评论
+     * @param productId
+     * @param page
+     * @param size
+     * @return
+     */
     @Override
     public ReqResult queryEvaluateByProductId(Long productId, int page, int size) {
         int offset = (page - 1) * size;
@@ -34,6 +41,12 @@ public class EvaluateServiceImpl implements IEvaluateService {
         return new ReqResult(EvaluateTypeEnum.EVA_QUERY_SUCCESS.getCode(), "查询成功", evaluateList);
     }
 
+    /**
+     * 根据商品id和用户id查询评论
+     * @param productId
+     * @param buyerId
+     * @return
+     */
     @Override
     public ReqResult queryEvaluateByProductIdAndBuyerId(Long productId, Long buyerId) {
         EvaluateEntity evaluateEntity = evaluateRepository.findAllByProductIdAndBuyerId(productId, buyerId);
@@ -43,6 +56,11 @@ public class EvaluateServiceImpl implements IEvaluateService {
         return new ReqResult(EvaluateTypeEnum.EVA_QUERY_SUCCESS.getCode(), "评论查询成功", evaluateEntity);
     }
 
+    /**
+     * 添加评论
+     * @param addEvaluateReq
+     * @return
+     */
     @Transactional
     @Override
     public ReqResult addEvaluate(AddEvaluateReq addEvaluateReq) {

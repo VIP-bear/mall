@@ -180,6 +180,7 @@ public class BuyerServiceImpl implements IBuyerService {
      * @param userCodeMatchingReq
      * @return
      */
+    @Transactional
     @Override
     public ReqResult codeMatching(UserCodeMatchingReq userCodeMatchingReq) {
         VerifyCodeEntity verifyCodeEntity = verifyCodeRepository

@@ -58,6 +58,7 @@ public class ShoppingCartServiceImpl implements IShoppingCartService {
      * 修改购物车商品数量
      * @return
      */
+    @Transactional
     @Override
     public ReqResult changeBuyProductNum(EditShoppingCartReq editShoppingCartReq) {
         int row = cartRepository.updateCartNumByCartId(editShoppingCartReq.getProduct_num(), editShoppingCartReq.getCart_id());

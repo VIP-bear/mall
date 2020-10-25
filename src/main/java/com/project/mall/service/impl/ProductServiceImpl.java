@@ -43,6 +43,11 @@ public class ProductServiceImpl implements IProductService {
     private AliyunProvider aliyunProvider;
 
 
+    /**
+     * 添加商品
+     * @param uploadProduct
+     * @return
+     */
     @Transactional
     @Override
     public ReqResult addProduct(MerchantUploadProductReq uploadProduct) {
@@ -57,6 +62,11 @@ public class ProductServiceImpl implements IProductService {
         return new ReqResult(ProductTypeEnum.ADD_SUCCESS.getCode(), "发布成功");
     }
 
+    /**
+     * 根据商品id删除商品
+     * @param productId
+     * @return
+     */
     @Transactional
     @Override
     public ReqResult deleteProduct(Long productId) {
@@ -64,6 +74,11 @@ public class ProductServiceImpl implements IProductService {
         return new ReqResult(ProductTypeEnum.DELETE_SUCCESS.getCode(), "删除成功");
     }
 
+    /**
+     * 更新商品信息
+     * @param changeProductReq
+     * @return
+     */
     @Transactional
     @Override
     public ReqResult updateProduct(MerchantChangeProductReq changeProductReq) {
@@ -73,6 +88,12 @@ public class ProductServiceImpl implements IProductService {
         return null;
     }
 
+    /**
+     * 根据商品id更新商品库存
+     * @param productStock
+     * @param productId
+     * @return
+     */
     @Transactional
     @Override
     public ReqResult updateProductStockByProductId(Double productStock, Long productId) {
@@ -83,6 +104,12 @@ public class ProductServiceImpl implements IProductService {
         return new ReqResult(ProductTypeEnum.UPDATE_SUCCESS.getCode(), "更新成功");
     }
 
+    /**
+     * 根据商品id更新商品状态
+     * @param productState
+     * @param productId
+     * @return
+     */
     @Transactional
     @Override
     public ReqResult updateProductStateByProductId(String productState, Long productId) {
@@ -93,6 +120,13 @@ public class ProductServiceImpl implements IProductService {
         return new ReqResult(ProductTypeEnum.UPDATE_SUCCESS.getCode(), "更新成功");
     }
 
+    /**
+     * 根据商品名称模糊查询(分页)
+     * @param productName
+     * @param page
+     * @param size
+     * @return
+     */
     @Override
     public ReqResult queryProductByProductName(String productName, int page, int size) {
         int offset = (page - 1) * size;
@@ -100,6 +134,13 @@ public class ProductServiceImpl implements IProductService {
         return new ReqResult(ProductTypeEnum.QUERY_SUCCESS.getCode(), "查询成功", productList);
     }
 
+    /**
+     * 根据商品类别查询(分页)
+     * @param tag
+     * @param page
+     * @param size
+     * @return
+     */
     @Override
     public ReqResult queryProductByTag(String tag, int page, int size) {
         int offset = (page - 1) * size;
@@ -107,12 +148,22 @@ public class ProductServiceImpl implements IProductService {
         return new ReqResult(ProductTypeEnum.QUERY_SUCCESS.getCode(), "查询成功", productList);
     }
 
+    /**
+     * 根据商品id查询
+     * @param productId
+     * @return
+     */
     @Override
     public ReqResult queryProductById(Long productId) {
         ProductEntity productEntity = productRepository.findById(productId).get();
         return new ReqResult(ProductTypeEnum.QUERY_SUCCESS.getCode(), "查询成功", productEntity);
     }
 
+    /**
+     * 推荐商品
+     * @param size 查询记录数
+     * @return
+     */
     @Override
     public ReqResult queryProductByRecommend(Long buyerId, int size) {
         // 查询所有用户
@@ -149,24 +200,45 @@ public class ProductServiceImpl implements IProductService {
         return new ReqResult(ProductTypeEnum.QUERY_SUCCESS.getCode(), "查询成功", productList);
     }
 
+    /**
+     * 随机推荐商品
+     * @param size
+     * @return
+     */
     @Override
     public ReqResult queryProductByRandom(int size) {
         List<ProductEntity> productList = productRepository.findProductByRandom(size);
         return new ReqResult(ProductTypeEnum.QUERY_SUCCESS.getCode(), "查询成功", productList);
     }
 
+    /**
+     * 根据商家id查询商品
+     * @param merchantId
+     * @return
+     */
     @Override
     public ReqResult queryProductByMerchantId(Long merchantId) {
         List<ProductEntity> productEntityList = productRepository.findAllByMerchantId(merchantId);
         return new ReqResult(ProductTypeEnum.QUERY_SUCCESS.getCode(), "查询成功", productEntityList);
     }
 
+    /**
+     * 根据商品状态查询商品
+     * @param productState
+     * @return
+     */
     @Override
     public ReqResult queryProductByProductState(String productState) {
         List<ProductEntity> productEntityList = productRepository.findAllByProductState(productState);
         return new ReqResult(ProductTypeEnum.QUERY_SUCCESS.getCode(), "查询成功", productEntityList);
     }
 
+    /**
+     * 根据商家id和商品状态查询
+     * @param merchantId
+     * @param productState
+     * @return
+     */
     @Override
     public ReqResult queryProductByMerchantIdAndProductState(Long merchantId, String productState) {
         List<ProductEntity> productEntityList = productRepository.findAllByMerchantIdAndProductState(merchantId, productState);
