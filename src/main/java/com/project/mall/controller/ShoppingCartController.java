@@ -28,7 +28,7 @@ public class ShoppingCartController {
     @PostMapping("/addShoppingCart")
     @ResponseBody
     public ReqResult addShoppingCart(ShoppingCartReq shoppingCartReq) {
-        log.info("shoppingCartReq:{}",shoppingCartReq);
+        log.info("/addShoppingCart,shoppingCartReq:{}",shoppingCartReq);
         return shoppingCartService.addShoppingCart(shoppingCartReq);
     }
 
@@ -40,7 +40,7 @@ public class ShoppingCartController {
     @DeleteMapping("/deleteShoppingCart")
     @ResponseBody
     public ReqResult deleteShoppingCart(@RequestParam(name = "shoppingCartID")List<Long> ID) {
-        log.info("buyer_id_deleteShoppingCart:{}",ID);
+        log.info("/deleteShoppingCart,buyer_id_deleteShoppingCart:{}",ID);
         return shoppingCartService.deleteShoppingCart(ID);
     }
 
@@ -52,7 +52,7 @@ public class ShoppingCartController {
     @PostMapping("/editShoppingCart")
     @ResponseBody
     public ReqResult editShoppingCart(EditShoppingCartReq editShoppingCartReq) {
-        log.info("editShoppingCartReq:{}",editShoppingCartReq);
+        log.info("/editShoppingCart,editShoppingCartReq:{}",editShoppingCartReq);
         return shoppingCartService.changeBuyProductNum(editShoppingCartReq);
     }
 
@@ -64,7 +64,7 @@ public class ShoppingCartController {
     @GetMapping("/queryShoppingCart")
     @ResponseBody
     public ReqResult queryShoppingCart(@RequestParam(name = "buyer_id")Long ID) {
-        log.info("buyer_id_queryShoppingCart:{}",ID);
+        log.info("/queryShoppingCart,buyer_id_queryShoppingCart:{}",ID);
         return shoppingCartService.getShoppingCartProduct(ID);
     }
 
@@ -79,7 +79,7 @@ public class ShoppingCartController {
     @PostMapping("/confirmShoppingCart")
     @ResponseBody
     public ReqResult confirmShoppingCart(PurchsaeReq purchsaeReq) {
-        log.info("purchsaeReq:{}",purchsaeReq);
+        log.info("/confirmShoppingCart,purchsaeReq:{}",purchsaeReq);
         return orderService.addOrder(purchsaeReq);
     }
 

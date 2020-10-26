@@ -25,7 +25,7 @@ public class ReplyController {
     @PostMapping("/reply/addReply")
     @ResponseBody
     public ReqResult addReply(AddReplyReq addReplyReq) {
-        log.info("addReplyReq:{}",addReplyReq);
+        log.info("/reply/addReply,addReplyReq:{}",addReplyReq);
         return replyEvaluateService.addReplyEvaluate(addReplyReq);
     }
 
@@ -37,7 +37,7 @@ public class ReplyController {
     @GetMapping("/reply/queryReply")
     @ResponseBody
     public ReqResult queryReply(@RequestParam(name = "evaluateID")Long evaluateID) {
-        log.info("evaluateID:{}",evaluateID);
+        log.info("/reply/queryReply,evaluateID:{}",evaluateID);
         return  replyEvaluateService.queryReplyEvaluateByEvaluateId(evaluateID);
     }
 
