@@ -151,7 +151,7 @@ public class BuyerServiceImpl implements IBuyerService {
         verifyCodeEntity.setEmail(email);
         verifyCodeEntity.setSend_time(new Timestamp(System.currentTimeMillis()));
         verifyCodeRepository.save(verifyCodeEntity);
-        return null;
+        return new ReqResult(555, "已发送验证码至邮箱");
     }
 
     /**

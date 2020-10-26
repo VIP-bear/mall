@@ -61,7 +61,7 @@ public class BuyerController {
      * @param email
      * @return
      */
-    @PostMapping("/buyer/getCode")
+    @GetMapping("/buyer/getCode")
     @ResponseBody
     public ReqResult getCode(@RequestParam(name = "email")String email) throws MessagingException {
         log.info("email: {}", email);
