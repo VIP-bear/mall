@@ -25,20 +25,20 @@ public class ReplyController {
     @PostMapping("/reply/addReply")
     @ResponseBody
     public ReqResult addReply(AddReplyReq addReplyReq) {
-
+        log.info("addReplyReq:{}",addReplyReq);
         return replyEvaluateService.addReplyEvaluate(addReplyReq);
     }
 
     /**
      * 查看卖家回复
-     * @param reply_id
+     * @param evaluateID
      * @return
      */
     @GetMapping("/reply/queryReply")
     @ResponseBody
-    public ReqResult queryReply(@RequestParam(name = "evaluateID")Long reply_id) {
-
-        return  replyEvaluateService.queryReplyEvaluateByEvaluateId(reply_id);
+    public ReqResult queryReply(@RequestParam(name = "evaluateID")Long evaluateID) {
+        log.info("evaluateID:{}",evaluateID);
+        return  replyEvaluateService.queryReplyEvaluateByEvaluateId(evaluateID);
     }
 
 }
