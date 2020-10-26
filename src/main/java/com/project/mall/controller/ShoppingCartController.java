@@ -48,7 +48,7 @@ public class ShoppingCartController {
      * @param editShoppingCartReq
      * @return
      */
-    @PutMapping("/editShoppingCart")
+    @PostMapping("/editShoppingCart")
     @ResponseBody
     public ReqResult editShoppingCart(EditShoppingCartReq editShoppingCartReq) {
         return shoppingCartService.changeBuyProductNum(editShoppingCartReq);
