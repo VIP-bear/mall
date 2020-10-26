@@ -1,7 +1,6 @@
 package com.project.mall.controller;
 
-import com.project.mall.controller.req.buyer.CheckOrderReq;
-import com.project.mall.controller.req.buyer.PurchsaeReq;
+import com.project.mall.controller.req.buyer.PurchaseReq;
 import com.project.mall.controller.req.buyer.QueryOrderReq;
 import com.project.mall.controller.res.ReqResult;
 import com.project.mall.service.IOrderService;
@@ -18,14 +17,14 @@ public class OrderController {
 
     /**
      * 购买下单
-     * @param purchsaeReq
+     * @param purchaseReq
      * @return
      */
     @PostMapping("/placeOrder")
     @ResponseBody
-    public ReqResult placeOrder(PurchsaeReq purchsaeReq) {
-        log.info("purchaseMessage: {}" + purchsaeReq);
-        return orderService.addOrder(purchsaeReq);
+    public ReqResult placeOrder(PurchaseReq purchaseReq) {
+        log.info("purchaseMessage: {}" + purchaseReq);
+        return orderService.addOrder(purchaseReq);
     }
 
     /**

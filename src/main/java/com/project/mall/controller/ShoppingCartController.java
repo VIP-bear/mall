@@ -1,7 +1,7 @@
 package com.project.mall.controller;
 
 import com.project.mall.controller.req.buyer.EditShoppingCartReq;
-import com.project.mall.controller.req.buyer.PurchsaeReq;
+import com.project.mall.controller.req.buyer.PurchaseReq;
 import com.project.mall.controller.req.buyer.ShoppingCartReq;
 import com.project.mall.controller.res.ReqResult;
 
@@ -73,14 +73,14 @@ public class ShoppingCartController {
 
     /**
      * 结算购物车，跳至下订单后续操作
-     * @param purchsaeReq
+     * @param purchaseReq
      * @return
      */
     @PostMapping("/confirmShoppingCart")
     @ResponseBody
-    public ReqResult confirmShoppingCart(PurchsaeReq purchsaeReq) {
-        log.info("/confirmShoppingCart,purchsaeReq:{}",purchsaeReq);
-        return orderService.addOrder(purchsaeReq);
+    public ReqResult confirmShoppingCart(PurchaseReq purchaseReq) {
+        log.info("/confirmShoppingCart,purchaseReq:{}", purchaseReq);
+        return orderService.addOrder(purchaseReq);
     }
 
 

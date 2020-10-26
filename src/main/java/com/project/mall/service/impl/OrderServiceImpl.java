@@ -1,6 +1,6 @@
 package com.project.mall.service.impl;
 
-import com.project.mall.controller.req.buyer.PurchsaeReq;
+import com.project.mall.controller.req.buyer.PurchaseReq;
 import com.project.mall.controller.req.buyer.QueryOrderReq;
 import com.project.mall.controller.res.ReqResult;
 import com.project.mall.dao.OrderRepository;
@@ -32,23 +32,23 @@ public class OrderServiceImpl implements IOrderService {
     /**
      * 买家创建订单
      *
-     * @param purchsaeReq
+     * @param purchaseReq
      * @return
      */
     @Transactional
     @Override
-    public ReqResult addOrder(PurchsaeReq purchsaeReq) {
+    public ReqResult addOrder(PurchaseReq purchaseReq) {
         // 查询商品库存
-        ProductEntity productEntity = productRepository.findById(purchsaeReq.getProduct_id()).get();
-        if (productEntity.getProduct_stock() < purchsaeReq.getOrder_num()) {
+        ProductEntity productEntity = productRepository.findById(purchaseReq.getProduct_id()).get();
+        if (productEntity.getProduct_stock() < purchaseReq.getOrder_num()) {
             return new ReqResult(OrderTypeEnum.ADD_FAILED.getCode(), "库存不足");
         }
         // 减少商品库存
         productRepository.updateProductStockByProductId(productEntity.getProduct_stock()
-                -purchsaeReq.getOrder_num(), purchsaeReq.getProduct_id());
+                - purchaseReq.getOrder_num(), purchaseReq.getProduct_id());
         // 保存订单信息
         OrderEntity orderEntity = new OrderEntity();
-        BeanUtils.copyProperties(purchsaeReq, orderEntity);
+        BeanUtils.copyProperties(purchaseReq, orderEntity);
         Timestamp now = new Timestamp(System.currentTimeMillis());
         orderEntity.setCreate_time(now);
         OrderEntity res = orderRepository.save(orderEntity);
