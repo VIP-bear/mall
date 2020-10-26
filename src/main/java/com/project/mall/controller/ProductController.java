@@ -28,6 +28,7 @@ public class ProductController {
     @GetMapping("/buyer/achieveRecommendProduct")
     @ResponseBody
     public ReqResult achieveRecommendProduct(@RequestParam(name = "buyer_id")Long id) {
+        log.info("/buyer/achieveRecommendProduct, buyer_id: {}", id);
         return ProductService.queryProductByRecommend(id,10);
     }
     /**
@@ -37,7 +38,7 @@ public class ProductController {
     @GetMapping("/buyer/queryEachProductByPage")
     @ResponseBody
     public ReqResult queryEachProductByPage(){
-
+        log.info("/buyer/queryEachProductByPage");
         return ProductService.queryProductByRandom(10);
     }
 
@@ -49,7 +50,7 @@ public class ProductController {
     @ResponseBody
     public ReqResult buyerQueryProductByName(@RequestParam(name = "productName")String productName,
                                              @RequestParam(name = "page")int page){
-
+        log.info("/buyer/queryProductByName, productName: {}, page: {}", productName, page);
         return ProductService.queryProductByProductName(productName,page,10);
     }
     /**
@@ -60,14 +61,14 @@ public class ProductController {
     @ResponseBody
     public ReqResult buyerQueryProductByType(@RequestParam(name = "productType")String productType,
                                              @RequestParam(name = "page")int page){
-
+        log.info("/buyer/queryProductByType, productType: {}, page: {}", productType, page);
         return ProductService.queryProductByTag(productType,page,10);
     }
 
     @GetMapping("/buyer/queryProductByID")
     @ResponseBody
     public ReqResult buyerQueryProductByID(@RequestParam(name = "product_id")Long ID) {
-
+        log.info("/buyer/queryProductByID, product_id: {}", ID);
         return ProductService.queryProductById(ID);
     }
 
@@ -83,7 +84,7 @@ public class ProductController {
     @PostMapping("/merchant/addProduct")
     @ResponseBody
     public ReqResult addProduct(MerchantUploadProductReq merchantUploadProductReq){
-
+        log.info("/merchant/addProduct, merchantUploadProductReq: {}", merchantUploadProductReq);
         return ProductService.addProduct(merchantUploadProductReq);
     }
 
@@ -95,7 +96,7 @@ public class ProductController {
     @DeleteMapping("/merchant/deleteProduct")
     @ResponseBody
     public ReqResult deleteProduct(@RequestParam(name = "productID")Long productID){
-
+        log.info("/merchant/deleteProduct, productID: {}", productID);
         return ProductService.deleteProduct(productID);
     }
 
@@ -107,7 +108,7 @@ public class ProductController {
     @GetMapping("/merchant/selectAllByMerchantID")
     @ResponseBody
     public ReqResult selectAllByMerchantID(@RequestParam(name = "MerchantID")long merchantID) {
-
+        log.info("/merchant/selectAllByMerchantID, MerchantID: {}", merchantID);
         return ProductService.queryProductByMerchantId(merchantID);
     }
 
@@ -144,7 +145,7 @@ public class ProductController {
     @GetMapping("/merchant/queryProductByState")
     @ResponseBody
     public ReqResult merchantQueryProductByState(MerchantQueryProductByStateReq merchantQueryProductByStateReq) {
-
+        log.info("/merchant/queryProductByState, merchantQueryProductByStateReq: {}", merchantQueryProductByStateReq);
         return ProductService.queryProductByMerchantIdAndProductState(merchantQueryProductByStateReq.getBuyer_id(),
                 merchantQueryProductByStateReq.getProduct_state());
     }
@@ -157,7 +158,7 @@ public class ProductController {
     @PutMapping("/merchant/changeProductInfo")
     @ResponseBody
     public ReqResult merchantChangeProductInfo(MerchantChangeProductReq merchantChangeProductReq) {
-
+        log.info("/merchant/changeProductInfo, merchantChangeProductReq: {}", merchantChangeProductReq);
         return ProductService.updateProduct(merchantChangeProductReq);
     }
 
@@ -171,6 +172,7 @@ public class ProductController {
     @ResponseBody
     public ReqResult merchantChangeProductStock(@RequestParam(name = "stock")Integer stock,
                                                 @RequestParam(name = "merchantID")Long merchantID) {
+        log.info("/merchant/changeProductStock, stock: {}, merchantID: {}", stock, merchantID);
         return ProductService.updateProductStockByProductId(stock,merchantID);
     }
 
@@ -187,6 +189,7 @@ public class ProductController {
     @GetMapping("/administrator/queryState")
     @ResponseBody
     public ReqResult administratorQueryState(@RequestParam(name = "state")String state) {
+        log.info("/administrator/queryState, state: {}", state);
         return ProductService.queryProductByProductState(state);
     }
 
@@ -198,6 +201,7 @@ public class ProductController {
     @PutMapping("/administrator/changeState")
     @ResponseBody
     public ReqResult administratorChangeState(AdministratorChangeStateReq administratorChangeStateReq) {
+        log.info("/administrator/changeState, administratorChangeStateReq: {}", administratorChangeStateReq);
         return ProductService.updateProductStateByProductId(administratorChangeStateReq.getProduct_state(),
                 administratorChangeStateReq.getProduct_id());
     }

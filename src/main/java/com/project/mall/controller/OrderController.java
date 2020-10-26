@@ -24,7 +24,7 @@ public class OrderController {
     @PostMapping("/placeOrder")
     @ResponseBody
     public ReqResult placeOrder(PurchsaeReq purchsaeReq) {
-        log.info("purchaseMessage: {}" + purchsaeReq);
+        log.info("/placeOrder, purchaseMessage: {}" + purchsaeReq);
         return orderService.addOrder(purchsaeReq);
     }
 
@@ -38,6 +38,7 @@ public class OrderController {
     @ResponseBody
     public ReqResult changeOrderState(@RequestParam(name = "order_id")Long ID,
                                       @RequestParam(name = "order_state")String order_state) {
+        log.info("/changeOrderState, order_id: {}, order_state: {}", ID, order_state);
         return orderService.updateOrderState(ID,order_state);
     }
 
@@ -49,7 +50,7 @@ public class OrderController {
     @GetMapping("/checkOrder/checkOrderByBuyerID")
     @ResponseBody
     public ReqResult checkOrderByBuyerID(@RequestParam(name = "buyer_id")Long ID) {
-
+        log.info("/checkOrder/checkOrderByBuyerID, buyer_id: {}", ID);
         return orderService.getOrder(ID);
     }
 
@@ -61,12 +62,14 @@ public class OrderController {
     @GetMapping("/checkOrder/checkOrderByOrderState")
     @ResponseBody
     public ReqResult checkOrderByOrderState(QueryOrderReq queryOrderReq) {
+        log.info("/checkOrder/checkOrderByOrderState, queryOrderReq: {}", queryOrderReq );
         return orderService.getOrderByState(queryOrderReq);
     }
 
     @DeleteMapping("/deleteOrder")
     @ResponseBody
     public ReqResult deleteOrder(@RequestParam(name = "order_id")Long ID) {
+        log.info("/deleteOrder, order_id: {}", ID);
         return orderService.deleteOrder(ID);
     }
 }

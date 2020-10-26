@@ -28,7 +28,7 @@ public class EvaluateController {
     @PostMapping("/evaluate/addEvaluate")
     @ResponseBody
     public ReqResult addEvaluate(AddEvaluateReq addEvaluateReq) {
-
+        log.info("/evaluate/addEvaluate, addEvaluateReq: {}", addEvaluateReq);
         return evaluateService.addEvaluate(addEvaluateReq);
     }
 
@@ -42,7 +42,7 @@ public class EvaluateController {
     @ResponseBody
     public ReqResult queryEvaluate(@RequestParam(name ="productID")Long id,
                                    @RequestParam(name = "page")int page) {
-
+        log.info("/evaluate/queryEvaluate, id: {}, page: {}", id, page);
         return evaluateService.queryEvaluateByProductId(id,page,10);
     }
 }

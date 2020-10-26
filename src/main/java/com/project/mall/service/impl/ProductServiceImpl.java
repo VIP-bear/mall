@@ -145,7 +145,6 @@ public class ProductServiceImpl implements IProductService {
     public ReqResult queryProductByTag(String tag, int page, int size) {
         int offset = (page - 1) * size;
         List<ProductEntity> productList = productRepository.findProductByCategory(tag, offset, size);
-        System.out.println(productList.get(0).getProduct_cover());
         return new ReqResult(ProductTypeEnum.QUERY_SUCCESS.getCode(), "查询成功", productList);
     }
 
