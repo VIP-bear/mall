@@ -169,7 +169,7 @@ public class ProductController {
      */
     @PutMapping("/merchant/changeProductStock")
     @ResponseBody
-    public ReqResult merchantChangeProductStock(@RequestParam(name = "stock")Double stock,
+    public ReqResult merchantChangeProductStock(@RequestParam(name = "stock")Integer stock,
                                                 @RequestParam(name = "merchantID")Long merchantID) {
         return ProductService.updateProductStockByProductId(stock,merchantID);
     }

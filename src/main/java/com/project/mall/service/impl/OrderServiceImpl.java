@@ -4,7 +4,9 @@ import com.project.mall.controller.req.buyer.PurchsaeReq;
 import com.project.mall.controller.req.buyer.QueryOrderReq;
 import com.project.mall.controller.res.ReqResult;
 import com.project.mall.dao.OrderRepository;
+import com.project.mall.dao.ProductRepository;
 import com.project.mall.dao.entity.OrderEntity;
+import com.project.mall.dao.entity.ProductEntity;
 import com.project.mall.enums.OrderTypeEnum;
 import com.project.mall.service.IOrderService;
 import org.springframework.beans.BeanUtils;
@@ -24,6 +26,9 @@ public class OrderServiceImpl implements IOrderService {
     @Autowired
     private OrderRepository orderRepository;
 
+    @Autowired
+    private ProductRepository productRepository;
+
     /**
      * 买家创建订单
      *
@@ -33,6 +38,15 @@ public class OrderServiceImpl implements IOrderService {
     @Transactional
     @Override
     public ReqResult addOrder(PurchsaeReq purchsaeReq) {
+        // 查询商品库存
+        ProductEntity productEntity = productRepository.findById(purchsaeReq.getProduct_id()).get();
+        if (productEntity.getProduct_stock() < purchsaeReq.getOrder_num()) {
+            return new ReqResult(OrderTypeEnum.ADD_FAILED.getCode(), "库存不足");
+        }
+        // 减少商品库存
+        productRepository.updateProductStockByProductId(productEntity.getProduct_stock()
+                -purchsaeReq.getOrder_num(), purchsaeReq.getProduct_id());
+        // 保存订单信息
         OrderEntity orderEntity = new OrderEntity();
         BeanUtils.copyProperties(purchsaeReq, orderEntity);
         Timestamp now = new Timestamp(System.currentTimeMillis());
