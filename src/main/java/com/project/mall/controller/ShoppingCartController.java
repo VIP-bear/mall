@@ -54,6 +54,11 @@ public class ShoppingCartController {
         return shoppingCartService.changeBuyProductNum(editShoppingCartReq);
     }
 
+    /**
+     * 购物车查询
+     * @param ID
+     * @return
+     */
     @GetMapping("/queryShoppingCart")
     @ResponseBody
     public ReqResult queryShoppingCart(@RequestParam(name = "buyer_id")Long ID) {
