@@ -19,6 +19,8 @@ import java.util.List;
 public class ShoppingCartController {
     @Autowired
     private IShoppingCartService shoppingCartService;
+    @Autowired
+    private IOrderService orderService;
 
     /**
      * 添加至购物车
@@ -68,8 +70,7 @@ public class ShoppingCartController {
         return shoppingCartService.getShoppingCartProduct(ID);
     }
 
-    @Autowired
-    IOrderService orderService;
+
 
     /**
      * 结算购物车，跳至下订单后续操作
