@@ -1,7 +1,6 @@
 package com.project.mall.service;
 
-import com.project.mall.controller.req.buyer.CheckOrderReq;
-import com.project.mall.controller.req.buyer.PurchsaeReq;
+import com.project.mall.controller.req.buyer.PurchaseReq;
 import com.project.mall.controller.req.buyer.QueryOrderReq;
 import com.project.mall.controller.res.ReqResult;
 
@@ -12,10 +11,10 @@ public interface IOrderService {
 
     /**
      * 买家创建订单
-     * @param purchsaeReq
+     * @param purchaseReq
      * @return
      */
-    ReqResult addOrder(PurchsaeReq purchsaeReq);
+    ReqResult addOrder(PurchaseReq purchaseReq);
 
     /**
      * 根据订单id删除订单

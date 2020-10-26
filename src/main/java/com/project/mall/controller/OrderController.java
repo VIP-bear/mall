@@ -1,7 +1,6 @@
 package com.project.mall.controller;
 
-import com.project.mall.controller.req.buyer.CheckOrderReq;
-import com.project.mall.controller.req.buyer.PurchsaeReq;
+import com.project.mall.controller.req.buyer.PurchaseReq;
 import com.project.mall.controller.req.buyer.QueryOrderReq;
 import com.project.mall.controller.res.ReqResult;
 import com.project.mall.service.IOrderService;
@@ -18,14 +17,14 @@ public class OrderController {
 
     /**
      * 购买下单
-     * @param purchsaeReq
+     * @param purchaseReq
      * @return
      */
     @PostMapping("/placeOrder")
     @ResponseBody
-    public ReqResult placeOrder(PurchsaeReq purchsaeReq) {
-        log.info("/placeOrder, purchaseMessage: {}" + purchsaeReq);
-        return orderService.addOrder(purchsaeReq);
+    public ReqResult placeOrder(PurchaseReq purchaseReq) {
+        log.info("purchaseMessage: {}" + purchaseReq);
+        return orderService.addOrder(purchaseReq);
     }
 
     /**
@@ -38,7 +37,6 @@ public class OrderController {
     @ResponseBody
     public ReqResult changeOrderState(@RequestParam(name = "order_id")Long ID,
                                       @RequestParam(name = "order_state")String order_state) {
-        log.info("/changeOrderState, order_id: {}, order_state: {}", ID, order_state);
         return orderService.updateOrderState(ID,order_state);
     }
 
@@ -50,7 +48,7 @@ public class OrderController {
     @GetMapping("/checkOrder/checkOrderByBuyerID")
     @ResponseBody
     public ReqResult checkOrderByBuyerID(@RequestParam(name = "buyer_id")Long ID) {
-        log.info("/checkOrder/checkOrderByBuyerID, buyer_id: {}", ID);
+
         return orderService.getOrder(ID);
     }
 
@@ -62,14 +60,12 @@ public class OrderController {
     @GetMapping("/checkOrder/checkOrderByOrderState")
     @ResponseBody
     public ReqResult checkOrderByOrderState(QueryOrderReq queryOrderReq) {
-        log.info("/checkOrder/checkOrderByOrderState, queryOrderReq: {}", queryOrderReq );
         return orderService.getOrderByState(queryOrderReq);
     }
 
     @DeleteMapping("/deleteOrder")
     @ResponseBody
     public ReqResult deleteOrder(@RequestParam(name = "order_id")Long ID) {
-        log.info("/deleteOrder, order_id: {}", ID);
         return orderService.deleteOrder(ID);
     }
 }

@@ -33,6 +33,7 @@ public class ShoppingCartServiceImpl implements IShoppingCartService {
     public ReqResult addShoppingCart(ShoppingCartReq shoppingCartReq) {
         CartEntity cartEntity = new CartEntity();
         BeanUtils.copyProperties(shoppingCartReq, cartEntity);
+        cartEntity.setCart_num(shoppingCartReq.getProduct_num());
         CartEntity res = cartRepository.save(cartEntity);
         if (null == res) {
             return new ReqResult(ShoppingCartTypeEnum.ADD_FAILED.getCode(), "添加失败");

@@ -6,7 +6,7 @@ import lombok.Data;
  * 用户直接购买商品
  */
 @Data
-public class PurchsaeReq {
+public class PurchaseReq {
     /**
      * 商品ID
      */

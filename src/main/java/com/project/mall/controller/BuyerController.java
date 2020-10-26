@@ -76,6 +76,7 @@ public class BuyerController {
     @GetMapping("/codeMatching")
     @ResponseBody
     public ReqResult codeMatching(UserCodeMatchingReq userCodeMatchingReq) {
+        log.info("userCodeMatchingReq:{}",userCodeMatchingReq);
         return buyerService.codeMatching(userCodeMatchingReq);
     }
 
@@ -87,6 +88,7 @@ public class BuyerController {
     @PutMapping("/changePassword")
     @ResponseBody
     public ReqResult changePassword(UserChangePasswordReq userChangePasswordReq) {
+        log.info("userChangePasswordReq:{}",userChangePasswordReq);
         return buyerService.changePwd(userChangePasswordReq);
     }
 
@@ -98,6 +100,7 @@ public class BuyerController {
     @PostMapping("/bindEmail")
     @ResponseBody
     public ReqResult bindEmail(ChangeEmailReq changeEmailReq) {
+        log.info("changeEmailReqL{}",changeEmailReq);
         return buyerService.changeEmail(changeEmailReq);
     }
 
