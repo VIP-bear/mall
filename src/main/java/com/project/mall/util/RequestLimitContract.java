@@ -63,7 +63,7 @@ public class RequestLimitContract {
                     @Override
 
                     public void run() {
-                        GlobalVal.loginEffective = true;
+                        GlobalVal.loginEffective = true; //计时器到时后将登陆验证有效性设为true
                         redisTemplate.remove(key);
 
                     }
