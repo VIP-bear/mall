@@ -245,8 +245,8 @@ public class BuyerServiceImpl implements IBuyerService {
     public ReqResult getCommonAddress(Long id) {
         List<AddressEntity> addressEntityList = new ArrayList<>();
         addressEntityList = addressRepository.findUnDefaultAddressByBuyerId(id);
-        if(addressEntityList == null)
-            return new ReqResult(BuyerTypeEnum.GET_GENERAL_ADDRESS_FAILED.getCode(),"为查询到一般地址");
+        if(addressEntityList.size() == 0)
+            return new ReqResult(BuyerTypeEnum.GET_GENERAL_ADDRESS_FAILED.getCode(),"未查询到一般地址");
         return new ReqResult(BuyerTypeEnum.GET_GENERAL_ADDRESS_SUCCESS.getCode(),"查询一般地址成功",addressEntityList);
     }
 
