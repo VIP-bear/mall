@@ -58,6 +58,7 @@ public class OrderServiceImpl implements IOrderService {
         // 保存订单信息
         OrderEntity orderEntity = new OrderEntity();
         BeanUtils.copyProperties(purchaseReq, orderEntity);
+        orderEntity.setOrder_state("unpaid");
         Timestamp now = new Timestamp(System.currentTimeMillis());
         orderEntity.setCreate_time(now);
         OrderEntity res = orderRepository.save(orderEntity);

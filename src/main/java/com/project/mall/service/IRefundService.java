@@ -1,5 +1,6 @@
 package com.project.mall.service;
 
+import com.project.mall.controller.req.buyer.BuyerRefundReq;
 import com.project.mall.controller.res.ReqResult;
 
 /**
@@ -7,6 +8,25 @@ import com.project.mall.controller.res.ReqResult;
  */
 public interface IRefundService {
 
-    ReqResult addRefund();
+    /**
+     * 申请退款
+     * @param buyerRefundReq
+     * @return
+     */
+    ReqResult addRefund(BuyerRefundReq buyerRefundReq);
+
+    /**
+     * 根据订单id修改申请退款状态
+     * @param orderId
+     * @param refundState
+     * @return
+     */
+    ReqResult updateRefundState(Long orderId, int refundState);
+
+    /**
+     * 获取所有处于申请退款的退款申请
+     * @return
+     */
+    ReqResult getAllRefund();
 
 }
