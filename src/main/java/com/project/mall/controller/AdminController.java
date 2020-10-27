@@ -70,8 +70,8 @@ public class AdminController {
 
     @PutMapping("admin/disposeRefundApply")
     @ResponseBody
-    public ReqResult administratorDisposeRefundApply(@RequestParam(name = "")Long ID,
-                                                     @RequestParam(name = "")String State) {
+    public ReqResult administratorDisposeRefundApply(@RequestParam(name = "order_id")Long ID,
+                                                     @RequestParam(name = "refund_state")Integer State) {
         return null;
     }
 }
