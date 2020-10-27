@@ -15,5 +15,10 @@ public interface IMerchantService {
      */
     ReqResult perInfoReview(MerchantVerifyReq merchantVerifyReq);
 
-
+    /**
+     * 商家登录验证
+     * @param id
+     * @return
+     */
+    ReqResult merchantConfirm(Long id);
 }

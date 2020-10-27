@@ -37,6 +37,6 @@ public class MerchantController {
     @ResponseBody
     public ReqResult merchantConfirm(@RequestParam(name = "buyer_id")Long ID) {
 
-        return null;
+        return merchantService.merchantConfirm(ID);
     }
 }
