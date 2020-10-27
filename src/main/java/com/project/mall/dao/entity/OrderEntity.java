@@ -64,7 +64,7 @@ public class OrderEntity {
     private Timestamp create_time;
 
     /**
-     * 订单状态(包括已支付payed、未支付unpayed、已取消canceled、配送中delivering、已完成completed、已退款refunded、退款中refunding)
+     * 订单状态(包括未支付unpayed、配送中delivering、已完成completed、已退款refunded、退款中refunding)
      */
     @Column
     private String order_state;
