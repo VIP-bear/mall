@@ -53,6 +53,7 @@ public class ProductServiceImpl implements IProductService {
     public ReqResult addProduct(MerchantUploadProductReq uploadProduct) {
         ProductEntity productEntity = new ProductEntity();
         BeanUtils.copyProperties(uploadProduct, productEntity);
+        productEntity.setProduct_state("verifying");
         // 上传封面到服务器
         String cover_url = aliyunProvider.upload(uploadProduct.getProduct_cover(), "product_cover/");
         productEntity.setProduct_cover(cover_url);

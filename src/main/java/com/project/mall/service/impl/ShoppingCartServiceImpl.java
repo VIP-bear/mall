@@ -4,7 +4,10 @@ import com.project.mall.controller.req.buyer.EditShoppingCartReq;
 import com.project.mall.controller.req.buyer.ShoppingCartReq;
 import com.project.mall.controller.res.ReqResult;
 import com.project.mall.dao.CartRepository;
+import com.project.mall.dao.ProductRepository;
 import com.project.mall.dao.entity.CartEntity;
+import com.project.mall.dao.entity.ProductEntity;
+import com.project.mall.domain.ShoppingCartMessage;
 import com.project.mall.enums.ShoppingCartTypeEnum;
 import com.project.mall.service.IShoppingCartService;
 import org.springframework.beans.BeanUtils;
@@ -12,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,6 +26,8 @@ public class ShoppingCartServiceImpl implements IShoppingCartService {
 
     @Autowired
     private CartRepository cartRepository;
+    @Autowired
+    private ProductRepository productRepository;
 
     /**
      * 添加至购物车
@@ -66,7 +72,7 @@ public class ShoppingCartServiceImpl implements IShoppingCartService {
         if (row == 0) {
             return new ReqResult(ShoppingCartTypeEnum.UPDATE_FAILED.getCode(), "更新失败");
         }
-        return new ReqResult(ShoppingCartTypeEnum.UPDATE_SUCCESS.getCode(), "更新失败");
+        return new ReqResult(ShoppingCartTypeEnum.UPDATE_SUCCESS.getCode(), "更新成功");
     }
 
     /**
@@ -76,7 +82,19 @@ public class ShoppingCartServiceImpl implements IShoppingCartService {
      */
     @Override
     public ReqResult getShoppingCartProduct(Long buyerId) {
+        // 查询购物车表
         List<CartEntity> shoppingCartList = cartRepository.findAllByBuyerId(buyerId);
-        return new ReqResult(ShoppingCartTypeEnum.QUERY_SUCCESS.getCode(), "查询成功", shoppingCartList);
+        List<ShoppingCartMessage> cartMessageList = new ArrayList<>();
+        // 查询商品表
+        for (CartEntity cartEntity : shoppingCartList) {
+            ProductEntity product = productRepository.findById(cartEntity.getProduct_id()).get();
+            ShoppingCartMessage cartMessage = new ShoppingCartMessage();
+            BeanUtils.copyProperties(product, cartMessage);
+            cartMessage.setCart_id(cartEntity.getCart_id());
+            cartMessage.setBuyer_id(cartEntity.getBuyer_id());
+            cartMessage.setCart_num(cartEntity.getCart_num());
+            cartMessageList.add(cartMessage);
+        }
+        return new ReqResult(ShoppingCartTypeEnum.QUERY_SUCCESS.getCode(), "查询成功", cartMessageList);
     }
 }

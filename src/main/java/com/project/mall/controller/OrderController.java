@@ -57,7 +57,7 @@ public class OrderController {
      * @param queryOrderReq
      * @return
      */
-    @GetMapping("/checkOrder/checkOrderByOrderState")
+    @PostMapping("/checkOrder/checkOrderByOrderState")
     @ResponseBody
     public ReqResult checkOrderByOrderState(QueryOrderReq queryOrderReq) {
         return orderService.getOrderByState(queryOrderReq);
