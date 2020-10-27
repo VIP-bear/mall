@@ -6,8 +6,10 @@ import com.project.mall.controller.req.UserChangePasswordReq;
 import com.project.mall.controller.req.UserCodeMatchingReq;
 import com.project.mall.controller.req.buyer.ChangeEmailReq;
 import com.project.mall.controller.res.ReqResult;
+import com.project.mall.dao.AddressRepository;
 import com.project.mall.dao.BuyerRepository;
 import com.project.mall.dao.VerifyCodeRepository;
+import com.project.mall.dao.entity.AddressEntity;
 import com.project.mall.dao.entity.BuyerEntity;
 import com.project.mall.dao.entity.VerifyCodeEntity;
 import com.project.mall.enums.BuyerTypeEnum;
@@ -25,6 +27,8 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -39,6 +43,9 @@ public class BuyerServiceImpl implements IBuyerService {
 
     @Autowired
     private VerifyCodeRepository verifyCodeRepository;
+
+    @Autowired
+    private AddressRepository addressRepository;
 
     // 用于加密和解密
     @Autowired
@@ -212,5 +219,7 @@ public class BuyerServiceImpl implements IBuyerService {
     public ReqResult changeEmail(ChangeEmailReq changeEmailReq) {
         return null;
     }
+
+
 
 }

@@ -5,7 +5,9 @@ import com.project.mall.service.IMerchantService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -13,8 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class MerchantController {
     @Autowired
     IMerchantService merchantService;
-
-
 
     /**
      * 商家注册
@@ -26,5 +26,17 @@ public class MerchantController {
     public ReqResult merchantRegister(MerchantVerifyReq merchantVerifyReq) {
         log.info("/merchant/register, merchantVerifyReq: {}", merchantVerifyReq);
         return merchantService.perInfoReview(merchantVerifyReq);
+    }
+
+    /**
+     * 登录时验证是否为卖家
+     * @param ID
+     * @return
+     */
+    @GetMapping("/merchant/confirm")
+    @ResponseBody
+    public ReqResult merchantConfirm(@RequestParam(name = "buyer_id")Long ID) {
+
+        return merchantService.merchantConfirm(ID);
     }
 }

@@ -1,5 +1,7 @@
 package com.project.mall.service.impl;
 
+import com.project.mall.controller.req.buyer.AddAddressReq;
+import com.project.mall.controller.req.buyer.ChangeAddressReq;
 import com.project.mall.controller.res.ReqResult;
 import com.project.mall.dao.AddressRepository;
 import com.project.mall.dao.entity.AddressEntity;
@@ -22,10 +24,11 @@ public class AddressServiceImpl implements IAddressService {
     /**
      * 添加地址
      * @return
+     * @param addAddressReq
      */
     @Transactional
     @Override
-    public ReqResult addAddress() {
+    public ReqResult addAddress(AddAddressReq addAddressReq) {
         return null;
     }
 
@@ -44,10 +47,11 @@ public class AddressServiceImpl implements IAddressService {
     /**
      * 更新地址
      * @return
+     * @param changeAddressReq
      */
     @Transactional
     @Override
-    public ReqResult updateAddress() {
+    public ReqResult updateAddress(ChangeAddressReq changeAddressReq) {
         return null;
     }
 

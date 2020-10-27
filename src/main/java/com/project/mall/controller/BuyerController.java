@@ -1,12 +1,11 @@
 package com.project.mall.controller;
 
-import com.project.mall.controller.req.buyer.BuyerLoginReq;
-import com.project.mall.controller.req.buyer.BuyerRegisterReq;
+import com.project.mall.controller.req.buyer.*;
 import com.project.mall.controller.req.UserChangePasswordReq;
 import com.project.mall.controller.req.UserCodeMatchingReq;
-import com.project.mall.controller.req.buyer.ChangeEmailReq;
 import com.project.mall.controller.res.ReqResult;
 import com.project.mall.enums.BuyerTypeEnum;
+import com.project.mall.service.IAddressService;
 import com.project.mall.service.IBuyerService;
 import com.project.mall.util.RequestLimit;
 import com.project.mall.variable.ConstantVar;
@@ -25,6 +24,9 @@ public class BuyerController {
 
     @Autowired
     private IBuyerService buyerService;
+
+    @Autowired
+    private IAddressService addressService;
 
     /**
      * 买家登录
@@ -102,6 +104,63 @@ public class BuyerController {
     public ReqResult bindEmail(ChangeEmailReq changeEmailReq) {
         log.info("changeEmailReqL{}",changeEmailReq);
         return buyerService.changeEmail(changeEmailReq);
+    }
+
+    /**
+     * 买家添加地址
+     * @param addAddressReq
+     * @return
+     */
+    @PostMapping("/address/addAddress")
+    @ResponseBody
+    public ReqResult addAddress(AddAddressReq addAddressReq) {
+        return addressService.addAddress(addAddressReq);
+    }
+
+    /**
+     * 删除地址
+     * @param ID
+     * @return
+     */
+    @DeleteMapping("/address/deleteAddress")
+    @ResponseBody
+    public ReqResult deleteAddress(@RequestParam(name = "address_id")Long ID) {
+
+        return addressService.deleteAddress(ID);
+    }
+
+    /**
+     * 用户修改地址
+     * @param changeAddressReq
+     * @return
+     */
+    @PutMapping("/address/changeAddress")
+    @ResponseBody
+    public ReqResult changeAddress(ChangeAddressReq changeAddressReq) {
+
+        return addressService.updateAddress(changeAddressReq);
+    }
+
+    /**
+     * 查询默认地址
+     * @param ID
+     * @return
+     */
+    @GetMapping("/address/defaultAddress")
+    @ResponseBody
+    public ReqResult defaultAddress(@RequestParam(name = "buyer_id")Long ID) {
+        return addressService.getDefaultAddress(ID);
+    }
+
+    /**
+     * 查询一般地址
+     * @param ID
+     * @return
+     */
+    @GetMapping("/address/commonAddress")
+    @ResponseBody
+    public ReqResult commonAddress(@RequestParam(name = "buyer_id")Long ID) {
+        return addressService.getAllAddress(ID);
     }
 
 }

@@ -63,6 +63,11 @@ public class OrderController {
         return orderService.getOrderByState(queryOrderReq);
     }
 
+    /**
+     * 删除订单
+     * @param ID
+     * @return
+     */
     @DeleteMapping("/deleteOrder")
     @ResponseBody
     public ReqResult deleteOrder(@RequestParam(name = "order_id")Long ID) {

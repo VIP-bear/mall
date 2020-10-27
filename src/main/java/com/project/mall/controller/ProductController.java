@@ -1,6 +1,5 @@
 package com.project.mall.controller;
 
-import com.project.mall.controller.req.AdministratorChangeStateReq;
 import com.project.mall.controller.req.merchant.*;
 import com.project.mall.controller.res.ReqResult;
 import com.project.mall.service.IProductService;
@@ -13,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 public class ProductController {
     @Autowired
-    IProductService ProductService;
+    IProductService productService;
 
 
     /**
@@ -28,8 +27,7 @@ public class ProductController {
     @GetMapping("/buyer/achieveRecommendProduct")
     @ResponseBody
     public ReqResult achieveRecommendProduct(@RequestParam(name = "buyer_id")Long id) {
-        log.info("/buyer/achieveRecommendProduct, buyer_id: {}", id);
-        return ProductService.queryProductByRecommend(id,10);
+        return productService.queryProductByRecommend(id,10);
     }
     /**
      * 随机拉取商品信息
@@ -38,38 +36,50 @@ public class ProductController {
     @GetMapping("/buyer/queryEachProductByPage")
     @ResponseBody
     public ReqResult queryEachProductByPage(){
-        log.info("/buyer/queryEachProductByPage");
-        return ProductService.queryProductByRandom(10);
+
+        return productService.queryProductByRandom(10);
     }
 
     /**
      * 买家按商品名查询
+     * @param productName
+     * @param page
      * @return
      */
     @GetMapping("/buyer/queryProductByName")
     @ResponseBody
     public ReqResult buyerQueryProductByName(@RequestParam(name = "productName")String productName,
                                              @RequestParam(name = "page")int page){
-        log.info("/buyer/queryProductByName, productName: {}, page: {}", productName, page);
-        return ProductService.queryProductByProductName(productName,page,10);
+
+        return productService.queryProductByProductName(productName,page,10);
     }
+
     /**
      * 买家按商类别查询
+     * @param productType
+     * @param page
      * @return
      */
     @GetMapping("/buyer/queryProductByType")
     @ResponseBody
     public ReqResult buyerQueryProductByType(@RequestParam(name = "productType")String productType,
                                              @RequestParam(name = "page")int page){
-        log.info("/buyer/queryProductByType, productType: {}, page: {}", productType, page);
-        return ProductService.queryProductByTag(productType,page,10);
+
+        return productService.queryProductByTag(productType,page,10);
     }
 
+    /**
+     * 按商品ID查询商品,查询详细信息
+     * @param productID
+     * @param buyerID
+     * @return
+     */
     @GetMapping("/buyer/queryProductByID")
     @ResponseBody
-    public ReqResult buyerQueryProductByID(@RequestParam(name = "product_id")Long ID) {
-        log.info("/buyer/queryProductByID, product_id: {}", ID);
-        return ProductService.queryProductById(ID);
+    public ReqResult buyerQueryProductByID(@RequestParam(name = "product_id")Long productID,
+                                           @RequestParam(name = "buyer_id")Long buyerID) {
+        //记录用户行为
+        return productService.queryProductById(productID);
     }
 
 
@@ -84,8 +94,8 @@ public class ProductController {
     @PostMapping("/merchant/addProduct")
     @ResponseBody
     public ReqResult addProduct(MerchantUploadProductReq merchantUploadProductReq){
-        log.info("/merchant/addProduct, merchantUploadProductReq: {}", merchantUploadProductReq);
-        return ProductService.addProduct(merchantUploadProductReq);
+
+        return productService.addProduct(merchantUploadProductReq);
     }
 
     /**
@@ -96,8 +106,8 @@ public class ProductController {
     @DeleteMapping("/merchant/deleteProduct")
     @ResponseBody
     public ReqResult deleteProduct(@RequestParam(name = "productID")Long productID){
-        log.info("/merchant/deleteProduct, productID: {}", productID);
-        return ProductService.deleteProduct(productID);
+
+        return productService.deleteProduct(productID);
     }
 
     /**
@@ -108,8 +118,8 @@ public class ProductController {
     @GetMapping("/merchant/selectAllByMerchantID")
     @ResponseBody
     public ReqResult selectAllByMerchantID(@RequestParam(name = "MerchantID")long merchantID) {
-        log.info("/merchant/selectAllByMerchantID, MerchantID: {}", merchantID);
-        return ProductService.queryProductByMerchantId(merchantID);
+
+        return productService.queryProductByMerchantId(merchantID);
     }
 
 //
@@ -145,8 +155,8 @@ public class ProductController {
     @GetMapping("/merchant/queryProductByState")
     @ResponseBody
     public ReqResult merchantQueryProductByState(MerchantQueryProductByStateReq merchantQueryProductByStateReq) {
-        log.info("/merchant/queryProductByState, merchantQueryProductByStateReq: {}", merchantQueryProductByStateReq);
-        return ProductService.queryProductByMerchantIdAndProductState(merchantQueryProductByStateReq.getBuyer_id(),
+
+        return productService.queryProductByMerchantIdAndProductState(merchantQueryProductByStateReq.getBuyer_id(),
                 merchantQueryProductByStateReq.getProduct_state());
     }
 
@@ -158,8 +168,8 @@ public class ProductController {
     @PutMapping("/merchant/changeProductInfo")
     @ResponseBody
     public ReqResult merchantChangeProductInfo(MerchantChangeProductReq merchantChangeProductReq) {
-        log.info("/merchant/changeProductInfo, merchantChangeProductReq: {}", merchantChangeProductReq);
-        return ProductService.updateProduct(merchantChangeProductReq);
+
+        return productService.updateProduct(merchantChangeProductReq);
     }
 
     /**
@@ -172,39 +182,10 @@ public class ProductController {
     @ResponseBody
     public ReqResult merchantChangeProductStock(@RequestParam(name = "stock")Integer stock,
                                                 @RequestParam(name = "merchantID")Long merchantID) {
-        log.info("/merchant/changeProductStock, stock: {}, merchantID: {}", stock, merchantID);
-        return ProductService.updateProductStockByProductId(stock,merchantID);
+        return productService.updateProductStockByProductId(stock,merchantID);
     }
 
-    /**
-     * 管理员操作
-     */
 
-
-    /**
-     * 管理员依据商品状态查询商品信息
-     * @param state
-     * @return
-     */
-    @GetMapping("/administrator/queryState")
-    @ResponseBody
-    public ReqResult administratorQueryState(@RequestParam(name = "state")String state) {
-        log.info("/administrator/queryState, state: {}", state);
-        return ProductService.queryProductByProductState(state);
-    }
-
-    /**
-     * 管理员审批通过商品上架
-     * @param administratorChangeStateReq
-     * @return
-     */
-    @PutMapping("/administrator/changeState")
-    @ResponseBody
-    public ReqResult administratorChangeState(AdministratorChangeStateReq administratorChangeStateReq) {
-        log.info("/administrator/changeState, administratorChangeStateReq: {}", administratorChangeStateReq);
-        return ProductService.updateProductStateByProductId(administratorChangeStateReq.getProduct_state(),
-                administratorChangeStateReq.getProduct_id());
-    }
 
 
 

@@ -45,4 +45,20 @@ public class MerchantServiceImpl implements IMerchantService {
         return new ReqResult(902, "审核通过");
     }
 
+    /**
+     * 商家登录验证
+     *
+     * @param id
+     * @return
+     */
+    @Override
+    public ReqResult merchantConfirm(Long id) {
+        MerchantEntity merchantEntity = new MerchantEntity();
+        merchantEntity = merchantRepository.findByBuyerId(id); //查询卖家表检查是否为卖家
+        if(merchantEntity == null)
+            return new ReqResult(903,"该用户一般买家");
+        return new ReqResult(904,"该用户为卖家");
+    }
+
+
 }

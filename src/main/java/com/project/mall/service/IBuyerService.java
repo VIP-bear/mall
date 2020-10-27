@@ -55,4 +55,6 @@ public interface IBuyerService {
      * @return
      */
     ReqResult changeEmail(ChangeEmailReq changeEmailReq);
+
+
 }
