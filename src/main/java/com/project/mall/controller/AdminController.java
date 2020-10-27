@@ -28,7 +28,7 @@ public class AdminController {
      */
     @PostMapping("/admin/adminLogin")
     @ResponseBody
-    public ReqResult adminLogin(AdminLoginReq adminLoginReq) {
+    public ReqResult adminLogin(@RequestBody AdminLoginReq adminLoginReq) {
         log.info("adminLoginReq:{}",adminLoginReq);
         return adminService.adminLogin(adminLoginReq);
     }
@@ -40,21 +40,20 @@ public class AdminController {
      */
     @GetMapping("/admin/queryState")
     @ResponseBody
-    public ReqResult administratorQueryState(@RequestParam(name = "state")String state) {
+    public ReqResult administratorQueryState(@RequestParam(name = "product_state")String state) {
         log.info("state:{}",state);
         return productService.queryProductByProductState(state);
     }
 
     /**
-     * 管理员审批通过商品上架
-     * @param administratorChangeStateReq
+     * 管理员根据商品id修改商品状态
      * @return
      */
-    @PutMapping("/admin/changeState")
+    @GetMapping("/admin/changeProductState")
     @ResponseBody
-    public ReqResult administratorChangeState(AdministratorChangeStateReq administratorChangeStateReq) {
-        log.info("administratorChangeStateReq:{}",administratorChangeStateReq);
-        return productService.updateProductStateByProductId(administratorChangeStateReq.getProduct_state(),
-                administratorChangeStateReq.getProduct_id());
+    public ReqResult administratorChangeState(@RequestParam(name = "product_id")Long product_id,
+                                              @RequestParam(name = "product_state")String state) {
+        log.info("product_id: {}, product_state: {}", product_id, state);
+        return productService.updateProductStateByProductId(state, product_id);
     }
 }

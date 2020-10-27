@@ -24,7 +24,7 @@ public class MerchantController {
     @PostMapping("/merchant/register")
     @ResponseBody
     public ReqResult merchantRegister(MerchantVerifyReq merchantVerifyReq) {
-
+        log.info("/merchant/register, merchantVerifyReq: {}", merchantVerifyReq);
         return merchantService.perInfoReview(merchantVerifyReq);
     }
 

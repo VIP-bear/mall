@@ -53,6 +53,7 @@ public class ProductServiceImpl implements IProductService {
     public ReqResult addProduct(MerchantUploadProductReq uploadProduct) {
         ProductEntity productEntity = new ProductEntity();
         BeanUtils.copyProperties(uploadProduct, productEntity);
+        productEntity.setProduct_state("verifying");
         // 上传封面到服务器
         String cover_url = aliyunProvider.upload(uploadProduct.getProduct_cover(), "product_cover/");
         productEntity.setProduct_cover(cover_url);
@@ -145,7 +146,6 @@ public class ProductServiceImpl implements IProductService {
     public ReqResult queryProductByTag(String tag, int page, int size) {
         int offset = (page - 1) * size;
         List<ProductEntity> productList = productRepository.findProductByCategory(tag, offset, size);
-        System.out.println(productList.get(0).getProduct_cover());
         return new ReqResult(ProductTypeEnum.QUERY_SUCCESS.getCode(), "查询成功", productList);
     }
 
