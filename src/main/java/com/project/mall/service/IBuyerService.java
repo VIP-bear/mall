@@ -55,4 +55,18 @@ public interface IBuyerService {
      * @return
      */
     ReqResult changeEmail(ChangeEmailReq changeEmailReq);
+
+    /**
+     * 查询默认地址
+     * @param id
+     * @return
+     */
+    ReqResult getDefaultAddress(Long id);
+
+    /**
+     * 查询一般地址
+     * @param id
+     * @return
+     */
+    ReqResult getCommonAddress(Long id);
 }

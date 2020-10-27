@@ -104,4 +104,21 @@ public class BuyerController {
         return buyerService.changeEmail(changeEmailReq);
     }
 
+    /**
+     * 查询默认地址
+     * @param ID
+     * @return
+     */
+    @GetMapping("/address/defaultAddress")
+    @ResponseBody
+    public ReqResult defaultAddress(@RequestParam(name = "buyer_id")Long ID) {
+        return buyerService.getDefaultAddress(ID);
+    }
+
+    @GetMapping("/address/commonAddress")
+    @ResponseBody
+    public ReqResult commonAddress(@RequestParam(name = "buyer_id")Long ID) {
+        return buyerService.getCommonAddress(ID);
+    }
+
 }

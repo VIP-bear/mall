@@ -6,8 +6,10 @@ import com.project.mall.controller.req.UserChangePasswordReq;
 import com.project.mall.controller.req.UserCodeMatchingReq;
 import com.project.mall.controller.req.buyer.ChangeEmailReq;
 import com.project.mall.controller.res.ReqResult;
+import com.project.mall.dao.AddressRepository;
 import com.project.mall.dao.BuyerRepository;
 import com.project.mall.dao.VerifyCodeRepository;
+import com.project.mall.dao.entity.AddressEntity;
 import com.project.mall.dao.entity.BuyerEntity;
 import com.project.mall.dao.entity.VerifyCodeEntity;
 import com.project.mall.enums.BuyerTypeEnum;
@@ -25,6 +27,8 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -39,6 +43,9 @@ public class BuyerServiceImpl implements IBuyerService {
 
     @Autowired
     private VerifyCodeRepository verifyCodeRepository;
+
+    @Autowired
+    private AddressRepository addressRepository;
 
     // 用于加密和解密
     @Autowired
@@ -211,6 +218,36 @@ public class BuyerServiceImpl implements IBuyerService {
     @Override
     public ReqResult changeEmail(ChangeEmailReq changeEmailReq) {
         return null;
+    }
+
+    /**
+     * 查询默认地址
+     *
+     * @param id
+     * @return
+     */
+    @Override
+    public ReqResult getDefaultAddress(Long id) {
+        AddressEntity addressEntity = new AddressEntity();
+        addressEntity = addressRepository.findDefaultAddressEntityByBuyerId(id);
+        if (addressEntity == null)
+            return new ReqResult(BuyerTypeEnum.GET_DEFAULT_ADDRESS_FAILED.getCode(),"查询到默认地址为空");
+        return new ReqResult(BuyerTypeEnum.GET_DEFAULT_ADDRESS_SUCCESS.getCode(),"查询默认地址成功",addressEntity);
+    }
+
+    /**
+     * 查询一般地址
+     *
+     * @param id
+     * @return
+     */
+    @Override
+    public ReqResult getCommonAddress(Long id) {
+        List<AddressEntity> addressEntityList = new ArrayList<>();
+        addressEntityList = addressRepository.findUnDefaultAddressByBuyerId(id);
+        if(addressEntityList == null)
+            return new ReqResult(BuyerTypeEnum.GET_GENERAL_ADDRESS_FAILED.getCode(),"为查询到一般地址");
+        return new ReqResult(BuyerTypeEnum.GET_GENERAL_ADDRESS_SUCCESS.getCode(),"查询一般地址成功",addressEntityList);
     }
 
 }
