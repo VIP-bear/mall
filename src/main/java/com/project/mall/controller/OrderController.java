@@ -1,5 +1,6 @@
 package com.project.mall.controller;
 
+import com.project.mall.controller.req.buyer.BuyerRefundReq;
 import com.project.mall.controller.req.buyer.PurchaseReq;
 import com.project.mall.controller.req.buyer.QueryOrderReq;
 import com.project.mall.controller.res.ReqResult;
@@ -38,6 +39,18 @@ public class OrderController {
     public ReqResult changeOrderState(@RequestParam(name = "order_id")Long ID,
                                       @RequestParam(name = "order_state")String order_state) {
         return orderService.updateOrderState(ID,order_state);
+    }
+
+    /**
+     * 用户退款接口
+     * @param buyerRefundReq
+     * @return
+     */
+    @PostMapping("/refundOrder")
+    @ResponseBody
+    public ReqResult refundOrder(BuyerRefundReq buyerRefundReq) {
+
+        return null;
     }
 
     /**

@@ -49,11 +49,29 @@ public class AdminController {
      * 管理员根据商品id修改商品状态
      * @return
      */
-    @GetMapping("/admin/changeProductState")
+    @PostMapping("/admin/changeProductState")
     @ResponseBody
     public ReqResult administratorChangeState(@RequestParam(name = "product_id")Long product_id,
                                               @RequestParam(name = "product_state")String state) {
         log.info("product_id: {}, product_state: {}", product_id, state);
         return productService.updateProductStateByProductId(state, product_id);
+    }
+
+    /**
+     * 管理员查看待处理退款申请
+     * @return
+     */
+    @GetMapping("/admin/queryRefundApply")
+    @ResponseBody
+    public ReqResult administratorQueryRefundApply() {
+
+        return null;
+    }
+
+    @PutMapping("admin/disposeRefundApply")
+    @ResponseBody
+    public ReqResult administratorDisposeRefundApply(@RequestParam(name = "")Long ID,
+                                                     @RequestParam(name = "")String State) {
+        return null;
     }
 }
