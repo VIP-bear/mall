@@ -220,34 +220,6 @@ public class BuyerServiceImpl implements IBuyerService {
         return null;
     }
 
-    /**
-     * 查询默认地址
-     *
-     * @param id
-     * @return
-     */
-    @Override
-    public ReqResult getDefaultAddress(Long id) {
-        AddressEntity addressEntity = new AddressEntity();
-        addressEntity = addressRepository.findDefaultAddressEntityByBuyerId(id);
-        if (addressEntity == null)
-            return new ReqResult(BuyerTypeEnum.GET_DEFAULT_ADDRESS_FAILED.getCode(),"查询到默认地址为空");
-        return new ReqResult(BuyerTypeEnum.GET_DEFAULT_ADDRESS_SUCCESS.getCode(),"查询默认地址成功",addressEntity);
-    }
 
-    /**
-     * 查询一般地址
-     *
-     * @param id
-     * @return
-     */
-    @Override
-    public ReqResult getCommonAddress(Long id) {
-        List<AddressEntity> addressEntityList = new ArrayList<>();
-        addressEntityList = addressRepository.findUnDefaultAddressByBuyerId(id);
-        if(addressEntityList.size() == 0)
-            return new ReqResult(BuyerTypeEnum.GET_GENERAL_ADDRESS_FAILED.getCode(),"未查询到一般地址");
-        return new ReqResult(BuyerTypeEnum.GET_GENERAL_ADDRESS_SUCCESS.getCode(),"查询一般地址成功",addressEntityList);
-    }
 
 }

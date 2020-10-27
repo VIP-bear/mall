@@ -1,5 +1,7 @@
 package com.project.mall.service;
 
+import com.project.mall.controller.req.buyer.AddAddressReq;
+import com.project.mall.controller.req.buyer.ChangeAddressReq;
 import com.project.mall.controller.res.ReqResult;
 
 /**
@@ -10,8 +12,9 @@ public interface IAddressService {
     /**
      * 添加地址
      * @return
+     * @param addAddressReq
      */
-    ReqResult addAddress();
+    ReqResult addAddress(AddAddressReq addAddressReq);
 
     /**
      * 根据地址id删除地址
@@ -23,8 +26,9 @@ public interface IAddressService {
     /**
      * 更新地址
      * @return
+     * @param changeAddressReq
      */
-    ReqResult updateAddress();
+    ReqResult updateAddress(ChangeAddressReq changeAddressReq);
 
     /**
      * 根据买家id获取默认地址
