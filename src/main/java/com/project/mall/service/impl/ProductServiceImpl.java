@@ -158,6 +158,17 @@ public class ProductServiceImpl implements IProductService {
     public ReqResult queryProductById(Long buyerId, Long productId) {
         ProductEntity productEntity = productRepository.findById(productId).get();
         // 记录用户点击商品的行为
+        BehaviorEntity behaviorEntity = behaviorRepository.findByBuyerAndProductId(buyerId, productId);
+        if (behaviorEntity == null) {
+            // 用户以前没有对该商品进行过操作, 记录用户点击行为
+            behaviorEntity.setBuyer_id(buyerId);
+            behaviorEntity.setProduct_id(productId);
+            behaviorEntity.setBehavior_score(1);
+            behaviorRepository.save(behaviorEntity);
+        } else {
+            // 用户以前对该商品进行过操作, 更新加权分
+            behaviorRepository.updateScoreByBuyerAndProductId(1, buyerId, productId);
+        }
         return new ReqResult(ProductTypeEnum.QUERY_SUCCESS.getCode(), "查询成功", productEntity);
     }
 

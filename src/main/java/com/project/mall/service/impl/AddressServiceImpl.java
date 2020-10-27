@@ -6,6 +6,7 @@ import com.project.mall.controller.res.ReqResult;
 import com.project.mall.dao.AddressRepository;
 import com.project.mall.dao.entity.AddressEntity;
 import com.project.mall.service.IAddressService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,7 +30,9 @@ public class AddressServiceImpl implements IAddressService {
     @Transactional
     @Override
     public ReqResult addAddress(AddAddressReq addAddressReq) {
-        return null;
+        AddressEntity addressEntity = new AddressEntity();
+        BeanUtils.copyProperties(addAddressReq, addressEntity);
+        return new ReqResult(622, "添加成功");
     }
 
     /**

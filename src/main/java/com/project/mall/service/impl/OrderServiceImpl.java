@@ -3,8 +3,10 @@ package com.project.mall.service.impl;
 import com.project.mall.controller.req.buyer.PurchaseReq;
 import com.project.mall.controller.req.buyer.QueryOrderReq;
 import com.project.mall.controller.res.ReqResult;
+import com.project.mall.dao.BehaviorRepository;
 import com.project.mall.dao.OrderRepository;
 import com.project.mall.dao.ProductRepository;
+import com.project.mall.dao.entity.BehaviorEntity;
 import com.project.mall.dao.entity.OrderEntity;
 import com.project.mall.dao.entity.ProductEntity;
 import com.project.mall.domain.OrderMessage;
@@ -33,6 +35,9 @@ public class OrderServiceImpl implements IOrderService {
     @Autowired
     private ProductRepository productRepository;
 
+    @Autowired
+    private BehaviorRepository behaviorRepository;
+
     /**
      * 买家创建订单
      *
@@ -58,6 +63,20 @@ public class OrderServiceImpl implements IOrderService {
         OrderEntity res = orderRepository.save(orderEntity);
         if (null == res) {
             return new ReqResult(OrderTypeEnum.ADD_FAILED.getCode(), "创建订单失败");
+        }
+        // 记录用户点击商品的行为
+        BehaviorEntity behaviorEntity = behaviorRepository
+                .findByBuyerAndProductId(purchaseReq.getBuyer_phone(), purchaseReq.getProduct_id());
+        if (behaviorEntity == null) {
+            // 用户以前没有对该商品进行过操作, 记录用户点击行为
+            behaviorEntity.setBuyer_id(purchaseReq.getBuyer_phone());
+            behaviorEntity.setProduct_id(purchaseReq.getProduct_id());
+            behaviorEntity.setBehavior_score(5);
+            behaviorRepository.save(behaviorEntity);
+        } else {
+            // 用户以前对该商品进行过操作, 更新加权分
+            behaviorRepository.updateScoreByBuyerAndProductId(5,
+                    purchaseReq.getBuyer_phone(), purchaseReq.getProduct_id());
         }
         return new ReqResult(OrderTypeEnum.ADD_SUCCESS.getCode(), "创建订单成功");
     }

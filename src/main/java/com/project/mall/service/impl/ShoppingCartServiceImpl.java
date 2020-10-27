@@ -3,8 +3,10 @@ package com.project.mall.service.impl;
 import com.project.mall.controller.req.buyer.EditShoppingCartReq;
 import com.project.mall.controller.req.buyer.ShoppingCartReq;
 import com.project.mall.controller.res.ReqResult;
+import com.project.mall.dao.BehaviorRepository;
 import com.project.mall.dao.CartRepository;
 import com.project.mall.dao.ProductRepository;
+import com.project.mall.dao.entity.BehaviorEntity;
 import com.project.mall.dao.entity.CartEntity;
 import com.project.mall.dao.entity.ProductEntity;
 import com.project.mall.domain.ShoppingCartMessage;
@@ -28,6 +30,8 @@ public class ShoppingCartServiceImpl implements IShoppingCartService {
     private CartRepository cartRepository;
     @Autowired
     private ProductRepository productRepository;
+    @Autowired
+    private BehaviorRepository behaviorRepository;
 
     /**
      * 添加至购物车
@@ -43,6 +47,20 @@ public class ShoppingCartServiceImpl implements IShoppingCartService {
         CartEntity res = cartRepository.save(cartEntity);
         if (null == res) {
             return new ReqResult(ShoppingCartTypeEnum.ADD_FAILED.getCode(), "添加失败");
+        }
+        // 记录用户点击商品的行为
+        BehaviorEntity behaviorEntity = behaviorRepository
+                .findByBuyerAndProductId(shoppingCartReq.getBuyer_id(), shoppingCartReq.getProduct_id());
+        if (behaviorEntity == null) {
+            // 用户以前没有对该商品进行过操作, 记录用户点击行为
+            behaviorEntity.setBuyer_id(shoppingCartReq.getBuyer_id());
+            behaviorEntity.setProduct_id(shoppingCartReq.getProduct_id());
+            behaviorEntity.setBehavior_score(3);
+            behaviorRepository.save(behaviorEntity);
+        } else {
+            // 用户以前对该商品进行过操作, 更新加权分
+            behaviorRepository.updateScoreByBuyerAndProductId(3,
+                    shoppingCartReq.getBuyer_id(), shoppingCartReq.getProduct_id());
         }
         return new ReqResult(ShoppingCartTypeEnum.ADD_SUCCESS.getCode(), "添加成功");
     }
