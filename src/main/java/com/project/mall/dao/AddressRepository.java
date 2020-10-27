@@ -28,6 +28,14 @@ public interface AddressRepository extends JpaRepository<AddressEntity, Long> {
     AddressEntity findDefaultAddressEntityByBuyerId(Long buyer_id);
 
     /**
+     * 根据买家id查询非默认地址
+     * @param buyer_id
+     * @return
+     */
+    @Query(value = "select * from mall_address where buyer_id = ?1 and address_default = 0", nativeQuery = true)
+    List<AddressEntity> findUnDefaultAddressByBuyerId(Long buyer_id);
+
+    /**
      * 根据地址id修改地址内容
      * @param address_content
      * @param address_id
