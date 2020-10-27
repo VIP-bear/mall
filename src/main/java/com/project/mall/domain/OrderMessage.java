@@ -27,6 +27,11 @@ public class OrderMessage {
     private Long product_id;
 
     /**
+     * 商品封面
+     */
+    private String product_cover;
+
+    /**
      * 商品名称
      */
     private String product_name;

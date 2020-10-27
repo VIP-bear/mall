@@ -10,6 +10,7 @@ import com.project.mall.dao.entity.ProductEntity;
 import com.project.mall.domain.OrderMessage;
 import com.project.mall.enums.OrderTypeEnum;
 import com.project.mall.service.IOrderService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,7 @@ import java.util.List;
  * 订单服务实现
  */
 @Service
+@Slf4j
 public class OrderServiceImpl implements IOrderService {
 
     @Autowired
@@ -88,6 +90,7 @@ public class OrderServiceImpl implements IOrderService {
             return new ReqResult(OrderTypeEnum.UPDATE_FAILED.getCode(), "更新失败");
         }
         return new ReqResult(OrderTypeEnum.UPDATE_SUCCESS.getCode(), "更新成功");
+
     }
 
     /**
@@ -98,17 +101,8 @@ public class OrderServiceImpl implements IOrderService {
      */
     @Override
     public ReqResult getOrder(Long buyerId) {
-        // 获取所有订单
         List<OrderEntity> allOrder = orderRepository.findAllByBuyerId(buyerId);
-        List<OrderMessage> orderMessageList = new ArrayList<>();
-        // 获取商品名称
-        for (OrderEntity orderEntity : allOrder) {
-            OrderMessage orderMessage = new OrderMessage();
-            BeanUtils.copyProperties(orderEntity, orderMessage);
-            orderMessage.setProduct_name(productRepository.findById(orderEntity.getProduct_id()).get().getProduct_name());
-
-        }
-        return new ReqResult(OrderTypeEnum.QUERY_SUCCESS.getCode(), "查询成功", orderMessageList);
+        return new ReqResult(OrderTypeEnum.QUERY_SUCCESS.getCode(), "查询成功", getOrderMessage(allOrder));
     }
 
     /**
@@ -119,7 +113,27 @@ public class OrderServiceImpl implements IOrderService {
     @Override
     public ReqResult getOrderByState(QueryOrderReq queryOrderReq) {
         List<OrderEntity> allOrder = orderRepository.findAllByOrderState(queryOrderReq.getOrder_state(), queryOrderReq.getBuyer_name());
-        return new ReqResult(OrderTypeEnum.QUERY_SUCCESS.getCode(), "查询成功", allOrder);
+        return new ReqResult(OrderTypeEnum.QUERY_SUCCESS.getCode(), "查询成功", getOrderMessage(allOrder));
     }
+
+    /**
+     * 获取订单详细信息
+     * @param allOrder
+     * @return
+     */
+    public List<OrderMessage> getOrderMessage(List<OrderEntity> allOrder) {
+        List<OrderMessage> orderMessageList = new ArrayList<>();
+        // 获取商品名称和封面
+        for (OrderEntity orderEntity : allOrder) {
+            OrderMessage orderMessage = new OrderMessage();
+            BeanUtils.copyProperties(orderEntity, orderMessage);
+            ProductEntity productEntity = productRepository.findById(orderEntity.getProduct_id()).get();
+            orderMessage.setProduct_name(productEntity.getProduct_name());
+            orderMessage.setProduct_cover(productEntity.getProduct_cover());
+            orderMessageList.add(orderMessage);
+        }
+        return orderMessageList;
+    }
+
 }
 

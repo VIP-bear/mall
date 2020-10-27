@@ -69,7 +69,7 @@ public interface IProductService {
      * @param productId
      * @return
      */
-    ReqResult queryProductById(Long productId);
+    ReqResult queryProductById(Long buyerId, Long productId);
 
     /**
      * 推荐商品

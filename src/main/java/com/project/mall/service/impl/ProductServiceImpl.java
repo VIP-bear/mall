@@ -155,8 +155,9 @@ public class ProductServiceImpl implements IProductService {
      * @return
      */
     @Override
-    public ReqResult queryProductById(Long productId) {
+    public ReqResult queryProductById(Long buyerId, Long productId) {
         ProductEntity productEntity = productRepository.findById(productId).get();
+        // 记录用户点击商品的行为
         return new ReqResult(ProductTypeEnum.QUERY_SUCCESS.getCode(), "查询成功", productEntity);
     }
 
