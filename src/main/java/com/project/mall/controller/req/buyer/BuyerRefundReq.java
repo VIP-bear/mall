@@ -25,8 +25,5 @@ public class BuyerRefundReq {
      */
     private String refund_pic;
 
-    /**
-     * 退款状态（1代表退款成功，0代表申请退款中，-1代表退款失败）
-     */
-    private Integer refund_state;
+
 }
