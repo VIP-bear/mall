@@ -42,6 +42,8 @@ public class ProductController {
 
     /**
      * 买家按商品名查询
+     * @param productName
+     * @param page
      * @return
      */
     @GetMapping("/buyer/queryProductByName")
@@ -51,8 +53,11 @@ public class ProductController {
 
         return productService.queryProductByProductName(productName,page,10);
     }
+
     /**
      * 买家按商类别查询
+     * @param productType
+     * @param page
      * @return
      */
     @GetMapping("/buyer/queryProductByType")
@@ -63,11 +68,18 @@ public class ProductController {
         return productService.queryProductByTag(productType,page,10);
     }
 
+    /**
+     * 按商品ID查询商品,查询详细信息
+     * @param productID
+     * @param buyerID
+     * @return
+     */
     @GetMapping("/buyer/queryProductByID")
     @ResponseBody
-    public ReqResult buyerQueryProductByID(@RequestParam(name = "product_id")Long ID) {
-
-        return productService.queryProductById(ID);
+    public ReqResult buyerQueryProductByID(@RequestParam(name = "product_id")Long productID,
+                                           @RequestParam(name = "buyer_id")Long buyerID) {
+        //记录用户行为
+        return productService.queryProductById(productID);
     }
 
 

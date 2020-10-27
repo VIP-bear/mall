@@ -31,6 +31,7 @@ public class ShoppingCartController {
     @ResponseBody
     public ReqResult addShoppingCart(ShoppingCartReq shoppingCartReq) {
         log.info("/addShoppingCart,shoppingCartReq:{}",shoppingCartReq);
+        //记录用户行为
         return shoppingCartService.addShoppingCart(shoppingCartReq);
     }
 
