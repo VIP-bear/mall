@@ -42,5 +42,11 @@ public interface MerchantRepository extends JpaRepository<MerchantEntity, Long> 
     @Query(value = "update mall_merchant set merchant_shopname = ?1 where merchant_id = ?2", nativeQuery = true)
     int updateMerchantShopNameById(String merchant_shopname, Long merchant_id);
 
-
+    /**
+     * 根据买家id查询卖家信息
+     * @param buyer_id
+     * @return
+     */
+    @Query(value = "select * from mall_merchant where buyer_id = ?1", nativeQuery = true)
+    MerchantEntity findByBuyerId(Long buyer_id);
 }
