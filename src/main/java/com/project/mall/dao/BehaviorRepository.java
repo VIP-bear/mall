@@ -30,7 +30,7 @@ public interface BehaviorRepository extends JpaRepository<BehaviorEntity, Behavi
      * @return
      */
     @Modifying
-    @Query(value = "update mall_behavior set behavior_score = ?1 where buyer_id = ?2 and product_id = ?3", nativeQuery = true)
+    @Query(value = "update mall_behavior set behavior_score = behavior_socre + ?1 where buyer_id = ?2 and product_id = ?3", nativeQuery = true)
     int updateScoreByBuyerAndProductId(int behavior_score, Long buyer_id, Long product_id);
 
     /**
