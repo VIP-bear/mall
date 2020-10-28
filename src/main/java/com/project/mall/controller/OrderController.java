@@ -56,6 +56,11 @@ public class OrderController {
         return refundService.addRefund(buyerRefundReq);
     }
 
+    /**
+     * 依据买家id查询退款信息
+     * @param ID
+     * @return
+     */
     @GetMapping("/queryRefundOrder")
     @ResponseBody
     public ReqResult queryRefundOrder(@RequestParam(name = "buyer_id")Long ID) {
