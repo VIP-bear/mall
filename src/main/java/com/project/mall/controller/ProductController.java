@@ -79,7 +79,7 @@ public class ProductController {
     public ReqResult buyerQueryProductByID(@RequestParam(name = "product_id")Long productID,
                                            @RequestParam(name = "buyer_id")Long buyerID) {
         //记录用户行为
-        return productService.queryProductById(productID);
+        return productService.queryProductById(productID,buyerID);
     }
 
 
