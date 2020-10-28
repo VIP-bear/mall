@@ -11,6 +11,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public interface ProductRepository extends JpaRepository<ProductEntity, Long> {
@@ -100,4 +101,11 @@ public interface ProductRepository extends JpaRepository<ProductEntity, Long> {
     @Query(value = "select * from mall_product order by rand() limit ?1", nativeQuery = true)
     List<ProductEntity> findProductByRandom(int size);
 
+    /**
+     * 根据商品id查询商品
+     * @param product_id
+     * @return
+     */
+    @Query(value = "select * from mall_product where product_id = ?1", nativeQuery = true)
+    ProductEntity findByProductId(Long product_id);
 }

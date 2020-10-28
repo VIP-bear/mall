@@ -26,7 +26,6 @@ import java.util.List;
  * 订单服务实现
  */
 @Service
-@Slf4j
 public class OrderServiceImpl implements IOrderService {
 
     @Autowired
@@ -147,7 +146,9 @@ public class OrderServiceImpl implements IOrderService {
         for (OrderEntity orderEntity : allOrder) {
             OrderMessage orderMessage = new OrderMessage();
             BeanUtils.copyProperties(orderEntity, orderMessage);
-            ProductEntity productEntity = productRepository.findById(orderEntity.getProduct_id()).get();
+            System.out.println("product_id: " + orderEntity.getProduct_id());
+            ProductEntity productEntity = productRepository.findByProductId(orderEntity.getProduct_id());
+
             orderMessage.setProduct_name(productEntity.getProduct_name());
             orderMessage.setProduct_cover(productEntity.getProduct_cover());
             orderMessageList.add(orderMessage);

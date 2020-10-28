@@ -13,13 +13,11 @@ import com.project.mall.dao.entity.ProductEntity;
 import com.project.mall.enums.ProductTypeEnum;
 import com.project.mall.service.IProductService;
 import com.project.mall.util.AliyunProvider;
-import com.project.mall.util.BASE64DecoderMultipartFile;
 import com.project.mall.util.RecommendProductProvider;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -7,14 +7,11 @@ import com.project.mall.dao.entity.EvaluateEntity;
 import com.project.mall.enums.EvaluateTypeEnum;
 import com.project.mall.service.IEvaluateService;
 import com.project.mall.util.AliyunProvider;
-import com.project.mall.util.BASE64DecoderMultipartFile;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.List;
 
