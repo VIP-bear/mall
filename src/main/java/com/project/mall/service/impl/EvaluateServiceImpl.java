@@ -7,11 +7,14 @@ import com.project.mall.dao.entity.EvaluateEntity;
 import com.project.mall.enums.EvaluateTypeEnum;
 import com.project.mall.service.IEvaluateService;
 import com.project.mall.util.AliyunProvider;
+import com.project.mall.util.BASE64DecoderMultipartFile;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -67,7 +70,7 @@ public class EvaluateServiceImpl implements IEvaluateService {
 
         // 判断当前用户是否评论过
         ReqResult reqResult = queryEvaluateByProductIdAndBuyerId(addEvaluateReq.getProduct_id(), addEvaluateReq.getBuyer_id());
-        if (null == reqResult.getData()) {
+        if (null != reqResult.getData()) {
             // 当前用户评论过
             return reqResult;
         }
@@ -87,7 +90,9 @@ public class EvaluateServiceImpl implements IEvaluateService {
         if (addEvaluateReq.getEvaluate_pic3() != null) {
             evaluateEntity.setEvaluate_pic3(aliyunProvider.upload(addEvaluateReq.getEvaluate_pic3(), "comment_pic/"));
         }
+        System.out.println("上传图片成功....");
         // 保存评论
+        evaluateEntity.setEvaluate_score(addEvaluateReq.getEvaluate_score());
         evaluateRepository.save(evaluateEntity);
         return new ReqResult(EvaluateTypeEnum.EVA_SUCCESS.getCode(), "评论成功");
     }

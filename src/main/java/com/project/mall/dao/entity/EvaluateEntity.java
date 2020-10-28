@@ -3,6 +3,7 @@ package com.project.mall.dao.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 /**
@@ -34,8 +35,8 @@ public class EvaluateEntity {
     /**
      * 商品评分，默认为5.0分
      */
-    @Column(columnDefinition = "decimal(2,1)")
-    private Double evaluate_score = 5.0;
+    @Column
+    private Double evaluate_score;
 
     /**
      * 评价内容

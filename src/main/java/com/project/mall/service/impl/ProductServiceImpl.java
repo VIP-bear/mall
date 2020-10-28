@@ -5,6 +5,7 @@ import com.project.mall.controller.req.merchant.MerchantUploadProductReq;
 import com.project.mall.controller.res.ReqResult;
 import com.project.mall.dao.BehaviorRepository;
 import com.project.mall.dao.BuyerRepository;
+import com.project.mall.dao.MerchantRepository;
 import com.project.mall.dao.ProductRepository;
 import com.project.mall.dao.entity.BehaviorEntity;
 import com.project.mall.dao.entity.BuyerEntity;
@@ -12,11 +13,13 @@ import com.project.mall.dao.entity.ProductEntity;
 import com.project.mall.enums.ProductTypeEnum;
 import com.project.mall.service.IProductService;
 import com.project.mall.util.AliyunProvider;
+import com.project.mall.util.BASE64DecoderMultipartFile;
 import com.project.mall.util.RecommendProductProvider;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -41,6 +44,9 @@ public class ProductServiceImpl implements IProductService {
 
     @Autowired
     private AliyunProvider aliyunProvider;
+
+    @Autowired
+    private MerchantRepository merchantRepository;
 
 
     /**
@@ -250,12 +256,15 @@ public class ProductServiceImpl implements IProductService {
 
     /**
      * 根据商家id和商品状态查询
-     * @param merchantId
+     * @param buyerId
      * @param productState
      * @return
      */
     @Override
-    public ReqResult queryProductByMerchantIdAndProductState(Long merchantId, String productState) {
+    public ReqResult queryProductByMerchantIdAndProductState(Long buyerId, String productState) {
+        // 根据买家id获取卖家id
+        Long merchantId = merchantRepository.findByBuyerId(buyerId).getMerchant_id();
+
         List<ProductEntity> productEntityList = productRepository.findAllByMerchantIdAndProductState(merchantId, productState);
         return new ReqResult(ProductTypeEnum.QUERY_SUCCESS.getCode(), "查询成功", productEntityList);
     }

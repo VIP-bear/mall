@@ -100,12 +100,12 @@ public interface IProductService {
     ReqResult queryProductByProductState(String productState);
 
     /**
-     * 根据商家id和商品状态查询
-     * @param merchantId
+     * 根据买家id和商品状态查询
+     * @param buyerId
      * @param productState
      * @return
      */
-    ReqResult queryProductByMerchantIdAndProductState(Long merchantId, String productState);
+    ReqResult queryProductByMerchantIdAndProductState(Long buyerId, String productState);
 
 
 }

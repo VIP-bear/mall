@@ -9,6 +9,7 @@ import com.project.mall.service.IRefundService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -31,6 +32,7 @@ public class RefundServiceImpl implements IRefundService {
      * @param buyerRefundReq
      * @return
      */
+    @Transactional
     @Override
     public ReqResult addRefund(BuyerRefundReq buyerRefundReq) {
         RefundEntity refundEntity = new RefundEntity();
@@ -54,6 +56,7 @@ public class RefundServiceImpl implements IRefundService {
      * @param refundState
      * @return
      */
+    @Transactional
     @Override
     public ReqResult updateRefundState(Long orderId, int refundState) {
         int row = refundRepository.updateStateByOrderId(refundState, orderId);

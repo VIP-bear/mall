@@ -52,7 +52,7 @@ public class AdminController {
      * 管理员根据商品id修改商品状态
      * @return
      */
-    @PostMapping("/admin/changeProductState")
+    @GetMapping("/admin/changeProductState")
     @ResponseBody
     public ReqResult administratorChangeState(@RequestParam(name = "product_id")Long product_id,
                                               @RequestParam(name = "product_state")String state) {

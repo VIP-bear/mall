@@ -94,7 +94,7 @@ public class ProductController {
     @PostMapping("/merchant/addProduct")
     @ResponseBody
     public ReqResult addProduct(MerchantUploadProductReq merchantUploadProductReq){
-
+        log.info("/merchant/addProduct, merchantUploadProductReq: {}", merchantUploadProductReq);
         return productService.addProduct(merchantUploadProductReq);
     }
 
@@ -149,15 +149,14 @@ public class ProductController {
 
     /**
      * 卖家按商品状态查询
-     * @param merchantQueryProductByStateReq
      * @return
      */
     @GetMapping("/merchant/queryProductByState")
     @ResponseBody
-    public ReqResult merchantQueryProductByState(MerchantQueryProductByStateReq merchantQueryProductByStateReq) {
+    public ReqResult merchantQueryProductByState(@RequestParam(name = "product_state")String productState,
+                                                 @RequestParam(name = "buyer_id")Long buyerId) {
 
-        return productService.queryProductByMerchantIdAndProductState(merchantQueryProductByStateReq.getMerchant_id(),
-                merchantQueryProductByStateReq.getProduct_state());
+        return productService.queryProductByMerchantIdAndProductState(buyerId, productState);
     }
 
     /**

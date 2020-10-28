@@ -3,7 +3,11 @@ package com.project.mall.util;
 import com.aliyun.oss.OSS;
 import com.aliyun.oss.OSSClientBuilder;
 import com.aliyun.oss.model.ObjectMetadata;
+import com.project.mall.config.AliyunConfig;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -19,23 +23,8 @@ import java.util.UUID;
 @Component
 public class AliyunProvider {
 
-    @Value("${aliyun.file.endpoint}")
-    private static String endpoint;
-
-    @Value("${aliyun.file.bucket-name}")
-    private static String bucketName;
-
-    @Value("${aliyun.file.folder}")
-    private static String folder;
-
-    @Value("${aliyun.file.public-key}")
-    private static String accessKeyId;
-
-    @Value("${aliyun.file.private-key}")
-    private static String accessKeySecret;
-
-    @Value("${aliyun.file.expires}")
-    private static Integer expires;
+    @Autowired
+    AliyunConfig aliyunConfig;
 
     /**
      * 上传图片到服务器，返回图片url
@@ -43,6 +32,13 @@ public class AliyunProvider {
      * @return
      */
     public String upload(MultipartFile uploadFile, String subDirectory) {
+        String endpoint = aliyunConfig.getEndpoint();
+        String bucketName = aliyunConfig.getBucketName();
+        String folder = aliyunConfig.getFolder();
+        String accessKeyId = aliyunConfig.getAccessKeyId();
+        String accessKeySecret = aliyunConfig.getAccessKeySecret();
+        Integer expires = aliyunConfig.getExpires();
+
         URL url;
         String imageUrl = null;
         // 图片名
