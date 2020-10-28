@@ -13,7 +13,7 @@ public class ChangeAddressReq {
     private String address_content;
 
     /**
-     * 买家id
+     * 地址id
      */
-    private Long buyer_id;
+    private Long address_id;
 }

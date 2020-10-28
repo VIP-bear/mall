@@ -55,7 +55,11 @@ public class AddressServiceImpl implements IAddressService {
     @Transactional
     @Override
     public ReqResult updateAddress(ChangeAddressReq changeAddressReq) {
-        return null;
+        int row = addressRepository.updateAddressById(changeAddressReq.getAddress_content(), changeAddressReq.getAddress_id());
+        if (row == 0) {
+            return new ReqResult(623, "更新失败");
+        }
+        return new ReqResult(624, "更新成功");
     }
 
     /**
@@ -76,7 +80,7 @@ public class AddressServiceImpl implements IAddressService {
      */
     @Override
     public ReqResult getAllAddress(Long buyerId) {
-        List<AddressEntity> addressEntityList = addressRepository.findAddressEntitiesByBuyerId(buyerId);
+        List<AddressEntity> addressEntityList = addressRepository.findUnDefaultAddressByBuyerId(buyerId);
         return new ReqResult(621, "查询成功", addressEntityList);
     }
 }
