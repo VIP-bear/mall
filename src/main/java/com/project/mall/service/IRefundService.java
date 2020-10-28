@@ -34,5 +34,5 @@ public interface IRefundService {
      * @param id
      * @return
      */
-    ReqResult updateRefundStateById(Long id);
+    ReqResult queryRefundStateById(Long id);
 }

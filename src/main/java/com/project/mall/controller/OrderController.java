@@ -65,7 +65,7 @@ public class OrderController {
     @ResponseBody
     public ReqResult queryRefundOrder(@RequestParam(name = "buyer_id")Long ID) {
 
-        return refundService.updateRefundStateById(ID);
+        return refundService.queryRefundStateById(ID);
     }
 
     /**
