@@ -16,5 +16,5 @@ public class MerchantQueryProductByStateReq {
      * 卖家ID
      */
 
-    private Long buyer_id;
+    private Long merchant_id;
 }
