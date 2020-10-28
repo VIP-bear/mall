@@ -43,7 +43,7 @@ public interface OrderRepository extends JpaRepository<OrderEntity, Long> {
     int updateOrderNumandCostById(double order_num, double order_cost, Long order_id);
 
     /**
-     * 根据订单状态查询订单
+     * 根据订单状态和买家id查询订单
      * @param order_state
      * @return
      */
@@ -65,4 +65,12 @@ public interface OrderRepository extends JpaRepository<OrderEntity, Long> {
      */
     @Query(value = "select * from mall_order where buyer_id = ?1", nativeQuery = true)
     List<OrderEntity> findAllByBuyerId(Long buyer_id);
+
+    /**
+     * 查询买家所有退款的订单
+     * @return
+     */
+    @Query(value = "select * from mall_order where ( order_state = 'refunded1' or order_state = 'refunded-1' " +
+            "or order_state = 'refunding') and buyer_id = ?1", nativeQuery = true)
+    List<OrderEntity> findAllRefundEntities(Long buyer_id);
 }
