@@ -51,7 +51,7 @@ public class EvaluateServiceImpl implements IEvaluateService {
     public ReqResult queryEvaluateByProductIdAndBuyerId(Long productId, Long buyerId) {
         EvaluateEntity evaluateEntity = evaluateRepository.findAllByProductIdAndBuyerId(productId, buyerId);
         if (evaluateEntity == null) {
-            return new ReqResult(EvaluateTypeEnum.EVA_NOT_EXIST.getCode(), "评论不存在", null);
+            return new ReqResult(EvaluateTypeEnum.EVA_NOT_EXIST.getCode(), "已评论过该商品");
         }
         return new ReqResult(EvaluateTypeEnum.EVA_QUERY_SUCCESS.getCode(), "评论查询成功", evaluateEntity);
     }

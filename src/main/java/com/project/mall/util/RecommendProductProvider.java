@@ -59,7 +59,7 @@ public class RecommendProductProvider {
             List<Long> buyerIdList = productAndBuyerMap.get(productId);
             Double xp = 0.0;
             for (Long buyerId : buyerIdList) {
-                xp += buyerSimilar.get(buyerId);
+                xp += buyerSimilar.getOrDefault(buyerId, 0.0);
             }
             targetBuyerXp.put(productId, xp);
         }
