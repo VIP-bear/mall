@@ -57,7 +57,7 @@ public class MerchantServiceImpl implements IMerchantService {
         merchantEntity = merchantRepository.findByBuyerId(id); //查询卖家表检查是否为卖家
         if(merchantEntity == null)
             return new ReqResult(903,"该用户一般买家");
-        return new ReqResult(904,"该用户为卖家");
+        return new ReqResult(904,"该用户为卖家",merchantEntity);
     }
 
 
