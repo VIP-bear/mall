@@ -5,6 +5,7 @@ import com.project.mall.controller.req.buyer.PurchaseReq;
 import com.project.mall.controller.req.buyer.QueryOrderReq;
 import com.project.mall.controller.res.ReqResult;
 import com.project.mall.service.IOrderService;
+import com.project.mall.service.IRefundService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.*;
 public class OrderController {
     @Autowired
     IOrderService orderService;
+    @Autowired
+    IRefundService refundService;
 
     /**
      * 购买下单
@@ -50,7 +53,7 @@ public class OrderController {
     @ResponseBody
     public ReqResult refundOrder(BuyerRefundReq buyerRefundReq) {
 
-        return null;
+        return refundService.addRefund(buyerRefundReq);
     }
 
     /**

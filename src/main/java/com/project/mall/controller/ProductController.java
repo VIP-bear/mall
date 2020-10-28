@@ -156,7 +156,7 @@ public class ProductController {
     @ResponseBody
     public ReqResult merchantQueryProductByState(MerchantQueryProductByStateReq merchantQueryProductByStateReq) {
 
-        return productService.queryProductByMerchantIdAndProductState(merchantQueryProductByStateReq.getBuyer_id(),
+        return productService.queryProductByMerchantIdAndProductState(merchantQueryProductByStateReq.getMerchant_id(),
                 merchantQueryProductByStateReq.getProduct_state());
     }
 

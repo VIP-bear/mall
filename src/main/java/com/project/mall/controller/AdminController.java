@@ -5,6 +5,7 @@ import com.project.mall.controller.req.AdministratorChangeStateReq;
 import com.project.mall.controller.res.ReqResult;
 import com.project.mall.service.IAdminService;
 import com.project.mall.service.IProductService;
+import com.project.mall.service.IRefundService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,8 @@ public class AdminController {
     IAdminService adminService;
     @Autowired
     IProductService productService;
+    @Autowired
+    IRefundService refundService;
 
     /**
      * 管理员登陆
@@ -65,13 +68,13 @@ public class AdminController {
     @ResponseBody
     public ReqResult administratorQueryRefundApply() {
 
-        return null;
+        return refundService.getAllRefund();
     }
 
     @PutMapping("admin/disposeRefundApply")
     @ResponseBody
     public ReqResult administratorDisposeRefundApply(@RequestParam(name = "order_id")Long ID,
                                                      @RequestParam(name = "refund_state")Integer State) {
-        return null;
+        return refundService.updateRefundState(ID,State);
     }
 }
