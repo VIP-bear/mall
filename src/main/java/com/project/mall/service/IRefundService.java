@@ -29,4 +29,10 @@ public interface IRefundService {
      */
     ReqResult getAllRefund();
 
+    /**
+     * 根据买家id查询退款信息
+     * @param id
+     * @return
+     */
+    ReqResult updateRefundStateById(Long id);
 }

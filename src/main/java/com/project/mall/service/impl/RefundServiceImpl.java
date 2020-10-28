@@ -4,6 +4,7 @@ import com.project.mall.controller.req.buyer.BuyerRefundReq;
 import com.project.mall.controller.res.ReqResult;
 import com.project.mall.dao.OrderRepository;
 import com.project.mall.dao.RefundRepository;
+import com.project.mall.dao.entity.OrderEntity;
 import com.project.mall.dao.entity.RefundEntity;
 import com.project.mall.service.IRefundService;
 import org.springframework.beans.BeanUtils;
@@ -80,5 +81,19 @@ public class RefundServiceImpl implements IRefundService {
     public ReqResult getAllRefund() {
         List<RefundEntity> allRefund = refundRepository.findAllByRefundState();
         return new ReqResult(454, "查询成功", allRefund);
+    }
+
+    /**
+     * 根据买家id查询退款信息
+     *
+     * @param id
+     * @return
+     */
+    @Override
+    public ReqResult updateRefundStateById(Long id) {
+        List<OrderEntity> refundEntityList = orderRepository.findAllRefundEntities(id);
+        if(refundEntityList == null)
+            return new ReqResult(455,"为查询到退款信息");
+        return new ReqResult(456,"查询成功",refundEntityList);
     }
 }
