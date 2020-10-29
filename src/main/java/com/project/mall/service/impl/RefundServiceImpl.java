@@ -3,8 +3,10 @@ package com.project.mall.service.impl;
 import com.project.mall.controller.req.buyer.BuyerRefundReq;
 import com.project.mall.controller.res.ReqResult;
 import com.project.mall.dao.OrderRepository;
+import com.project.mall.dao.ProductRepository;
 import com.project.mall.dao.RefundRepository;
 import com.project.mall.dao.entity.OrderEntity;
+import com.project.mall.dao.entity.ProductEntity;
 import com.project.mall.dao.entity.RefundEntity;
 import com.project.mall.domain.OrderMessage;
 import com.project.mall.service.IRefundService;
@@ -13,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,7 +31,8 @@ public class RefundServiceImpl implements IRefundService {
     @Autowired
     OrderRepository orderRepository;
 
-
+    @Autowired
+    ProductRepository productRepository;
     /**
      * 申请退款
      *
@@ -97,8 +101,20 @@ public class RefundServiceImpl implements IRefundService {
     @Override
     public ReqResult queryRefundStateById(Long id) {
         List<OrderEntity> refundEntityList = orderRepository.findAllRefundEntities(id);
+
         OrderServiceImpl orderService = new OrderServiceImpl();
-        List<OrderMessage> orderMessageList = orderService.getOrderMessage(refundEntityList);
+        List<OrderMessage> orderMessageList = new ArrayList<>();
+        // 获取商品名称和封面
+        for (OrderEntity orderEntity : refundEntityList) {
+            OrderMessage orderMessage = new OrderMessage();
+            BeanUtils.copyProperties(orderEntity, orderMessage);
+            System.out.println("product_id: " + orderEntity.getProduct_id());
+            ProductEntity productEntity = productRepository.findByProductId(orderEntity.getProduct_id());
+
+            orderMessage.setProduct_name(productEntity.getProduct_name());
+            orderMessage.setProduct_cover(productEntity.getProduct_cover());
+            orderMessageList.add(orderMessage);
+        }
         if(refundEntityList == null)
             return new ReqResult(455,"为查询到退款信息");
         return new ReqResult(456,"查询成功", orderMessageList);

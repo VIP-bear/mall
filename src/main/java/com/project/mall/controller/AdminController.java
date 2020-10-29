@@ -1,7 +1,6 @@
 package com.project.mall.controller;
 
 import com.project.mall.controller.req.AdminLoginReq;
-import com.project.mall.controller.req.AdministratorChangeStateReq;
 import com.project.mall.controller.res.ReqResult;
 import com.project.mall.service.IAdminService;
 import com.project.mall.service.IProductService;

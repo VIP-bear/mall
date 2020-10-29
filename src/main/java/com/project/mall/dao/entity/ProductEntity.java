@@ -55,7 +55,7 @@ public class ProductEntity {
      * 商品库存
      */
     @Column
-    private Integer product_stock = 0;
+    private Integer product_stock;
 
     /**
      * 商品状态（包括审核中verifying、出售中on offer、下架undercarriage）
@@ -66,7 +66,7 @@ public class ProductEntity {
     /**
      * 商品评分（默认为0（但在界面不显示），评价超过十人后计算平均评分作为商品评分并显示在界面）
      */
-    @Column(columnDefinition = "decimal(1,1)")
+    @Column(columnDefinition = "decimal(2,1)")
     private Double product_score = 0.0;
 
     /**
