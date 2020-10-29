@@ -45,4 +45,12 @@ public interface AddressRepository extends JpaRepository<AddressEntity, Long> {
     @Query(value = "update mall_address set address_content = ?1 where address_id = ?2", nativeQuery = true)
     int updateAddressById(String address_content, Long address_id);
 
+    /**
+     * 设置默认地址
+     * @param address_id
+     * @return
+     */
+    @Modifying
+    @Query(value = "update mall_address set address_default = 1 where address_id = ?1", nativeQuery = true)
+    int updateDefaultAddress(Long address_id);
 }

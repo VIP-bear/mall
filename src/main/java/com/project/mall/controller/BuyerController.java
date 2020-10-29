@@ -125,14 +125,19 @@ public class BuyerController {
     @DeleteMapping("/address/deleteAddress")
     @ResponseBody
     public ReqResult deleteAddress(@RequestParam(name = "address_id")Long ID) {
-
+        log.info("/address/deleteAddress, address_id: {}", ID);
         return addressService.deleteAddress(ID);
     }
 
-    @GetMapping("address/setDefaultAddress")
+    /**
+     * 设置默认地址
+     * @param ID
+     * @return
+     */
+    @GetMapping("/address/setDefaultAddress")
     @ResponseBody
     public ReqResult setDefaultAddress(@RequestParam(name = "address_id")Long ID) {
-
+        log.info("/address/setDefaultAddress, address_id: {}", ID);
         return addressService.setDefaultAddress(ID);
     }
 

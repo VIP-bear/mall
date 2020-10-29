@@ -90,8 +90,13 @@ public class AddressServiceImpl implements IAddressService {
      * @param id
      * @return
      */
+    @Transactional
     @Override
     public ReqResult setDefaultAddress(Long id) {
-        return null;
+        int row = addressRepository.updateDefaultAddress(id);
+        if (row == 0) {
+            return new ReqResult(623, "设置失败");
+        }
+        return new ReqResult(624, "设置成功");
     }
 }
