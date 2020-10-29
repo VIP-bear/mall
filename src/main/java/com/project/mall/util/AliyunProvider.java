@@ -28,7 +28,7 @@ public class AliyunProvider {
     private AliyunConfig aliyunConfig;
 
     // 可重入非公平锁
-    private ReentrantLock lock;
+    private ReentrantLock lock = new ReentrantLock();
 
     /**
      * 上传图片到服务器，返回图片url
