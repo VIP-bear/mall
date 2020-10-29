@@ -1,6 +1,7 @@
 package com.project.mall.util;
 
 import java.util.*;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * 推荐商品
@@ -21,17 +22,25 @@ public class RecommendProductProvider {
     // 推荐商品集合
     private List<Long> recommendProductList;
 
+    // 可重入非公平锁
+    private ReentrantLock lock = new ReentrantLock();
+
 
     // 推荐商品
     public List<Long> recommendProduct(Long buyerId, int size, Map<Long, List<Long>> buyerAndProductMap) {
-        this.buyerAndProductMap = buyerAndProductMap;
-
-        transferForm();
-        getBuyerProductScore(buyerId);
-        calBuyerSimilar(buyerId);
-        getSimilarBuyerList();
-        getRecommendProductList(buyerId, size);
-
+        try {
+            lock.lock();    // 上锁
+            this.buyerAndProductMap = buyerAndProductMap;
+            transferForm();
+            getBuyerProductScore(buyerId);
+            calBuyerSimilar(buyerId);
+            getSimilarBuyerList();
+            getRecommendProductList(buyerId, size);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            lock.unlock();  // 释放锁
+        }
         return recommendProductList;
     }
 

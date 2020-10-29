@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Date;
 import java.util.UUID;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * 图片处理
@@ -24,7 +25,10 @@ import java.util.UUID;
 public class AliyunProvider {
 
     @Autowired
-    AliyunConfig aliyunConfig;
+    private AliyunConfig aliyunConfig;
+
+    // 可重入非公平锁
+    private ReentrantLock lock;
 
     /**
      * 上传图片到服务器，返回图片url
@@ -46,6 +50,7 @@ public class AliyunProvider {
         try {
             OSS ossClient = new OSSClientBuilder().build(endpoint, accessKeyId, accessKeySecret);
             // 上传
+            lock.lock();    // 获取锁
             ObjectMetadata objectMetadata = new ObjectMetadata();
             objectMetadata.setContentLength(uploadFile.getInputStream().available());
             objectMetadata.setCacheControl("no-cache");
@@ -65,6 +70,8 @@ public class AliyunProvider {
 
         }catch (IOException e){
             return null;
+        } finally {
+            lock.unlock();  // 释放锁
         }
         return imageUrl;
     }
