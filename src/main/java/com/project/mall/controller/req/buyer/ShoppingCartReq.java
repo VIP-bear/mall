@@ -22,4 +22,9 @@ public class ShoppingCartReq {
      * 购买数量
      */
     private int product_num;
+
+    /**
+     * 地址
+     */
+    private String cart_address;
 }
