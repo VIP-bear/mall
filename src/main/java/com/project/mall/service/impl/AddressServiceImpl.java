@@ -83,4 +83,15 @@ public class AddressServiceImpl implements IAddressService {
         List<AddressEntity> addressEntityList = addressRepository.findUnDefaultAddressByBuyerId(buyerId);
         return new ReqResult(621, "查询成功", addressEntityList);
     }
+
+    /**
+     * 设置默认地址
+     *
+     * @param id
+     * @return
+     */
+    @Override
+    public ReqResult setDefaultAddress(Long id) {
+        return null;
+    }
 }

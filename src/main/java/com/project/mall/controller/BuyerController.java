@@ -129,8 +129,15 @@ public class BuyerController {
         return addressService.deleteAddress(ID);
     }
 
+    @GetMapping("address/setDefaultAddress")
+    @ResponseBody
+    public ReqResult setDefaultAddress(@RequestParam(name = "address_id")Long ID) {
+
+        return addressService.setDefaultAddress(ID);
+    }
+
     /**
-     * 用户修改地址
+     * 用户修改地址内容
      * @param changeAddressReq
      * @return
      */
