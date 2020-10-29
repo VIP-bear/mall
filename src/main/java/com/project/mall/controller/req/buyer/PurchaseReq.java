@@ -15,7 +15,7 @@ public class PurchaseReq {
     /**
      * 用户ID
      */
-    private long buyer_phone;
+    private long buyer_id;
 
     /**
      * 购买数量

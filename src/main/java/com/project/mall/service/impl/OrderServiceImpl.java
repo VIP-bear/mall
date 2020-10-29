@@ -66,17 +66,17 @@ public class OrderServiceImpl implements IOrderService {
         }
         // 记录用户点击商品的行为
         BehaviorEntity behaviorEntity = behaviorRepository
-                .findByBuyerAndProductId(purchaseReq.getBuyer_phone(), purchaseReq.getProduct_id());
+                .findByBuyerAndProductId(purchaseReq.getBuyer_id(), purchaseReq.getProduct_id());
         if (behaviorEntity == null) {
             // 用户以前没有对该商品进行过操作, 记录用户点击行为
-            behaviorEntity.setBuyer_id(purchaseReq.getBuyer_phone());
+            behaviorEntity.setBuyer_id(purchaseReq.getBuyer_id());
             behaviorEntity.setProduct_id(purchaseReq.getProduct_id());
             behaviorEntity.setBehavior_score(5);
             behaviorRepository.save(behaviorEntity);
         } else {
             // 用户以前对该商品进行过操作, 更新加权分
             behaviorRepository.updateScoreByBuyerAndProductId(5,
-                    purchaseReq.getBuyer_phone(), purchaseReq.getProduct_id());
+                    purchaseReq.getBuyer_id(), purchaseReq.getProduct_id());
         }
         return new ReqResult(OrderTypeEnum.ADD_SUCCESS.getCode(), "创建订单成功");
     }

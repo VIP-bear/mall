@@ -98,7 +98,7 @@ public interface ProductRepository extends JpaRepository<ProductEntity, Long> {
      * @param size
      * @return
      */
-    @Query(value = "select * from mall_product order by rand() limit ?1", nativeQuery = true)
+    @Query(value = "select * from mall_product where product_state = 'onoffer' order by rand() limit ?1", nativeQuery = true)
     List<ProductEntity> findProductByRandom(int size);
 
     /**

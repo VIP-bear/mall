@@ -75,7 +75,7 @@ public class BuyerController {
      * @param userCodeMatchingReq
      * @return
      */
-    @GetMapping("/codeMatching")
+    @PostMapping("/codeMatching")
     @ResponseBody
     public ReqResult codeMatching(UserCodeMatchingReq userCodeMatchingReq) {
         log.info("userCodeMatchingReq:{}",userCodeMatchingReq);

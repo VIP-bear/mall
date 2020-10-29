@@ -46,7 +46,7 @@ public class MerchantUploadProductReq {
      * 商品库存
      */
 
-    private Double product_stock = 0.00;
+    private Integer product_stock;
 
 
     /**
