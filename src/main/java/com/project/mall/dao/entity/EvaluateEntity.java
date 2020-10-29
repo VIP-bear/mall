@@ -35,7 +35,7 @@ public class EvaluateEntity {
      * 商品评分，默认为5.0分
      */
     @Column(columnDefinition = "decimal(2,1)")
-    private Double evaluate_score = 5.0;
+    private Double evaluate_score;
 
     /**
      * 评价内容

@@ -19,8 +19,11 @@ public class BehaviorEntity implements Serializable {
     @Column(name = "product_id")
     private Long product_id;
 
+    /*
+    用户行为加权分
+     */
     @Column
-    private  int behavior_score;
+    private int behavior_score;
 
 
 }

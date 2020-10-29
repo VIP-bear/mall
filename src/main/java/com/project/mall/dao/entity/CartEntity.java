@@ -22,6 +22,8 @@ public class CartEntity {
     @Column
     private Long buyer_id;
 
+    @Column
+    private String cart_address;
     /*
     购物车中商品数量
      */

@@ -66,8 +66,8 @@ public class ProductEntity {
     /**
      * 商品评分（默认为0（但在界面不显示），评价超过十人后计算平均评分作为商品评分并显示在界面）
      */
-    @Column(columnDefinition = "decimal(1,1)")
-    private Double product_score = 0.0;
+    @Column
+    private Double product_score;
 
     /**
      * 卖家id
