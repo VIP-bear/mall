@@ -46,8 +46,7 @@ public interface IAddressService {
 
     /**
      * 设置默认地址
-     * @param id
      * @return
      */
-    ReqResult setDefaultAddress(Long id);
+    ReqResult setDefaultAddress(Long addressId, Long buyerId);
 }

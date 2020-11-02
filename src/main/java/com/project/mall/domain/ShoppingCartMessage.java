@@ -74,6 +74,11 @@ public class ShoppingCartMessage {
     private Double product_score = 0.0;
 
     /**
+     *买家地址
+     */
+    private String address;
+
+    /**
      * 卖家id
      */
     private Long merchant_id;

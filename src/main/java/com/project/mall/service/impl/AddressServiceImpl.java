@@ -86,17 +86,23 @@ public class AddressServiceImpl implements IAddressService {
 
     /**
      * 设置默认地址
-     *
-     * @param id
+     * @param addressId 地址id
+     * @param buyerId 买家id
      * @return
      */
     @Transactional
     @Override
-    public ReqResult setDefaultAddress(Long id) {
-        int row = addressRepository.updateDefaultAddress(id);
+    public ReqResult setDefaultAddress(Long addressId, Long buyerId) {
+
+        // 将之前的默认地址设置为非默认地址
+        int t = addressRepository.updateNotDefaultAddress(buyerId);
+
+        // 将当前地址设置为默认地址
+        int row = addressRepository.updateDefaultAddress(addressId);
         if (row == 0) {
             return new ReqResult(623, "设置失败");
         }
+
         return new ReqResult(624, "设置成功");
     }
 }

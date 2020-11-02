@@ -3,6 +3,7 @@ package com.project.mall.service.impl;
 import com.project.mall.controller.req.buyer.AddEvaluateReq;
 import com.project.mall.controller.res.ReqResult;
 import com.project.mall.dao.EvaluateRepository;
+import com.project.mall.dao.OrderRepository;
 import com.project.mall.dao.entity.EvaluateEntity;
 import com.project.mall.enums.EvaluateTypeEnum;
 import com.project.mall.service.IEvaluateService;
@@ -26,6 +27,9 @@ public class EvaluateServiceImpl implements IEvaluateService {
 
     @Autowired
     private AliyunProvider aliyunProvider;
+
+    @Autowired
+    private OrderRepository orderRepository;
 
     /**
      * 根据商品id分页查询评论
@@ -87,10 +91,21 @@ public class EvaluateServiceImpl implements IEvaluateService {
         if (addEvaluateReq.getEvaluate_pic3() != null) {
             evaluateEntity.setEvaluate_pic3(aliyunProvider.upload(addEvaluateReq.getEvaluate_pic3(), "comment_pic/"));
         }
-        System.out.println("上传图片成功....");
+
         // 保存评论
         evaluateEntity.setEvaluate_score(addEvaluateReq.getEvaluate_score());
-        evaluateRepository.save(evaluateEntity);
+        EvaluateEntity res = evaluateRepository.save(evaluateEntity);
+        if (res == null) {
+            return new ReqResult(EvaluateTypeEnum.EVA_FAILED.getCode(), "评论失败");
+        }
+
+        // 修改订单状态
+        int row = orderRepository.updateOrderStateByBuyerIdAndProductId(addEvaluateReq.getBuyer_id(),
+                addEvaluateReq.getProduct_id(), "evaluated");
+        if (row == 0) {
+            return new ReqResult(EvaluateTypeEnum.EVA_FAILED.getCode(), "评论失败");
+        }
+
         return new ReqResult(EvaluateTypeEnum.EVA_SUCCESS.getCode(), "评论成功");
     }
 

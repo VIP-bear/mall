@@ -4,6 +4,7 @@ import com.project.mall.controller.req.buyer.PurchaseReq;
 import com.project.mall.controller.req.buyer.QueryOrderReq;
 import com.project.mall.controller.res.ReqResult;
 import com.project.mall.dao.BehaviorRepository;
+import com.project.mall.dao.CartRepository;
 import com.project.mall.dao.OrderRepository;
 import com.project.mall.dao.ProductRepository;
 import com.project.mall.dao.entity.BehaviorEntity;
@@ -37,6 +38,9 @@ public class OrderServiceImpl implements IOrderService {
     @Autowired
     private BehaviorRepository behaviorRepository;
 
+    @Autowired
+    private CartRepository cartRepository;
+
     /**
      * 买家创建订单
      *
@@ -64,6 +68,10 @@ public class OrderServiceImpl implements IOrderService {
         if (null == res) {
             return new ReqResult(OrderTypeEnum.ADD_FAILED.getCode(), "创建订单失败");
         }
+
+        // 移除购物车信息
+        cartRepository.deleteCartByBuyerIdAndProductId(purchaseReq.getBuyer_id(), purchaseReq.getProduct_id());
+
         // 记录用户点击商品的行为
         BehaviorEntity behaviorEntity = behaviorRepository
                 .findByBuyerAndProductId(purchaseReq.getBuyer_id(), purchaseReq.getProduct_id());

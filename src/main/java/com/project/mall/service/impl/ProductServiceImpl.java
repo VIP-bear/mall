@@ -207,7 +207,7 @@ public class ProductServiceImpl implements IProductService {
         // 查询推荐的商品
         List<ProductEntity> productList = new ArrayList<>();
         for (Long productId : productIdList) {
-            productList.add(productRepository.findById(productId).get());
+            productList.add(productRepository.findByProductId(productId));
         }
 
         // 如果推荐商品数量不够，随机推荐一些商品

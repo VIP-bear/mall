@@ -106,6 +106,6 @@ public interface ProductRepository extends JpaRepository<ProductEntity, Long> {
      * @param product_id
      * @return
      */
-    @Query(value = "select * from mall_product where product_id = ?1", nativeQuery = true)
+    @Query(value = "select * from mall_product where product_state = 'onoffer' and product_id = ?1", nativeQuery = true)
     ProductEntity findByProductId(Long product_id);
 }

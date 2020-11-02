@@ -73,4 +73,15 @@ public interface OrderRepository extends JpaRepository<OrderEntity, Long> {
     @Query(value = "select * from mall_order where ( order_state = 'refunded1' or order_state = 'refunded-1' " +
             "or order_state = 'refunding') and buyer_id = ?1", nativeQuery = true)
     List<OrderEntity> findAllRefundEntities(Long buyer_id);
+
+    /**
+     * 根据买家id和商品id修改订单状态
+     * @param buyer_id
+     * @param product_id
+     * @param evaluated
+     * @return
+     */
+    @Modifying
+    @Query(value = "update mall_order set order_state = ?3 where buyer_id = ?1 and product_id = ?2", nativeQuery = true)
+    int updateOrderStateByBuyerIdAndProductId(Long buyer_id, Long product_id, String evaluated);
 }

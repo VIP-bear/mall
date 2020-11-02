@@ -53,4 +53,13 @@ public interface AddressRepository extends JpaRepository<AddressEntity, Long> {
     @Modifying
     @Query(value = "update mall_address set address_default = 1 where address_id = ?1", nativeQuery = true)
     int updateDefaultAddress(Long address_id);
+
+    /**
+     * 将默认地址设置为非默认地址
+     * @return
+     */
+    @Modifying
+    @Query(value = "update mall_address set address_default = 0 where buyerId = ?1 and address_default = 1", nativeQuery = true)
+    int updateNotDefaultAddress(Long buyerId);
+
 }

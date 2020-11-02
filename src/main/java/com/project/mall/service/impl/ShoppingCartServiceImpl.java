@@ -41,18 +41,13 @@ public class ShoppingCartServiceImpl implements IShoppingCartService {
     @Transactional
     @Override
     public ReqResult addShoppingCart(ShoppingCartReq shoppingCartReq) {
-        CartEntity cartEntity = new CartEntity();
-        BeanUtils.copyProperties(shoppingCartReq, cartEntity);
-        cartEntity.setCart_num(shoppingCartReq.getProduct_num());
-        CartEntity res = cartRepository.save(cartEntity);
-        if (null == res) {
-            return new ReqResult(ShoppingCartTypeEnum.ADD_FAILED.getCode(), "添加失败");
-        }
+
         // 记录用户点击商品的行为
         BehaviorEntity behaviorEntity = behaviorRepository
                 .findByBuyerAndProductId(shoppingCartReq.getBuyer_id(), shoppingCartReq.getProduct_id());
         if (behaviorEntity == null) {
             // 用户以前没有对该商品进行过操作, 记录用户点击行为
+            behaviorEntity = new BehaviorEntity();
             behaviorEntity.setBuyer_id(shoppingCartReq.getBuyer_id());
             behaviorEntity.setProduct_id(shoppingCartReq.getProduct_id());
             behaviorEntity.setBehavior_score(3);
@@ -62,7 +57,33 @@ public class ShoppingCartServiceImpl implements IShoppingCartService {
             behaviorRepository.updateScoreByBuyerAndProductId(3,
                     shoppingCartReq.getBuyer_id(), shoppingCartReq.getProduct_id());
         }
-        return new ReqResult(ShoppingCartTypeEnum.ADD_SUCCESS.getCode(), "添加成功");
+
+        // 查询购物车记录
+        CartEntity cartEntity = cartRepository.findCartByBuyerIdAndProductId(shoppingCartReq.getBuyer_id(),
+                shoppingCartReq.getProduct_id());
+        if (cartEntity != null) {
+            // 用户添加过该商品，更新添加的商品数量
+            int row = cartRepository.updateCartNumByCartId(
+                    cartEntity.getCart_num() + shoppingCartReq.getProduct_num(), cartEntity.getCart_id());
+            if (row == 0) {
+                return new ReqResult(ShoppingCartTypeEnum.ADD_FAILED.getCode(), "添加失败");
+            } else {
+                return new ReqResult(ShoppingCartTypeEnum.ADD_SUCCESS.getCode(), "添加成功");
+            }
+        } else {
+            // 用户没有添加过该商品到购物车
+            cartEntity = new CartEntity();
+            cartEntity.setCart_num(shoppingCartReq.getProduct_num());
+            cartEntity.setBuyer_id(shoppingCartReq.getBuyer_id());
+            cartEntity.setProduct_id(shoppingCartReq.getProduct_id());
+            cartEntity.setCart_address(shoppingCartReq.getCart_address());
+            CartEntity res = cartRepository.save(cartEntity);
+            if (null == res) {
+                return new ReqResult(ShoppingCartTypeEnum.ADD_FAILED.getCode(), "添加失败");
+            } else {
+                return new ReqResult(ShoppingCartTypeEnum.ADD_SUCCESS.getCode(), "添加成功");
+            }
+        }
     }
 
     /**
@@ -111,6 +132,7 @@ public class ShoppingCartServiceImpl implements IShoppingCartService {
             cartMessage.setCart_id(cartEntity.getCart_id());
             cartMessage.setBuyer_id(cartEntity.getBuyer_id());
             cartMessage.setCart_num(cartEntity.getCart_num());
+            cartMessage.setAddress(cartEntity.getCart_address());
             cartMessageList.add(cartMessage);
         }
         return new ReqResult(ShoppingCartTypeEnum.QUERY_SUCCESS.getCode(), "查询成功", cartMessageList);

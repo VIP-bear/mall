@@ -131,14 +131,14 @@ public class BuyerController {
 
     /**
      * 设置默认地址
-     * @param ID
      * @return
      */
     @GetMapping("/address/setDefaultAddress")
     @ResponseBody
-    public ReqResult setDefaultAddress(@RequestParam(name = "address_id")Long ID) {
-        log.info("/address/setDefaultAddress, address_id: {}", ID);
-        return addressService.setDefaultAddress(ID);
+    public ReqResult setDefaultAddress(@RequestParam(name = "address_id")Long addressId,
+                                       @RequestParam(name = "buyer_id")Long buyerId) {
+        log.info("/address/setDefaultAddress, address_id: {}, buyer_id: {}", addressId, buyerId);
+        return addressService.setDefaultAddress(addressId, buyerId);
     }
 
     /**

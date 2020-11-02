@@ -36,4 +36,24 @@ public interface CartRepository extends JpaRepository<CartEntity, Long> {
     @Modifying
     @Query(value = "delete from mall_cart where cart_id = ?1", nativeQuery = true)
     void deleteByCartId(Long cart_id);
+
+    /**
+     * 根据买家id和商品id删除购物车
+     * @param buyer_id
+     * @param product_id
+     * @return
+     */
+    @Modifying
+    @Query(value = "delete from mall_cart where buyer_id = ?1 and product_id = ?2", nativeQuery = true)
+    void deleteCartByBuyerIdAndProductId(long buyer_id, long product_id);
+
+
+    /**
+     * 根据买家id和商品id查询购物车
+     * @param buyer_id
+     * @param product_id
+     * @return
+     */
+    @Query(value = "select * from mall_cart where buyer_id = ?1 and product_id = ?2", nativeQuery = true)
+    CartEntity findCartByBuyerIdAndProductId(long buyer_id, long product_id);
 }
