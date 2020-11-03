@@ -63,7 +63,7 @@ public class RequestLimitContract {
                     @Override
 
                     public void run() {
-                        GlobalVal.loginEffective = true; //计时器到时后将登陆验证有效性设为true
+                        GlobalVal.loginEffective.put(key,true); //计时器到时后将登陆验证有效性设为true
                         redisTemplate.remove(key);
 
                     }
@@ -78,7 +78,7 @@ public class RequestLimitContract {
 
             if (count > limit.count()) {
                 logger.info("用户IP[" + ip + "]访问地址[" + url + "]超过了限定的次数[" + limit.count() + "]");
-                GlobalVal.loginEffective = false;
+                GlobalVal.loginEffective.put(key,false);
                 //throw new RequestLimitException();
             }
 

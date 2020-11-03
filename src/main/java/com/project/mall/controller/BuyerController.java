@@ -36,7 +36,11 @@ public class BuyerController {
     @RequestLimit(count = ConstantVar.MAX_REQUEST_COUNT,time = ConstantVar.REQUEST_TIMES)
     @ResponseBody
     public ReqResult login(HttpServletRequest request) {
-        if (GlobalVal.loginEffective) {
+        String ip = request.getLocalAddr();
+        String url = request.getRequestURL().toString();
+        String key = "req_limit_".concat(url).concat(ip);
+
+        if (GlobalVal.loginEffective.get(key) == null||GlobalVal.loginEffective.get(key)) {
             BuyerLoginReq buyerLoginReq = new BuyerLoginReq();
             buyerLoginReq.setBuyer_name(request.getParameter("buyer_name"));
             buyerLoginReq.setBuyer_pwd(request.getParameter("buyer_pwd"));
