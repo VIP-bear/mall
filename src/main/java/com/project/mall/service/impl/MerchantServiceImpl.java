@@ -28,7 +28,8 @@ public class MerchantServiceImpl implements IMerchantService {
     @Transactional
     @Override
     public ReqResult perInfoReview(MerchantVerifyReq merchantVerifyReq) {
-        IdentityFormEntity entity = identityFormRepository.findByIdentifyNumber(merchantVerifyReq.getQualification_idnum());
+        IdentityFormEntity entity = identityFormRepository.findByIdentifyNumber(merchantVerifyReq.getQualification_realname());
+
         if (entity == null || !merchantVerifyReq.getQualification_realname().equals(entity.getUsername())) {
             return new ReqResult(900, "未查询到此人");
         }
