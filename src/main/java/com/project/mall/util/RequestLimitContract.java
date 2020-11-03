@@ -52,7 +52,7 @@ public class RequestLimitContract {
 
             int count = redisTemplate.get(key);
 
-            if (count > 0) {
+            if (count == 1) {
 
                 //创建一个定时器
 
