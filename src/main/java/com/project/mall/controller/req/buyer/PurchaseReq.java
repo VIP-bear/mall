@@ -25,7 +25,7 @@ public class PurchaseReq {
     /**
      * 商品单位
      */
-    private String product_unit;
+    private String order_unit;
 
     /**
      * 订单总价

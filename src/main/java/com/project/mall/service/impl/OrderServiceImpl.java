@@ -77,6 +77,7 @@ public class OrderServiceImpl implements IOrderService {
                 .findByBuyerAndProductId(purchaseReq.getBuyer_id(), purchaseReq.getProduct_id());
         if (behaviorEntity == null) {
             // 用户以前没有对该商品进行过操作, 记录用户点击行为
+            behaviorEntity = new BehaviorEntity();
             behaviorEntity.setBuyer_id(purchaseReq.getBuyer_id());
             behaviorEntity.setProduct_id(purchaseReq.getProduct_id());
             behaviorEntity.setBehavior_score(5);

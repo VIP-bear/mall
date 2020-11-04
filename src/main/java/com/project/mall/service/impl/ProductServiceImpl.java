@@ -19,10 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 商品服务
@@ -205,7 +202,7 @@ public class ProductServiceImpl implements IProductService {
         List<Long> productIdList =  recommendProductProvider.recommendProduct(buyerId, size, buyerAndProductMap);
 
         // 查询推荐的商品
-        List<ProductEntity> productList = new ArrayList<>();
+        Set<ProductEntity> productList = new HashSet<>();
         for (Long productId : productIdList) {
             productList.add(productRepository.findByProductId(productId));
         }
@@ -213,7 +210,7 @@ public class ProductServiceImpl implements IProductService {
         // 如果推荐商品数量不够，随机推荐一些商品
         if (productList.size() < size) {
             ReqResult reqResult = queryProductByRandom(size - productList.size());
-            productList.addAll((List<ProductEntity>)reqResult.getData());
+            productList.addAll((ArrayList<ProductEntity>)reqResult.getData());
         }
 
         return new ReqResult(ProductTypeEnum.QUERY_SUCCESS.getCode(), "查询成功", productList);

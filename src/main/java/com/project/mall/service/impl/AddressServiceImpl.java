@@ -32,6 +32,10 @@ public class AddressServiceImpl implements IAddressService {
     public ReqResult addAddress(AddAddressReq addAddressReq) {
         AddressEntity addressEntity = new AddressEntity();
         BeanUtils.copyProperties(addAddressReq, addressEntity);
+        AddressEntity res = addressRepository.save(addressEntity);
+        if (res == null) {
+            return new ReqResult(625, "添加失败");
+        }
         return new ReqResult(622, "添加成功");
     }
 
