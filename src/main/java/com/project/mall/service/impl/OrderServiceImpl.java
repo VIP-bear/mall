@@ -22,6 +22,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 /**
  * 订单服务实现
@@ -51,7 +53,13 @@ public class OrderServiceImpl implements IOrderService {
     @Override
     public ReqResult addOrder(PurchaseReq purchaseReq) {
         // 查询商品库存
-        ProductEntity productEntity = productRepository.findById(purchaseReq.getProduct_id()).get();
+        Optional<ProductEntity> optionalProductEntity = productRepository.findById(purchaseReq.getProduct_id());
+        ProductEntity productEntity;
+        try {
+            productEntity = optionalProductEntity.get();
+        } catch (NoSuchElementException e) {
+            return new ReqResult(OrderTypeEnum.ADD_FAILED.getCode(), "没有该商品");
+        }
         if (productEntity.getProduct_stock() < purchaseReq.getOrder_num()) {
             return new ReqResult(OrderTypeEnum.ADD_FAILED.getCode(), "库存不足");
         }

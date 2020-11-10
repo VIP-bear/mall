@@ -16,12 +16,12 @@ public interface IRefundService {
     ReqResult addRefund(BuyerRefundReq buyerRefundReq);
 
     /**
-     * 根据订单id修改申请退款状态
+     * 申请/拒绝退款
      * @param orderId
      * @param refundState
      * @return
      */
-    ReqResult updateRefundState(Long orderId, int refundState);
+    ReqResult updateRefundState(Long orderId, Long productId, int refundState, int productNumber);
 
     /**
      * 获取所有处于申请退款的退款申请

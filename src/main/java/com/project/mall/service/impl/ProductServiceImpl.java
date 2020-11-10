@@ -14,6 +14,7 @@ import com.project.mall.enums.ProductTypeEnum;
 import com.project.mall.service.IProductService;
 import com.project.mall.util.AliyunProvider;
 import com.project.mall.util.RecommendProductProvider;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,7 @@ import java.util.*;
  * 商品服务
  */
 
+@Slf4j
 @Service
 public class ProductServiceImpl implements IProductService {
 
@@ -190,13 +192,13 @@ public class ProductServiceImpl implements IProductService {
         List<BehaviorEntity> temp;
         for (int i = 0; i < buyerEntities.size(); i++) {
             temp = behaviorRepository.findBehaviorByBuyerIdOrdeOrderByScore(buyerEntities.get(i).getBuyer_id(), size);
-            System.out.println(temp.toArray());
             List<Long> productIdList = new ArrayList<>();
             for (BehaviorEntity behaviorEntity : temp) {
                 productIdList.add(behaviorEntity.getProduct_id());
             }
             buyerAndProductMap.put(buyerEntities.get(i).getBuyer_id(), productIdList);
         }
+
         // 推荐商品
         RecommendProductProvider recommendProductProvider = new RecommendProductProvider();
         List<Long> productIdList =  recommendProductProvider.recommendProduct(buyerId, size, buyerAndProductMap);
@@ -205,6 +207,11 @@ public class ProductServiceImpl implements IProductService {
         Set<ProductEntity> productList = new HashSet<>();
         for (Long productId : productIdList) {
             productList.add(productRepository.findByProductId(productId));
+        }
+
+        // 推荐的商品
+        for (ProductEntity productEntity : productList) {
+            log.info("productMessage: {}\n", productEntity);
         }
 
         // 如果推荐商品数量不够，随机推荐一些商品

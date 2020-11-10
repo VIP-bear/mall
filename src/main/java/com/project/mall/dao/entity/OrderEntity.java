@@ -68,4 +68,10 @@ public class OrderEntity {
      */
     @Column
     private String order_state;
+
+    /**
+     * 运单号
+     */
+    @Column
+    private String order_logistics;
 }

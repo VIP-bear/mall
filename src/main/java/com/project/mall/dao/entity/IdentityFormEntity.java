@@ -37,4 +37,10 @@ public class IdentityFormEntity {
     @Column
     private String merchant_license;
 
+    /**
+     * 是否被使用(0表示未被注册，1表示已被注册)
+     */
+    @Column
+    private Integer used;
+
 }

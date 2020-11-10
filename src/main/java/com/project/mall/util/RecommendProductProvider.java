@@ -1,5 +1,7 @@
 package com.project.mall.util;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.*;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -7,6 +9,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * 推荐商品
  * 基于用户的协同过滤推荐算法
  */
+@Slf4j
 public class RecommendProductProvider {
 
     // 用户-商品表
@@ -62,9 +65,10 @@ public class RecommendProductProvider {
             }
         }
 
+
         // 计算目标用户对候选商品感兴趣程度
         Map<Long, Double> targetBuyerXp = new HashMap<>();
-        for (Long productId : productList) {
+        for (Long productId : set) {
             List<Long> buyerIdList = productAndBuyerMap.get(productId);
             Double xp = 0.0;
             for (Long buyerId : buyerIdList) {
@@ -103,10 +107,11 @@ public class RecommendProductProvider {
 
     // 计算目标用户与其他用户相似度
     private void calBuyerSimilar(Long targetBuyerId) {
+        log.info("similar: {}", buyerProductScore);
         buyerSimilar = new HashMap<>();
         for (Long buyerId : buyerProductScore.keySet()) {
             Set<Long> set = new HashSet<>();    // 存储商品id，用于去重
-            if (buyerId != targetBuyerId) {
+            if (!buyerId.equals(targetBuyerId)) {
                 set.addAll(buyerAndProductMap.get(targetBuyerId));
                 set.addAll(buyerAndProductMap.get(buyerId));
                 buyerSimilar.put(buyerId, 1.0 * buyerProductScore.get(buyerId) / set.size());
@@ -119,16 +124,17 @@ public class RecommendProductProvider {
         buyerProductScore = new HashMap<>();
         for (Long productId : productAndBuyerMap.keySet()) {
             List<Long> buyerIdList = productAndBuyerMap.get(productId);
+            //System.out.println("buyerIdList: " + buyerIdList + "  targetId: " + targetBuyerId);
             boolean isExist = false;
             for (Long buyerId : buyerIdList) {
-                if (buyerId == targetBuyerId) {
+                if (buyerId.equals(targetBuyerId)) {
                     isExist = true;
                 }
             }
             // 存在目标用户
             if (isExist) {
                 for (Long buyerId : buyerIdList) {
-                    if (buyerId != targetBuyerId) {
+                    if (!buyerId.equals(targetBuyerId)) {
                         buyerProductScore.put(buyerId, buyerProductScore.getOrDefault(buyerId, 0) + 1);
                     }
                 }

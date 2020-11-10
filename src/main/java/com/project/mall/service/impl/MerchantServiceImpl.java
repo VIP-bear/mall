@@ -36,6 +36,9 @@ public class MerchantServiceImpl implements IMerchantService {
         if (!merchantVerifyReq.getMerchant_license().equals(entity.getMerchant_license())) {
             return new ReqResult(901, "营业执照注册号无效");
         }
+        if (entity.getUsed() == 1) {
+            return new ReqResult(903, "该实名信息已被占用");
+        }
         // 将商家信息保存到数据库
         MerchantEntity merchantEntity = new MerchantEntity();
         merchantEntity.setMerchant_license(merchantVerifyReq.getMerchant_license());
@@ -43,6 +46,13 @@ public class MerchantServiceImpl implements IMerchantService {
         merchantEntity.setBuyer_id(merchantVerifyReq.getBuyer_id());
         merchantEntity.setMerchant_state("可营业");
         merchantRepository.save(merchantEntity);
+
+        // 修改实名信息为被使用
+        int row = identityFormRepository.updateUsed(entity.getId());
+        if (row == 0) {
+            return new ReqResult(904, "注册失败");
+        }
+
         return new ReqResult(902, "审核通过");
     }
 

@@ -71,12 +71,21 @@ public class AdminController {
     }
 
 
-
-    @PutMapping("admin/disposeRefundApply")
+    /**
+     * 申请/拒绝退款
+     * @param orderId
+     * @param productId
+     * @param state
+     * @param productNumber
+     * @return
+     */
+    @GetMapping("/admin/disposeRefundApply")
     @ResponseBody
-    public ReqResult administratorDisposeRefundApply(@RequestParam(name = "order_id")Long ID,
-                                                     @RequestParam(name = "refund_state")Integer State) {
-        return refundService.updateRefundState(ID,State);
+    public ReqResult administratorDisposeRefundApply(@RequestParam(name = "order_id")Long orderId,
+                                                     @RequestParam(name = "product_id")Long productId,
+                                                     @RequestParam(name = "refund_state")Integer state,
+                                                     @RequestParam(name = "product_num")Integer productNumber) {
+        return refundService.updateRefundState(orderId, productId, state, productNumber);
     }
 
 

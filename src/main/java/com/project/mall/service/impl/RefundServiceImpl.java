@@ -9,6 +9,7 @@ import com.project.mall.dao.entity.OrderEntity;
 import com.project.mall.dao.entity.ProductEntity;
 import com.project.mall.dao.entity.RefundEntity;
 import com.project.mall.domain.OrderMessage;
+import com.project.mall.domain.RefundMessage;
 import com.project.mall.service.IRefundService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,7 +58,7 @@ public class RefundServiceImpl implements IRefundService {
     }
 
     /**
-     * 根据订单id修改申请退款状态
+     * 申请/拒绝退款
      *
      * @param orderId
      * @param refundState
@@ -65,7 +66,7 @@ public class RefundServiceImpl implements IRefundService {
      */
     @Transactional
     @Override
-    public ReqResult updateRefundState(Long orderId, int refundState) {
+    public ReqResult updateRefundState(Long orderId, Long productId, int refundState, int productNumber) {
         int row = refundRepository.updateStateByOrderId(refundState, orderId);
         if (row == 0) {
             return new ReqResult(452, "修改失败，请重试");
@@ -73,10 +74,14 @@ public class RefundServiceImpl implements IRefundService {
         // 修改订单状态
         if (refundState == 1) {
             // 退款成功
-            orderRepository.updateOrderStateById("refunded", orderId);
+            orderRepository.updateOrderStateById("refunded1", orderId);
+            // 修改库存
+            int stock = productRepository.findById(productId).get().getProduct_stock();
+            stock += productNumber;
+            productRepository.updateProductStockByProductId(stock, productId);
         } else {
-            // 退款失败
-            orderRepository.updateOrderStateById("refundfailed", orderId);
+            // 拒绝退款
+            orderRepository.updateOrderStateById("refunded-1", orderId);
         }
         return new ReqResult(453, "操作成功");
     }
@@ -86,10 +91,30 @@ public class RefundServiceImpl implements IRefundService {
      *
      * @return
      */
+    @Transactional
     @Override
     public ReqResult getAllRefund() {
+
+        List<RefundMessage> res = new ArrayList<>();
+
+        // 查询退款表
         List<RefundEntity> allRefund = refundRepository.findAllByRefundState();
-        return new ReqResult(454, "查询成功", allRefund);
+        if (allRefund != null) {
+            for (RefundEntity refundEntity : allRefund) {
+                RefundMessage refundMessage = new RefundMessage();
+                BeanUtils.copyProperties(refundEntity, refundMessage);
+                // 查询订单表
+                OrderEntity orderEntity = orderRepository.findById(refundEntity.getOrder_id()).get();
+                BeanUtils.copyProperties(orderEntity, refundMessage);
+                // 查询商品表
+                ProductEntity productEntity = productRepository.findById(orderEntity.getProduct_id()).get();
+                BeanUtils.copyProperties(productEntity, refundMessage);
+
+                res.add(refundMessage);
+            }
+        }
+
+        return new ReqResult(454, "查询成功", res);
     }
 
     /**
